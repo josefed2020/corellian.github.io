@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joan Sutherland Theatre - Machinery Package - Corellian</title>
+    <meta name="description" content="Corellian's extensive theatre renovation work at the Joan Sutherland Theatre in Sydney Opera House.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Raleway:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset & Base Styles */
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #004080;
+            --accent-color: #e63946;
+            --text-color: #333333;
+            --light-text: #ffffff;
+            --light-bg: #f9f9f9;
+            --dark-bg: #222222;
+            --border-color: #e0e0e0;
+            --font-main: 'Open Sans', Arial, sans-serif;
+            --font-heading: 'Raleway', 'Open Sans', Arial, sans-serif;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #ffffff;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .screen-reader-text {
+            border: 0;
+            clip: rect(1px, 1px, 1px, 1px);
+            clip-path: inset(50%);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+            word-wrap: normal !important;
+        }
+
+        /* Header */
+        .site-header {
+            padding: 1rem 0;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        .tagline {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: -5px;
+        }
+
+        /* Navigation */
+        .main-navigation {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-item {
+            margin-left: 1.5rem;
+        }
+
+        .menu-item a {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .menu-item a:hover, .menu-item.current-menu-item a {
+            color: var(--primary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-icon {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .menu-icon:before,
+        .menu-icon:after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            position: absolute;
+            transition: var(--transition);
+        }
+
+        .menu-icon:before {
+            top: -8px;
+        }
+
+        .menu-icon:after {
+            bottom: -8px;
+        }
+
+        .menu-toggle.is-active .menu-icon {
+            background-color: transparent;
+        }
+
+        .menu-toggle.is-active .menu-icon:before {
+            transform: rotate(45deg);
+            top: 0;
+        }
+
+        .menu-toggle.is-active .menu-icon:after {
+            transform: rotate(-45deg);
+            bottom: 0;
+        }
+        
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .scroll-to-top.visible {
+            opacity: 1;
+        }
+
+        /* Main Content */
+        .site-content {
+            padding: 3rem 0;
+        }
+
+        /* Single Project Page Styles */
+        .single-project {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .entry-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .entry-title {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .entry-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .author-name {
+            font-weight: 600;
+        }
+
+        .project-featured-image {
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .project-featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .project-content h2 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-top: 2.5rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .project-content p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+
+        .project-content p strong {
+            color: #222;
+        }
+
+        .project-content ul, 
+        .project-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .project-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-gallery {
+            margin: 3rem 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            margin: 2rem 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .spacer {
+            height: 44px;
+            margin-bottom: 2rem;
+        }
+
+        /* Post Navigation */
+        .post-navigation {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .post-navigation .nav-links {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .post-navigation .nav-previous,
+        .post-navigation .nav-next {
+            max-width: 45%;
+        }
+
+        .post-navigation a {
+            display: flex;
+            flex-direction: column;
+            color: var(--text-color);
+        }
+
+        .post-navigation .ast-post-nav {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .post-navigation svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 0.5rem;
+            fill: currentColor;
+        }
+
+        .post-navigation .nav-next .ast-post-nav svg {
+            margin-right: 0;
+            margin-left: 0.5rem;
+        }
+
+        .post-navigation p {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-widgets {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-widget h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-widget h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-widget ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-widget li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-widget a {
+            color: var(--light-text);
+            opacity: 0.8;
+        }
+
+        .footer-widget a:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.875rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 992px) {
+            .footer-widgets {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .entry-title {
+                font-size: 2.2rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: #fff;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 1rem 0;
+                margin: 0;
+            }
+
+            .menu.is-active {
+                display: flex;
+            }
+
+            .menu-item {
+                margin: 0;
+                text-align: center;
+            }
+
+            .menu-item a {
+                display: block;
+                padding: 0.75rem 1.5rem;
+            }
+            
+            .post-navigation .nav-links {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .post-navigation .nav-previous,
+            .post-navigation .nav-next {
+                max-width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .footer-widgets {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Core<span>llian</span></a>
+                <div class="tagline">Rigging and Building Works</div>
+            </div>
+            
+            <nav class="main-navigation">
+                <button class="menu-toggle" aria-expanded="false">
+                    <span class="screen-reader-text">Menu</span>
+                    <span class="menu-icon"></span>
+                </button>
+                
+                <ul class="menu">
+                    <li class="menu-item"><a href="index.html">Home</a></li>
+                    <li class="menu-item current-menu-item"><a href="projects.html">Our Projects</a></li>
+                    <li class="menu-item"><a href="contact.html">Contact</a></li>
+                    <li class="menu-item"><a href="services.html">Services</a></li>
+                    <li class="menu-item"><a href="employment.html">Employment Opportunities</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div id="content" class="site-content">
+        <div class="container">
+            <div id="primary" class="content-area">
+                <main id="main" class="site-main">
+                    <article class="single-project">
+                        <header class="entry-header">
+                            <h1 class="entry-title">Joan Sutherland Theatre – Machinery Package</h1>
+                            <div class="entry-meta">
+                                By <span class="author-name">admin</span> / <span class="published">13/05/2024</span>
+                            </div>
+                        </header>
+                        
+                        <div class="project-content">
+                            <p><strong>Comprehensive Theatre Renovation by Corellian at Sydney Opera House</strong></p>
+                            
+                            <p>The iconic Sydney Opera House underwent a major renovation of the theatre machinery within its Joan Sutherland Theatre. As a leading rigging and construction expert, Corellian was subcontracted to spearhead the extensive deconstruction, preservation, and installation work.</p>
+                            
+                            <div class="project-featured-image">
+                                <img src="images/projects/joan-sutherland-theatre.webp" alt="Joan Sutherland Theatre - Sydney Opera House">
+                            </div>
+                            
+                            <h2 style="font-size:22px"><strong>The Job</strong></h2>
+                            
+                            <p><strong>Deconstructing the Existing Theatre Space</strong></p>
+                            
+                            <p>The initial phase involved the complete deconstruction and removal of extensive theatre machinery by Corellian's skilled team. They carefully dismantled the theatre's intricate stage lifts, equalizer platforms, hoists, winches, portal bridge, and counterweight system. Corellian's crew systematically removed every associated cable, rope line, fly batten, and curtain.</p>
+                            
+                            <p><strong>Preserving Heritage Theatre Elements</strong></p>
+                            
+                            <p>With the Opera House holding heritage listing status, the project required meticulous handling of certain original components. Corellian collaborated closely with the Sydney Opera House Trust to properly salvage and catalogue all heritage-listed machinery elements for preservation.</p>
+                            
+                            <p><strong>Rigging and Positioning New Theatre Machinery</strong></p>
+                            
+                            <p>Once the existing machinery was deconstructed, Corellian commenced their vital role of rigging the newly supplied theatre equipment into position. This included the complex lifting, positioning and installation of the new rear stage elevator, windlass, and cable reelers that will enable the theatre's productions going forward.</p>
+                            
+                            <p>Corellian's exceptional skills for large-scale theatre deconstruction and new equipment rigging were on full display during this project. Their successful execution showcased their unmatched capabilities for managing comprehensive theatre renovations while upholding heritage preservation standards.</p>
+                            
+                            <p>No theatre renovation project is too large or complex for the specialized team at Corellian. Their experience with delicate rigging work in heritage venues is unparalleled. Corellian's commitment to quality and safety makes them a trusted partner for upgrades to performance venues, theatres, and other challenging renovation projects requiring rigging expertise.</p>
+                            
+                            <div class="spacer"></div>
+                            
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/npc2wDnLt-M?si=h6eg6VKXjAF98Cok" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            
+                            <div class="project-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item">
+                                        <img src="images/projects/joan-sutherland-1.jpg" alt="Joan Sutherland Theatre Project">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="images/projects/joan-sutherland-2.jpg" alt="Theatre machinery work">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="images/projects/joan-sutherland-3.jpg" alt="Theatre renovation">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="images/projects/joan-sutherland-4.jpg" alt="Theatre equipment installation">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="images/projects/joan-sutherland-5.jpg" alt="Rear stage lifts installation">
+                                    </div>
+                                    <div class="gallery-item">
+                                        <img src="images/projects/joan-sutherland-6.jpg" alt="Theatre machinery work">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Post Navigation -->
+                    <nav class="post-navigation">
+                        <div class="nav-links">
+                            <div class="nav-previous">
+                                <a href="project-sydney-airport.html">
+                                    <span class="ast-post-nav">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"></path></svg>
+                                        Previous
+                                    </span>
+                                    <p>Sydney Airport</p>
+                                </a>
+                            </div>
+                            <div class="nav-next">
+                                <a href="project-general-labourer.html">
+                                    <span class="ast-post-nav">
+                                        Next
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M313.941 216H12c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12h301.941v46.059c0 21.382 25.851 32.09 40.971 16.971l86.059-86.059c9.373-9.373 9.373-24.569 0-33.941l-86.059-86.059c-15.119-15.119-40.971-4.411-40.971 16.971V216z"></path></svg>
+                                    </span>
+                                    <p>General Labourer / Rigger</p>
+                                </a>
+                            </div>
+                        </div>
+                    </nav>
+                </main>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-widgets">
+                <div class="footer-widget">
+                    <h3>About Us</h3>
+                    <p>Corellian provides expert rigging and building services for the relocation of heavy and delicate equipment. With over 100 years of combined experience, our team delivers excellence at every stage of your project.</p>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Our Projects</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="employment.html">Employment Opportunities</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="services.html">Expert Rigging</a></li>
+                        <li><a href="services.html">Building Works</a></li>
+                        <li><a href="services.html">Demolition</a></li>
+                        <li><a href="services.html">Metalwork</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3>Contact Us</h3>
+                    <address>
+                        Sydney & Melbourne<br>
+                        Australia<br>
+                        <a href="tel:1300655496">1300 655 496</a><br>
+                        <a href="mailto:estimating@corellian.com.au">Estimating@corellian.com.au</a>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Corellian. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <span>↑</span>
+    </div>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const menuToggle = document.querySelector('.menu-toggle');
+            const menu = document.querySelector('.menu');
+            
+            // Toggle mobile menu
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+                    
+                    menuToggle.setAttribute('aria-expanded', !expanded);
+                    menu.classList.toggle('is-active');
+                    
+                    // Toggle menu icon animation
+                    menuToggle.classList.toggle('is-active');
+                });
+            }
+            
+            // Gallery image lightbox (simple implementation)
+            const galleryItems = document.querySelectorAll('.gallery-item img');
+            
+            if (galleryItems.length > 0) {
+                galleryItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        // You could implement a lightbox here
+                        // For a simple implementation, just open the image in a new tab
+                        window.open(this.src, '_blank');
+                    });
+                    
+                    // Make gallery items look clickable
+                    item.style.cursor = 'pointer';
+                });
+            }
+            
+            // Scroll to top functionality
+            const scrollToTopButton = document.getElementById('scrollToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopButton.classList.add('visible');
+                } else {
+                    scrollToTopButton.classList.remove('visible');
+                }
+            });
+            
+            scrollToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

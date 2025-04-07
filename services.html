@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Corellian</title>
+    <meta name="description" content="Explore Corellian's comprehensive rigging, demolition, building works, and metalwork services.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Raleway:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Embedded CSS -->
+    <style>
+        /* Reset & Base Styles */
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #004080;
+            --accent-color: #e63946;
+            --text-color: #333333;
+            --light-text: #ffffff;
+            --light-bg: #f9f9f9;
+            --dark-bg: #222222;
+            --border-color: #e0e0e0;
+            --font-main: 'Open Sans', Arial, sans-serif;
+            --font-heading: 'Raleway', 'Open Sans', Arial, sans-serif;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #ffffff;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .screen-reader-text {
+            border: 0;
+            clip: rect(1px, 1px, 1px, 1px);
+            clip-path: inset(50%);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+            word-wrap: normal !important;
+        }
+
+        /* Buttons */
+        .button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .primary-button {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            border: 2px solid var(--primary-color);
+        }
+
+        .primary-button:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: var(--light-text);
+        }
+
+        .secondary-button {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .secondary-button:hover {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+        }
+
+        /* Header */
+        .site-header {
+            padding: 1rem 0;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        .tagline {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: -5px;
+        }
+
+        /* Navigation */
+        .main-navigation {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-item {
+            margin-left: 1.5rem;
+        }
+
+        .menu-item a {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .menu-item a:hover, .menu-item.current-menu-item a {
+            color: var(--primary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-icon {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .menu-icon:before,
+        .menu-icon:after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            position: absolute;
+            transition: var(--transition);
+        }
+
+        .menu-icon:before {
+            top: -8px;
+        }
+
+        .menu-icon:after {
+            bottom: -8px;
+        }
+
+        .menu-toggle.is-active .menu-icon {
+            background-color: transparent;
+        }
+
+        .menu-toggle.is-active .menu-icon:before {
+            transform: rotate(45deg);
+            top: 0;
+        }
+
+        .menu-toggle.is-active .menu-icon:after {
+            transform: rotate(-45deg);
+            bottom: 0;
+        }
+        
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .scroll-to-top.visible {
+            opacity: 1;
+        }
+
+        /* Main Content */
+        .site-content {
+            padding: 3rem 0;
+        }
+
+        .entry-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .entry-title {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+        }
+
+        .entry-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Services Page Styles */
+        .service-section {
+            margin-bottom: 3rem;
+        }
+
+        .service-description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-columns {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .service-list-column {
+            flex: 1;
+        }
+
+        .service-image-column {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .service-list {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+
+        .service-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .section-divider {
+            margin: 3rem 0;
+            border: none;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .wp-block-button {
+            margin-top: 1.5rem;
+        }
+
+        .wp-block-button__link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            background-color: white;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .wp-block-button__link:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        blockquote {
+            font-style: italic;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            color: #555;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-widgets {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-widget h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-widget h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-widget ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-widget li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-widget a {
+            color: var(--light-text);
+            opacity: 0.8;
+        }
+
+        .footer-widget a:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.875rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 992px) {
+            .footer-widgets {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .service-columns {
+                flex-direction: column;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: #fff;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 1rem 0;
+                margin: 0;
+            }
+
+            .menu.is-active {
+                display: flex;
+            }
+
+            .menu-item {
+                margin: 0;
+                text-align: center;
+            }
+
+            .menu-item a {
+                display: block;
+                padding: 0.75rem 1.5rem;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .footer-widgets {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Core<span>llian</span></a>
+                <div class="tagline">Rigging and Building Works</div>
+            </div>
+            
+            <nav class="main-navigation">
+                <button class="menu-toggle" aria-expanded="false">
+                    <span class="screen-reader-text">Menu</span>
+                    <span class="menu-icon"></span>
+                </button>
+                
+                <ul class="menu">
+                    <li class="menu-item"><a href="index.html">Home</a></li>
+                    <li class="menu-item"><a href="our-projects.html">Our Projects</a></li>
+                    <li class="menu-item"><a href="contact.html">Contact</a></li>
+                    <li class="menu-item current-menu-item"><a href="services.html">Services</a></li>
+                    <li class="menu-item"><a href="employment.html">Employment Opportunities</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div id="content" class="site-content">
+        <div class="container">
+            <div id="primary" class="content-area">
+                <main id="main" class="site-main">
+                    <article class="page-content">
+                        <header class="entry-header">
+                            <h1 class="entry-title">Services</h1>
+                        </header>
+                        
+                        <div class="entry-content">
+                            <p class="service-description">Corellian offers whole-package solutions to moving machinery, parts, and materials through any space to any location. With over 40 years of experience in rigging, building works and problem solving, we provide careful and reliable transport of your goods through the site, including every step of the process:</p>
+                            
+                            <ul class="service-list">
+                                <li>We plan the move and assess the site for all logistical and safety factors</li>
+                                <li>We undertake any demolition or building works required to make the move possible</li>
+                                <li>We provide an experienced, qualified and professional team to perform internal rigging, operate mobile plant or cranes for moving the load</li>
+                                <li>All surfaces, fittings and structures affected by the move are made safe and clean to our consistent standards of quality</li>
+                            </ul>
+                            
+                            <p class="service-description">
+                                <a href="contact.html" class="cta-link">Contact us</a> today to start discussing your project.
+                            </p>
+                            
+                            <hr class="section-divider">
+                            
+                            <section class="service-section">
+                                <h2>RIGGING</h2>
+                                
+                                <p>Corellian can provide a comprehensive service combining rigging, dogging, craneage and traffic control to facilitate the delivery of a diverse range of projects including heavy machinery and equipment installations, from delicate Switchboards and Generators to HVAC installations and mechanical plant on rooftops and in confined spaces. Our experience includes refurbishments or upgrades, removal and/or relocation of:</p>
+                                
+                                <ul class="service-list">
+                                    <li>Generators, Chillers, Boilers, Tanks, Heat Exchangers, Condensers, Radiators, Compressors, Pumps, Motors, Fans, CRAC units, Switchboards, Silencers, Attenuators, Cooling Towers, Package Units, AHUs and generally any type of HVAC equipment.</li>
+                                    <li>Structural steel erection and associated metalwork.</li>
+                                    <li>Structural design, engineering and certification services.</li>
+                                    <li>Motor, Pump Impellor, Compressor and Fan replacements.</li>
+                                    <li>Materials handling solutions.</li>
+                                    <li>Wind Turbine assembly, erection and installation.</li>
+                                </ul>
+                                
+                                <div class="wp-block-button">
+                                    <a href="our-projects.html" class="wp-block-button__link">See our expert rigging in action</a>
+                                </div>
+                            </section>
+                            
+                            <hr class="section-divider">
+                            
+                            <section class="service-section">
+                                <h2>DEMOLITION</h2>
+                                
+                                <p>Corellian can provide a broad range of demolition services including base-building, fit-out and demolition of detailed services. We specialise in the demolition and removal of:</p>
+                                
+                                <div class="service-columns">
+                                    <div class="service-list-column">
+                                        <ul class="service-list">
+                                            <li>Chillers including degassing of refrigerant gasses.</li>
+                                            <li>Boilers and Flues including Asbestos decontamination, monitoring, clearance and certification.</li>
+                                            <li>Pumps, compressors, motors and fans.</li>
+                                            <li>Silencers and attenuators.</li>
+                                            <li>Sheet-metal ductwork, flexible ductwork, fire-rated ductwork, registers, grilles and boots.</li>
+                                            <li>Cooling Towers, Dry Coolers, Air Handling Units, Package Units, Condensers and A/C Units.</li>
+                                            <li>Hydraulic pipework, CW Pipework, CHW Pipework, HW Pipework and Refrigerant Pipework.</li>
+                                            <li>Switchboards, Ice Farms, Tanks, DX Cooling systems & redundant plant rooms.</li>
+                                            <li>Concrete plinths, Inertia Bases, concrete piers & hobs.</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="service-image-column">
+                                        <div class="service-image">
+                                            <img src="images/demolition-service.jpg" alt="Demolition services">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <p>We can also demolish and remove all kinds of masonry, partition walls, glazing, concrete, suspended ceilings, wall and floor coverings. We also provide a complete penetration service including masonry and concrete penetrations through both walls and floors, core holes and structural advice and/or certification.</p>
+                            </section>
+                            
+                            <hr class="section-divider">
+                            
+                            <section class="service-section">
+                                <h2>BUILDING WORKS</h2>
+                                
+                                <p>Corellian can provide a broad and comprehensive range of precise architectural trade services tailored to suit your specific project needs. From complete plant room retrofit installations, to concrete plinth works, to temporary structures involved in the rigging process. We can cover most aspects of any architectural scope including base-building and fit-out works. Our understanding of services enables us to interpret and anticipate your needs and requirements. Just some of our building work services include:</p>
+                                
+                                <div class="service-columns">
+                                    <div class="service-list-column">
+                                        <ul class="service-list">
+                                            <li>Galvabond and timber surround concrete plinths and concrete for inertia bases.</li>
+                                            <li>Concrete piers, jersey walls, steel beam and structural steel Cooling Tower support systems.</li>
+                                            <li>Civil works including excavation, piering, H.D. bolt installation, bitumen and concrete slab installations.</li>
+                                            <li>Roof installations, roof penetrations, alterations, under flashings and back-flashings.</li>
+                                            <li>Grid and plasterboard ceiling removals, penetrations, making good, alterations and/or installations.</li>
+                                            <li>Partition wall & plasterboard ceiling installations, penetrations, making good and/or alterations.</li>
+                                            <li>All types of masonry including new blockwork, brickwork & hebel walls, columns, piers, facework, penetrations & lintel installations.</li>
+                                            <li>Modular and temporary building location, assembly and installation.</li>
+                                            <li>Mechanical louvre penetrations and installation thereof.</li>
+                                            <li>Metalwork including handrails, bollards, Colourbond roofing and cladding installation.</li>
+                                            <li>Security fencing, cages, gates and compounds.</li>
+                                            <li>Partition & security doors, fire and acoustic door installations and certification.</li>
+                                            <li>General carpentry, joinery and cabinet making.</li>
+                                            <li>Resilient finishes including floor repairs and levelling, vinyl sheet flooring and skirting installation.</li>
+                                            <li>Acrylic and epoxy membrane installations, painting and decorating.</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="service-image-column">
+                                        <div class="service-image">
+                                            <img src="images/building-works.jpg" alt="Building works">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <p>Corellian can also provide a complete Design and Construct service for whatever your specific project requirements may entail. From structural to civil works, commercial and high specification fit-outs, we are the preferred partner for clients seeking to meet the architectural obligations for their HVAC or electrical services contract.</p>
+                            </section>
+                            
+                            <hr class="section-divider">
+                            
+                            <section class="service-section">
+                                <h2>METALWORK AND STRUCTURAL STEEL</h2>
+                                
+                                <p>As part of our service to deliver the whole package in for mechanical services industry leaders, Corellian has developed a team capable of delivering a broad range of boiler making, metal fabrication, structural steel and on-site welding in both ferrous and non-ferrous. We can also provide a complete Design and Construct service for whatever your structural steel requirements may be, including: site surveys, structural consultation and structural drawings, shop drawings, and certification of our completed works. Just some of our metalwork services include:</p>
+                                
+                                <div class="service-columns">
+                                    <div class="service-list-column">
+                                        <ul class="service-list">
+                                            <li>Equipment platforms for Cooling Towers, Chillers, A/C Units and the like.</li>
+                                            <li>Simple beam equipment supports.</li>
+                                            <li>Access walkways, stairs, step-overs and ladders in both galvanised steel and aluminium.</li>
+                                            <li>Retrofit temporary and permanent wall and slab penetration structural supports.</li>
+                                            <li>Custom gantries, monorails and rigging apparatus.</li>
+                                            <li>Security fencing, gates and cages including automation.</li>
+                                            <li>Ductwork, pipework, attenuator and equipment supports, hangers and stands.</li>
+                                            <li>Roofing, cladding, flashings, purlins, structural steel installations and/or alterations.</li>
+                                            <li>Guard rails, bollards, height clearance indicators, security/vermin mesh and screens.</li>
+                                            <li>Plate flooring, grate flooring, expanded mesh flooring in both galvanised steel and aluminium.</li>
+                                            <li>Galvabond plinth surrounds, column liners and permanent formwork.</li>
+                                            <li>Supply & installation of Sandwich Panel walls, ceilings and rooms including access doors and panels.</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="service-image-column">
+                                        <div class="service-image">
+                                            <img src="images/metalwork-service.jpg" alt="Metalwork and structural steel">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <p>Check out Projects gallery for some typical examples of metalwork that we have delivered.</p>
+                            </section>
+                            
+                            <hr class="section-divider">
+                            
+                            <blockquote>
+                                <p>"When we get Corellian around to quote on replacing mechanical plant, we know that we are getting a quote for every step of the work and all the problem solving. No surprises."</p>
+                            </blockquote>
+                        </div>
+                    </article>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-widgets">
+                <div class="footer-widget">
+                    <h3>About Us</h3>
+                    <p>Corellian provides expert rigging and building services for the relocation of heavy and delicate equipment. With over 100 years of combined experience, our team delivers excellence at every stage of your project.</p>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="our-projects.html">Our Projects</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="employment.html">Employment Opportunities</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="services.html">Expert Rigging</a></li>
+                        <li><a href="services.html">Building Works</a></li>
+                        <li><a href="services.html">Demolition</a></li>
+                        <li><a href="services.html">Metalwork</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-widget">
+                    <h3>Contact Us</h3>
+                    <address>
+                        Sydney & Melbourne<br>
+                        Australia<br>
+                        <a href="tel:1300655496">1300 655 496</a><br>
+                        <a href="mailto:estimating@corellian.com.au">Estimating@corellian.com.au</a>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Corellian. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <span>↑</span>
+    </div>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const menuToggle = document.querySelector('.menu-toggle');
+            const menu = document.querySelector('.menu');
+            
+            // Toggle mobile menu
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+                    
+                    menuToggle.setAttribute('aria-expanded', !expanded);
+                    menu.classList.toggle('is-active');
+                    
+                    // Toggle menu icon animation
+                    menuToggle.classList.toggle('is-active');
+                });
+            }
+            
+            // Lazy load images
+            if ('loading' in HTMLImageElement.prototype) {
+                const images = document.querySelectorAll('img[loading="lazy"]');
+                images.forEach(img => {
+                    img.src = img.dataset.src;
+                });
+            } else {
+                // Fallback for browsers that don't support lazy loading
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+                document.body.appendChild(script);
+            }
+            
+            // Scroll to top functionality
+            const scrollToTopButton = document.getElementById('scrollToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopButton.classList.add('visible');
+                } else {
+                    scrollToTopButton.classList.remove('visible');
+                }
+            });
+            
+            scrollToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
