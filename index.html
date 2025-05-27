@@ -460,53 +460,136 @@
             background-color: var(--light-bg);
         }
 
+        .testimonials-carousel {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .testimonials-wrapper {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-slide {
+            min-width: 100%;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.5s ease;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
         .testimonial-card {
             background: #fff;
-            padding: 2.5rem;
+            padding: 3rem 2.5rem;
             border-radius: 6px;
             box-shadow: var(--box-shadow);
-            max-width: 800px;
-            margin: 0 auto;
             position: relative;
+            text-align: center;
         }
 
         .testimonial-card:before {
             content: '"';
             position: absolute;
-            top: 1.5rem;
-            left: 1.5rem;
-            font-size: 6rem;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 4rem;
             color: var(--secondary-color);
-            opacity: 0.1;
+            opacity: 0.2;
             line-height: 1;
             font-family: serif;
         }
 
         .testimonial-content {
             font-style: italic;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             position: relative;
             z-index: 1;
+            font-size: 1.1rem;
+            line-height: 1.7;
         }
 
         .testimonial-author {
             display: flex;
+            flex-direction: column;
             align-items: center;
-        }
-
-        .author-info {
-            margin-left: 1rem;
         }
 
         .author-name {
             font-weight: 700;
             font-size: 1.1rem;
             color: var(--primary-color);
+            margin-bottom: 0.25rem;
         }
 
-        .author-position {
+        .author-company {
             color: #666;
-            font-size: 0.875rem;
+            font-size: 0.95rem;
+        }
+
+        /* Carousel Navigation */
+        .testimonials-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-dot.active {
+            background-color: var(--secondary-color);
+        }
+
+        .nav-dot:hover {
+            background-color: var(--secondary-color);
+            opacity: 0.7;
+        }
+
+        /* Carousel Arrows */
+        .carousel-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .carousel-arrows:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .prev-arrow {
+            left: -20px;
+        }
+
+        .next-arrow {
+            right: -20px;
         }
 
         /* Safety and credentials section */
@@ -830,6 +913,14 @@
             .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .prev-arrow {
+                left: -10px;
+            }
+
+            .next-arrow {
+                right: -10px;
+            }
         }
 
         @media screen and (max-width: 768px) {
@@ -900,6 +991,14 @@
             .feature-box {
                 height: 300px;
             }
+            
+            .testimonial-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .carousel-arrows {
+                display: none;
+            }
         }
 
         @media screen and (max-width: 576px) {
@@ -944,7 +1043,7 @@
                 <ul class="menu">
                     <li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
                     <li class="menu-item"><a href="services.html">Services</a></li>
-                    <li class="menu-item"><a href="our-projects.html">Projects</a></li>
+                    <li class="menu-item"><a href="projects.html">Projects</a></li>
                     <li class="menu-item"><a href="about.html">About Us</a></li>
                     <li class="menu-item"><a href="contact.html">Contact</a></li>
                 </ul>
@@ -982,7 +1081,7 @@
                     <div class="project-overlay">
                         <h3 class="project-title">Hospital Equipment Relocation</h3>
                         <p>Precision rigging and relocation of sensitive medical equipment</p>
-                        <a href="our-projects.html" class="view-project">View Project</a>
+                        <a href="projects.html" class="view-project">View Project</a>
                     </div>
                 </div>
                 
@@ -993,7 +1092,7 @@
                     <div class="project-overlay">
                         <h3 class="project-title">Industrial Machinery Installation</h3>
                         <p>Heavy machinery rigging and installation for manufacturing facility</p>
-                        <a href="our-projects.html" class="view-project">View Project</a>
+                        <a href="projects.html" class="view-project">View Project</a>
                     </div>
                 </div>
                 
@@ -1004,13 +1103,13 @@
                     <div class="project-overlay">
                         <h3 class="project-title">Data Center Equipment Relocation</h3>
                         <p>Seamless relocation of sensitive server equipment</p>
-                        <a href="our-projects.html" class="view-project">View Project</a>
+                        <a href="projects.html" class="view-project">View Project</a>
                     </div>
                 </div>
             </div>
             
             <div style="text-align: center; margin-top: 2rem;">
-                <a href="our-projects.html" class="button secondary-button">View All Projects</a>
+                <a href="projects.html" class="button secondary-button">View All Projects</a>
             </div>
         </div>
     </section>
@@ -1023,15 +1122,78 @@
                 <p>Don't just take our word for it – hear what our clients have to say about working with Corellian.</p>
             </div>
             
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    <p>We take great pride in the results that we have helped our clients to produce and look forward to many more years of conquering rigging challenges. When you need equipment moved quickly, safely, and reliably by experienced professionals, Corellian delivers every time.</p>
-                </div>
-                <div class="testimonial-author">
-                    <div class="author-info">
-                        <div class="author-name">Anthony Micallef</div>
-                        <div class="author-position">General Manager, Corellian</div>
+            <div class="testimonials-carousel">
+                <button class="carousel-arrows prev-arrow" onclick="prevTestimonial()">‹</button>
+                <button class="carousel-arrows next-arrow" onclick="nextTestimonial()">›</button>
+                
+                <div class="testimonials-wrapper">
+                    <div class="testimonial-slide active">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p>We take great pride in the results that we have helped our clients to produce and look forward to many more years of conquering rigging challenges. When you need equipment moved quickly, safely, and reliably by experienced professionals, Corellian delivers every time.</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-name">Anthony Micallef</div>
+                                <div class="author-company">General Manager, Corellian</div>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p>Corellian's expertise in rigging sensitive medical equipment was exceptional. They handled our MRI installation with precision and care, ensuring zero downtime for our hospital operations. Their team's professionalism and attention to safety protocols made the entire process seamless.</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-name">Dr. Sarah Chen</div>
+                                <div class="author-company">Royal North Shore Hospital</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p>The team at Corellian transformed what seemed like an impossible task into a smooth operation. Moving our 15-tonne chiller to the 12th floor required creative problem-solving and precise execution – they delivered on both counts flawlessly.</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-name">Michael Torres</div>
+                                <div class="author-company">Torres Construction Group</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p>Outstanding service from start to finish. Corellian's comprehensive approach meant we had one point of contact for rigging, demolition, and building works. Their efficiency saved us both time and money on our data center upgrade project.</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-name">Lisa Anderson</div>
+                                <div class="author-company">NextDC</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p>Professional, reliable, and incredibly skilled. Corellian handled our theatre machinery installation with the respect and care that such a heritage project deserved. We couldn't have asked for a better partner.</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-name">James Morrison</div>
+                                <div class="author-company">Sydney Opera House Trust</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonials-nav">
+                    <span class="nav-dot active" onclick="currentTestimonial(1)"></span>
+                    <span class="nav-dot" onclick="currentTestimonial(2)"></span>
+                    <span class="nav-dot" onclick="currentTestimonial(3)"></span>
+                    <span class="nav-dot" onclick="currentTestimonial(4)"></span>
+                    <span class="nav-dot" onclick="currentTestimonial(5)"></span>
                 </div>
             </div>
         </div>
@@ -1122,7 +1284,7 @@
                     <ul class="footer-links">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="services.html">Services</a></li>
-                        <li><a href="our-projects.html">Projects</a></li>
+                        <li><a href="projects.html">Projects</a></li>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
@@ -1266,72 +1428,55 @@
             // Initial check if elements are in view
             checkIfInView();
         });
-    </script></div>
-    </section>
 
-    <!-- Main Content Section -->
-    <section class="services-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Expertise</h2>
-                <p>We are the premier specialists in whole package rigging, providing every step in the relocation of heavy and delicate equipment. Corellian is there with you through every stage of the move.</p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-box">
-                    <div class="feature-image">
-                        <img src="images/rigging-assessment.jpg" alt="Expert site assessment">
-                    </div>
-                    <div class="feature-content">
-                        <h3>Expert Site Assessment</h3>
-                        <p>We are the experts in whole-package cranage and rigging works.</p>
-                    </div>
-                </div>
-                
-                <div class="feature-box">
-                    <div class="feature-image">
-                        <img src="images/problem-solving.jpg" alt="Problem-solving during move">
-                    </div>
-                    <div class="feature-content">
-                        <h3>Safe Problem-Solving</h3>
-                        <p>Rigging with mobile plant, cranes, skates, gantries - whatever it takes.</p>
-                    </div>
-                </div>
-                
-                <div class="feature-box full-width">
-                    <div class="feature-image">
-                        <img src="images/building-works.jpg" alt="Building and demolition">
-                    </div>
-                    <div class="feature-content">
-                        <h3>Building, Demolition & Fabrication</h3>
-                        <p>Over 100 years combined experience in the building and rigging trades, with qualified specialists from a wide variety of trades.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="safety-highlights">
-                <p>Corellian is committed to a high standard of safety with practices that meet the best in the industry as well as NSW Health standards with an AS 3745:2010 Outbreak Emergency Plan.</p>
-            </div>
-        </div>
-    </section>
+        // Testimonials Carousel Functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const dots = document.querySelectorAll('.nav-dot');
+        const totalSlides = slides.length;
 
-    <!-- About Section -->
-    <section class="about-section">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-content">
-                    <h2>About Corellian</h2>
-                    <p>At Corellian, we understand the critical importance of seamless and efficient rigging and construction operations for the successful completion of major projects. Established in 2009 by industry veterans Anthony Micallef and Gary Jefferson, our company was founded on the unwavering mission to provide the highest standards of rigging services.</p>
-                    
-                    <p>Our team of highly skilled professionals boasts a comprehensive range of expertise, including metal fabrication, plastering, carpentry, plumbing, and bricklaying. This diverse skillset enables us to tackle any challenge on any construction site with confidence and precision.</p>
-                    
-                    <p>Corellian takes pride in our ability to safely and efficiently relocate loads up to 50 tonnes in weight, as well as delicate and sensitive equipment such as data servers. Our whole-package approach to rigging has earned us a reputation as an industry leader.</p>
-                    
-                    <a href="about.html" class="button secondary-button">Learn More About Us</a>
-                </div>
-                
-                <div class="about-image">
-                    <img src="images/about-corellian.jpg" alt="Corellian team at work">
-                </div>
-            </div>
-        
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Remove active class from all dots
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // Show current slide and activate dot
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
+
+        function nextTestimonial() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevTestimonial() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function currentTestimonial(index) {
+            currentSlide = index - 1;
+            showSlide(currentSlide);
+        }
+
+        // Auto-advance testimonials every 6 seconds
+        setInterval(nextTestimonial, 6000);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevTestimonial();
+            } else if (e.key === 'ArrowRight') {
+                nextTestimonial();
+            }
+        });
+    </script>
+</body>
+</html>
