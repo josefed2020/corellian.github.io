@@ -7,7 +7,7 @@
     <meta name="description" content="Corellian provides expert rigging and building services for the relocation of heavy and delicate equipment across Australia.">
     
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏗️</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛓️</text></svg>">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -99,7 +99,9 @@
         img {
             max-width: 100%;
             height: auto;
+            opacity: 0.5; /* Adjust value between 0 (fully transparent) and 1 (fully opaque) */
         }
+
 
         ul, ol {
             margin-bottom: 1.5rem;
@@ -154,7 +156,7 @@
         }
 
         .secondary-button {
-            background-color: transparent;
+            background-color: white;
             color: var(--primary-color);
             border: 2px solid var(--primary-color);
         }
@@ -450,7 +452,7 @@
             display: inline-block;
             color: var(--secondary-color);
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 1.2rem;
             margin-top: 0.5rem;
         }
 
@@ -464,24 +466,28 @@
             position: relative;
             max-width: 900px;
             margin: 0 auto;
-            overflow: hidden;
+            overflow: visible;
+            padding: 0 60px;
         }
 
         .testimonials-wrapper {
             display: flex;
-            transition: transform 0.5s ease;
+            position: relative;
         }
 
         .testimonial-slide {
             min-width: 100%;
             opacity: 0;
-            transform: translateX(100%);
-            transition: all 0.5s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: opacity 0.5s ease;
         }
 
         .testimonial-slide.active {
             opacity: 1;
-            transform: translateX(0);
+            position: relative;
         }
 
         .testimonial-card {
@@ -566,17 +572,18 @@
             transform: translateY(-50%);
             background: rgba(255, 255, 255, 0.9);
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: var(--primary-color);
             transition: var(--transition);
             z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .carousel-arrows:hover {
@@ -585,11 +592,11 @@
         }
 
         .prev-arrow {
-            left: -20px;
+            left: -60px;
         }
 
         .next-arrow {
-            right: -20px;
+            right: -60px;
         }
 
         /* Safety and credentials section */
@@ -914,12 +921,16 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
+            .testimonials-carousel {
+                padding: 0 50px;
+            }
+            
             .prev-arrow {
-                left: -10px;
+                left: -50px;
             }
 
             .next-arrow {
-                right: -10px;
+                right: -50px;
             }
         }
 
@@ -996,8 +1007,22 @@
                 padding: 2rem 1.5rem;
             }
             
+            .testimonials-carousel {
+                padding: 0 20px;
+            }
+            
             .carousel-arrows {
-                display: none;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .prev-arrow {
+                left: -20px;
+            }
+
+            .next-arrow {
+                right: -20px;
             }
         }
 
@@ -1042,9 +1067,9 @@
                 
                 <ul class="menu">
                     <li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
-                    <li class="menu-item"><a href="services.html">Services</a></li>
                     <li class="menu-item"><a href="projects.html">Projects</a></li>
                     <li class="menu-item"><a href="about.html">About Us</a></li>
+                    <li class="menu-item"><a href="employment.html">Employment</a></li>
                     <li class="menu-item"><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
@@ -1058,7 +1083,7 @@
                 <h1>Professional <span>Rigging</span> & Building Services</h1>
                 <p class="lead">Australia's premier specialists in whole package rigging, providing expert solutions for the relocation of heavy and delicate equipment.</p>
                 <div class="hero-buttons">
-                    <a href="services.html" class="button primary-button">Our Services</a>
+                    <a href="about.html" class="button primary-button">Our Services</a>
                     <a href="contact.html" class="button secondary-button">Get a Quote</a>
                 </div>
             </div>
@@ -1076,12 +1101,12 @@
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="docs/assets/images/project-1.jpg" alt="Hospital Equipment Relocation">
+                        <img src="./docs/assets/images/projects/joan-sutherland-theatre.webp" alt="Joan Sutherland Theatre – Machinery Package" class="transparent-image">
                     </div>
                     <div class="project-overlay">
-                        <h3 class="project-title">Hospital Equipment Relocation</h3>
-                        <p>Precision rigging and relocation of sensitive medical equipment</p>
-                        <a href="projects.html" class="view-project">View Project</a>
+                        <h3 class="project-title">Joan Sutherland Theatre – Machinery Package</h3>
+                        <p>The iconic Sydney Opera House underwent a major renovation of the theatre machinery within its Joan Sutherland Theatre</p>
+                        <a href="project-joan-sutherland-theatre.html" class="view-project">View Project</a>
                     </div>
                 </div>
                 
@@ -1127,14 +1152,26 @@
                 <button class="carousel-arrows next-arrow" onclick="nextTestimonial()">›</button>
                 
                 <div class="testimonials-wrapper">
+                    <div class="testimonial-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p>The team at Corellian planned, engineered and successfully executed all of our rigging and craneage requirements for the works. All personnel involved on the project from supervisors & schedulers, site engineers, riggers, crane crew to directors were instrumental with their dedication to getting the project delivered to a high standard given the complexities around the placement and handling of all equipment. Kane & Global Switch commend Corellian and look forward to working with you on the next project.</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-name">James Pearce</div>
+                                <div class="author-company">Project Manager, Kane Constructions</div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="testimonial-slide active">
                         <div class="testimonial-card">
                             <div class="testimonial-content">
-                                <p>We take great pride in the results that we have helped our clients to produce and look forward to many more years of conquering rigging challenges. When you need equipment moved quickly, safely, and reliably by experienced professionals, Corellian delivers every time.</p>
+                                <p>I've had the privilege of working closely with Corellian for the past 20 years. One of our most recent projects showcased the breadth of their capabilities, encompassing demolition, structural works, waterproofing, platform construction, crane lifts, and rigging. This complex scope was further challenged by the location, 60 stories high in a fully tenanted building. Despite these demanding conditions, Corellian delivered seamless, incident-free operations, reinforcing our client's confidence and securing ongoing work. It's this consistent excellence that ensures I'll continue partnering with Corellian for the next 20 years.</p>
                             </div>
                             <div class="testimonial-author">
-                                <div class="author-name">Anthony Micallef</div>
-                                <div class="author-company">General Manager, Corellian</div>
+                                <div class="author-name">Dave Murray</div>
+                                <div class="author-company">NSW & ACT General Manager, VAE Group</div>
                             </div>
                         </div>
                     </div>
@@ -1142,11 +1179,11 @@
                     <div class="testimonial-slide">
                         <div class="testimonial-card">
                             <div class="testimonial-content">
-                                <p>Corellian's expertise in rigging sensitive medical equipment was exceptional. They handled our MRI installation with precision and care, ensuring zero downtime for our hospital operations. Their team's professionalism and attention to safety protocols made the entire process seamless.</p>
+                                <p>The team at Corellian are the company you turn to when you are looking to move something that is large, delicate, awkward or needs to get into a difficult position in the building. Their unique skillset and range of trades people allow them to move these items with the highest degree of safety, care and know how. The team covers off all aspects of the project and will deal with all the tertiary works required to complete the operation.</p>
                             </div>
                             <div class="testimonial-author">
-                                <div class="author-name">Dr. Sarah Chen</div>
-                                <div class="author-company">Royal North Shore Hospital</div>
+                                <div class="author-name">Chris Clegg</div>
+                                <div class="author-company">Design Consultant, Clegg Designs Pty Ltd</div>
                             </div>
                         </div>
                     </div>
@@ -1154,11 +1191,11 @@
                     <div class="testimonial-slide">
                         <div class="testimonial-card">
                             <div class="testimonial-content">
-                                <p>The team at Corellian transformed what seemed like an impossible task into a smooth operation. Moving our 15-tonne chiller to the 12th floor required creative problem-solving and precise execution – they delivered on both counts flawlessly.</p>
+                                <p>In our recent major project, Corellian's scope has extended beyond equipment rigging and logistics to include substantial building and excavation works. Their team was consistently proactive, reliable, and highly professional throughout the duration of the project. They executed their works to the highest standards of safety, quality, and workmanship providing a major contribution to the successful delivery of the project on time and within budget.</p>
                             </div>
                             <div class="testimonial-author">
-                                <div class="author-name">Michael Torres</div>
-                                <div class="author-company">Torres Construction Group</div>
+                                <div class="author-name">Khaled Elsawi</div>
+                                <div class="author-company">Operations Manger, Fredon Air CSG</div>
                             </div>
                         </div>
                     </div>
@@ -1166,34 +1203,35 @@
                     <div class="testimonial-slide">
                         <div class="testimonial-card">
                             <div class="testimonial-content">
-                                <p>Outstanding service from start to finish. Corellian's comprehensive approach meant we had one point of contact for rigging, demolition, and building works. Their efficiency saved us both time and money on our data center upgrade project.</p>
+                                <p>Corellian's expertise in specialized rigging and their extensive knowledge of the building industry made this project highly efficient and hassle-free. The Corellian team ensured the project's success from start to finish. Also, working with Corellian on our mechanical upgrade project was an absolute pleasure, they consistently exceeded our expectations throughout the process. The project involved complex mechanical equipment installation, requiring precise coordination and careful planning to ensure minimal disruption to our daily operations. They not only completed the installation of the new mechanical systems but also ensured that all the necessary structural modifications of the crane lifts were seamlessly integrated. What impressed us most was their ability to tackle challenges head-on, working around existing infrastructure while maintaining the highest safety standards.</p>
                             </div>
                             <div class="testimonial-author">
-                                <div class="author-name">Lisa Anderson</div>
-                                <div class="author-company">NextDC</div>
+                                <div class="author-name">Glen Shipway</div>
+                                <div class="author-company">Construction Manager, Airmaster NSW</div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="testimonial-slide">
                         <div class="testimonial-card">
                             <div class="testimonial-content">
-                                <p>Professional, reliable, and incredibly skilled. Corellian handled our theatre machinery installation with the respect and care that such a heritage project deserved. We couldn't have asked for a better partner.</p>
+                                <p>I have had the pleasure of working with Corellian as my subcontractor for over 14 years, and throughout this time, their service has consistently been of the highest standard. Their professionalism, reliability, and attention to detail have made them a trusted and invaluable partner in every project we've undertaken together.</p>
                             </div>
                             <div class="testimonial-author">
-                                <div class="author-name">James Morrison</div>
-                                <div class="author-company">Sydney Opera House Trust</div>
+                                <div class="author-name">Selcuk Cakir</div>
+                                <div class="author-company">Senior Project Manager, New Edge Group</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="testimonials-nav">
-                    <span class="nav-dot active" onclick="currentTestimonial(1)"></span>
-                    <span class="nav-dot" onclick="currentTestimonial(2)"></span>
+                    <span class="nav-dot" onclick="currentTestimonial(1)"></span>
+                    <span class="nav-dot active" onclick="currentTestimonial(2)"></span>
                     <span class="nav-dot" onclick="currentTestimonial(3)"></span>
                     <span class="nav-dot" onclick="currentTestimonial(4)"></span>
                     <span class="nav-dot" onclick="currentTestimonial(5)"></span>
+                    <span class="nav-dot" onclick="currentTestimonial(6)"></span>
                 </div>
             </div>
         </div>
@@ -1221,7 +1259,7 @@
                 </div>
                 
                 <div class="credential-card">
-                    <div class="credential-icon">⚙️</div>
+                    <div class="credential-icon">🗜️</div>
                     <h3 class="credential-title">Equipment</h3>
                     <p>We utilize only the highest quality equipment, regularly inspected and maintained to ensure optimal performance and safety.</p>
                 </div>
@@ -1427,17 +1465,25 @@
             
             // Initial check if elements are in view
             checkIfInView();
+            
+            // Initialize testimonials carousel
+            initializeTestimonials();
         });
 
         // Testimonials Carousel Functionality
-        let currentSlide = 0;
+        let currentSlide = 1; // Start with second slide (index 1) as it has the "active" class in HTML
         const slides = document.querySelectorAll('.testimonial-slide');
         const dots = document.querySelectorAll('.nav-dot');
         const totalSlides = slides.length;
 
+        function initializeTestimonials() {
+            // Set up the initial state
+            showSlide(currentSlide);
+        }
+
         function showSlide(index) {
             // Hide all slides
-            slides.forEach(slide => {
+            slides.forEach((slide, i) => {
                 slide.classList.remove('active');
             });
             
@@ -1447,8 +1493,12 @@
             });
             
             // Show current slide and activate dot
-            slides[index].classList.add('active');
-            dots[index].classList.add('active');
+            if (slides[index]) {
+                slides[index].classList.add('active');
+            }
+            if (dots[index]) {
+                dots[index].classList.add('active');
+            }
         }
 
         function nextTestimonial() {
