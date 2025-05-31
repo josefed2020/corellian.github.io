@@ -7,7 +7,7 @@
     <meta name="description" content="Meet the team behind Corellian's expert rigging and building services. Learn about our experienced professionals and company history.">
     
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏗️</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛓️</text></svg>">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -197,13 +197,8 @@
         }
 
         .logo {
-            font-family: var(--font-heading);
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-decoration: none;
+            max-width: 200px;
+            height: auto;
         }
 
         .tagline {
@@ -1031,7 +1026,7 @@
     <header class="site-header">
         <div class="container">
             <div class="logo-container">
-                <a href="index.html" class="logo">CORELLIAN</a>
+                <img src="docs/assets/images/Cor_Logo_small.png" alt="CORELLIAN" class="logo">
                 <div class="tagline">Rigging and Building Works</div>
             </div>
             
@@ -1043,9 +1038,9 @@
                 
                 <ul class="menu">
                     <li class="menu-item"><a href="index.html">Home</a></li>
-                    <li class="menu-item"><a href="services.html">Services</a></li>
                     <li class="menu-item"><a href="projects.html">Projects</a></li>
                     <li class="menu-item current-menu-item"><a href="about.html">About Us</a></li>
+                    <li class="menu-item"><a href="employment.html">Employment</a></li>
                     <li class="menu-item"><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
@@ -1340,7 +1335,6 @@
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
                         <li><a href="projects.html">Projects</a></li>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="contact.html">Contact</a></li>
@@ -1350,11 +1344,11 @@
                 <div class="footer-column">
                     <h3>Our Services</h3>
                     <ul class="footer-links">
-                        <li><a href="services.html">Expert Rigging</a></li>
-                        <li><a href="services.html">Building Works</a></li>
-                        <li><a href="services.html">Demolition</a></li>
-                        <li><a href="services.html">Fabrication</a></li>
-                        <li><a href="services.html">Equipment Installation</a></li>
+                        <li><a href="#" onclick="openServicesModal(); return false;">Expert Rigging</a></li>
+                        <li><a href="#" onclick="openServicesModal(); return false;">Building Works</a></li>
+                        <li><a href="#" onclick="openServicesModal(); return false;">Demolition</a></li>
+                        <li><a href="#" onclick="openServicesModal(); return false;">Fabrication</a></li>
+                        <li><a href="#" onclick="openServicesModal(); return false;">Equipment Installation</a></li>
                     </ul>
                 </div>
                 
@@ -1482,6 +1476,13 @@
                 button.textContent = 'Show Less';
                 button.classList.add('active');
             }
+        }
+
+        // Function to open services modal (for footer links)
+        function openServicesModal() {
+            const modal = document.getElementById('servicesOverviewModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
     </script>
 </body>

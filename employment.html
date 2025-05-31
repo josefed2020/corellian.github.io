@@ -7,28 +7,27 @@
     <meta name="description" content="Career opportunity as a General Labourer / Rigger at Corellian, specialists in rigging and building works.">
     
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛓️</text></svg>">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Raleway:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
     
     <!-- Embedded CSS -->
     <style>
         /* Reset & Base Styles */
         :root {
-            --primary-color: #0066cc;
-            --secondary-color: #004080;
-            --accent-color: #e63946;
+            --primary-color: #222222; /* Black */
+            --secondary-color: #e60000; /* Red */
+            --accent-color: #f2f2f2; /* Light grey */
             --text-color: #333333;
             --light-text: #ffffff;
             --light-bg: #f9f9f9;
-            --dark-bg: #222222;
             --border-color: #e0e0e0;
-            --font-main: 'Open Sans', Arial, sans-serif;
-            --font-heading: 'Raleway', 'Open Sans', Arial, sans-serif;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --font-main: 'Roboto', Arial, sans-serif;
+            --font-heading: 'Montserrat', 'Roboto', Arial, sans-serif;
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
 
@@ -66,7 +65,17 @@
             font-size: 2rem;
             position: relative;
             padding-bottom: 0.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
         }
 
         h3 {
@@ -74,22 +83,23 @@
         }
 
         h4 {
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
         }
 
         p {
             margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
 
         a {
-            color: var(--primary-color);
+            color: var(--secondary-color);
             text-decoration: none;
             transition: var(--transition);
         }
 
         a:hover {
-            color: var(--secondary-color);
+            color: var(--primary-color);
         }
 
         img {
@@ -106,13 +116,13 @@
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1rem;
+            padding: 0 1.5rem;
         }
 
         .narrow-container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 0 1rem;
+            padding: 0 1.5rem;
         }
 
         .screen-reader-text {
@@ -138,17 +148,20 @@
             border-radius: 4px;
             cursor: pointer;
             transition: var(--transition);
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            letter-spacing: 0.5px;
         }
 
         .primary-button {
-            background-color: var(--primary-color);
+            background-color: var(--secondary-color);
             color: var(--light-text);
-            border: 2px solid var(--primary-color);
+            border: 2px solid var(--secondary-color);
         }
 
         .primary-button:hover {
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
+            background-color: #cc0000;
+            border-color: #cc0000;
             color: var(--light-text);
         }
 
@@ -171,6 +184,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            border-bottom: 3px solid var(--secondary-color);
         }
 
         .site-header .container {
@@ -179,21 +193,21 @@
             align-items: center;
         }
 
-        .logo {
-            font-family: var(--font-heading);
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: var(--secondary-color);
+        .logo-container {
+            display: flex;
+            flex-direction: column;
         }
 
-        .logo span {
-            color: var(--primary-color);
+        .logo {
+            max-width: 200px;
+            height: auto;
         }
-        
+
         .tagline {
             font-size: 0.9rem;
-            color: #666;
-            margin-top: -5px;
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-top: 0.25rem;
         }
 
         /* Navigation */
@@ -214,12 +228,34 @@
         }
 
         .menu-item a {
-            color: var(--text-color);
+            color: var(--primary-color);
             font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding-bottom: 0.25rem;
         }
 
-        .menu-item a:hover, .menu-item.current-menu-item a {
-            color: var(--primary-color);
+        .menu-item a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .menu-item a:hover:after, 
+        .menu-item.current-menu-item a:after {
+            width: 100%;
+        }
+
+        .menu-item a:hover, 
+        .menu-item.current-menu-item a {
+            color: var(--secondary-color);
         }
 
         .menu-toggle {
@@ -234,7 +270,7 @@
             display: block;
             width: 25px;
             height: 3px;
-            background-color: var(--text-color);
+            background-color: var(--primary-color);
             position: relative;
             transition: var(--transition);
         }
@@ -245,7 +281,7 @@
             display: block;
             width: 100%;
             height: 3px;
-            background-color: var(--text-color);
+            background-color: var(--primary-color);
             position: absolute;
             transition: var(--transition);
         }
@@ -277,39 +313,57 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary-color);
-            color: white;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.5rem;
             cursor: pointer;
             opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 999;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         
         .scroll-to-top.visible {
             opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background-color: #cc0000;
         }
 
         /* Job Post Content */
         .site-content {
-            padding: 3rem 0;
+            padding: 5rem 0;
         }
 
         .entry-header {
-            margin-bottom: 2rem;
             text-align: center;
+            margin-bottom: 3rem;
         }
 
         .entry-title {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
+            font-size: 2rem;
+            color: var(--primary-color);
             margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .entry-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 1rem auto 0;
         }
 
         .entry-meta {
@@ -321,7 +375,7 @@
         .entry-content {
             max-width: 800px;
             margin: 0 auto;
-            padding: 0 1rem;
+            padding: 0 1.5rem;
         }
 
         .entry-content p {
@@ -332,17 +386,18 @@
         /* Form Styles */
         .wp-block-file {
             margin: 2rem 0;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-radius: 8px;
+            padding: 1.5rem;
+            background-color: var(--light-bg);
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            box-shadow: var(--box-shadow);
         }
 
         .wp-block-file a {
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--secondary-color);
             display: flex;
             align-items: center;
         }
@@ -354,10 +409,11 @@
         }
 
         .contact-form {
-            margin-top: 2rem;
-            background-color: #f8f9fa;
-            padding: 2rem;
-            border-radius: 8px;
+            margin-top: 3rem;
+            background-color: var(--light-bg);
+            padding: 2.5rem;
+            border-radius: 6px;
+            box-shadow: var(--box-shadow);
         }
 
         .contact-form form {
@@ -370,6 +426,7 @@
             font-weight: 600;
             margin-bottom: 0.5rem;
             display: block;
+            color: var(--primary-color);
         }
 
         .contact-form input[type="text"],
@@ -379,6 +436,16 @@
             padding: 0.75rem;
             border: 1px solid var(--border-color);
             border-radius: 4px;
+            font-family: var(--font-main);
+            transition: var(--transition);
+        }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(230, 0, 0, 0.1);
         }
 
         .contact-form input[type="file"] {
@@ -386,36 +453,38 @@
         }
 
         .contact-form input[type="submit"] {
-            background-color: var(--primary-color);
+            background-color: var(--secondary-color);
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
             border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
+            font-family: var(--font-heading);
             align-self: flex-start;
             transition: var(--transition);
+            letter-spacing: 0.5px;
         }
 
         .contact-form input[type="submit"]:hover {
-            background-color: var(--secondary-color);
+            background-color: #cc0000;
         }
 
         .job-image {
             text-align: center;
-            margin: 2rem 0;
+            margin: 3rem 0;
         }
         
         .job-image img {
             max-width: 410px;
             height: auto;
-            border-radius: 8px;
+            border-radius: 6px;
             box-shadow: var(--box-shadow);
         }
 
         .post-navigation {
             margin-top: 3rem;
-            padding-top: 1.5rem;
+            padding-top: 2rem;
             border-top: 1px solid var(--border-color);
         }
 
@@ -437,7 +506,7 @@
 
         .post-navigation .ast-post-nav {
             font-size: 0.9rem;
-            color: var(--primary-color);
+            color: var(--secondary-color);
             font-weight: 600;
             margin-bottom: 0.5rem;
             display: flex;
@@ -454,70 +523,87 @@
         .post-navigation p {
             margin: 0;
             font-weight: 600;
+            color: var(--primary-color);
         }
 
         /* Footer */
         .site-footer {
-            background-color: var(--dark-bg);
+            background-color: var(--primary-color);
             color: var(--light-text);
-            padding: 3rem 0 1.5rem;
+            padding: 5rem 0 2rem;
         }
 
-        .footer-widgets {
+        .footer-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .footer-widget h3 {
-            margin-bottom: 1.5rem;
+        .footer-column h3 {
             font-size: 1.25rem;
-            position: relative;
-            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
         }
 
-        .footer-widget h3:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background-color: var(--primary-color);
-        }
-
-        .footer-widget ul {
+        .footer-links {
             list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        .footer-widget li {
-            margin-bottom: 0.5rem;
+        .footer-links li {
+            margin-bottom: 0.75rem;
         }
 
-        .footer-widget a {
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .footer-contact p {
+            margin-bottom: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
             color: var(--light-text);
-            opacity: 0.8;
+            border-radius: 50%;
+            transition: var(--transition);
         }
 
-        .footer-widget a:hover {
-            opacity: 1;
-            color: var(--accent-color);
+        .social-link:hover {
+            background-color: var(--secondary-color);
         }
 
         .copyright {
             text-align: center;
             padding-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
             font-size: 0.875rem;
-            opacity: 0.7;
         }
 
         /* Responsive styles */
         @media screen and (max-width: 992px) {
-            .footer-widgets {
+            .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -528,6 +614,10 @@
             }
 
             h2 {
+                font-size: 1.75rem;
+            }
+
+            .entry-title {
                 font-size: 1.75rem;
             }
 
@@ -545,7 +635,7 @@
                 background-color: #fff;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                 padding: 1rem 0;
-                margin: 0;
+                z-index: 100;
             }
 
             .menu.is-active {
@@ -554,12 +644,15 @@
 
             .menu-item {
                 margin: 0;
-                text-align: center;
             }
 
             .menu-item a {
                 display: block;
                 padding: 0.75rem 1.5rem;
+            }
+
+            .menu-item a:after {
+                display: none;
             }
             
             .post-navigation .nav-links {
@@ -574,12 +667,12 @@
         }
 
         @media screen and (max-width: 576px) {
-            .footer-widgets {
+            .footer-grid {
                 grid-template-columns: 1fr;
             }
             
             .contact-form {
-                padding: 1.5rem 1rem;
+                padding: 1.5rem;
             }
         }
     </style>
@@ -588,8 +681,8 @@
     <!-- Header -->
     <header class="site-header">
         <div class="container">
-            <div class="logo">
-                <a href="index.html">Core<span>llian</span></a>
+            <div class="logo-container">
+                <img src="docs/assets/images/Cor_Logo_small.png" alt="CORELLIAN" class="logo">
                 <div class="tagline">Rigging and Building Works</div>
             </div>
             
@@ -601,10 +694,10 @@
                 
                 <ul class="menu">
                     <li class="menu-item"><a href="index.html">Home</a></li>
-                    <li class="menu-item"><a href="our-projects.html">Our Projects</a></li>
+                    <li class="menu-item"><a href="projects.html">Projects</a></li>
+                    <li class="menu-item"><a href="about.html">About Us</a></li>
+                    <li class="menu-item current-menu-item"><a href="employment.html">Employment</a></li>
                     <li class="menu-item"><a href="contact.html">Contact</a></li>
-                    <li class="menu-item"><a href="services.html">Services</a></li>
-                    <li class="menu-item current-menu-item"><a href="employment.html">Employment Opportunities</a></li>
                 </ul>
             </nav>
         </div>
@@ -617,9 +710,9 @@
                 <main id="main" class="site-main">
                     <article class="post">
                         <header class="entry-header">
-                            <h1 class="entry-title">General Labourer / Rigger</h1>
+                            <h2 class="entry-title">General Labourer / Rigger</h2>
                             <div class="entry-meta">
-                                By <span class="author">admin</span> / <span class="date">01/08/2024</span>
+                                Currently <span class="author">OPEN for applications</span> from <span class="date">June 2025</span>
                             </div>
                         </header>
                         
@@ -664,7 +757,7 @@
                                     </p>
                                     
                                     <p>
-                                        <input type="submit" value="Submit">
+                                        <input type="submit" value="Submit Application">
                                     </p>
                                 </form>
                             </div>
@@ -679,12 +772,12 @@
                     <nav class="post-navigation">
                         <div class="nav-links">
                             <div class="nav-previous">
-                                <a href="joan-sutherland-theatre-machinery-package.html">
+                                <a href="projects.html">
                                     <span class="ast-post-nav">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"></path></svg>
                                         Previous
                                     </span>
-                                    <p>Joan Sutherland Theatre - Machinery Package</p>
+                                    <p>View Our Projects</p>
                                 </a>
                             </div>
                         </div>
@@ -697,46 +790,54 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
-            <div class="footer-widgets">
-                <div class="footer-widget">
-                    <h3>About Us</h3>
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>About Corellian</h3>
                     <p>Corellian provides expert rigging and building services for the relocation of heavy and delicate equipment. With over 100 years of combined experience, our team delivers excellence at every stage of your project.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link">FB</a>
+                        <a href="#" class="social-link">IN</a>
+                        <a href="#" class="social-link">TW</a>
+                    </div>
                 </div>
                 
-                <div class="footer-widget">
+                <div class="footer-column">
                     <h3>Quick Links</h3>
-                    <ul>
+                    <ul class="footer-links">
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="our-projects.html">Our Projects</a></li>
-                        <li><a href="services.html">Services</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="about.html">About Us</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a href="employment.html">Employment Opportunities</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-widget">
+                <div class="footer-column">
                     <h3>Our Services</h3>
-                    <ul>
-                        <li><a href="services.html">Expert Rigging</a></li>
-                        <li><a href="services.html">Building Works</a></li>
-                        <li><a href="services.html">Demolition</a></li>
-                        <li><a href="services.html">Metalwork</a></li>
+                    <ul class="footer-links">
+                        <li><a href="#">Expert Rigging</a></li>
+                        <li><a href="#">Building Works</a></li>
+                        <li><a href="#">Demolition</a></li>
+                        <li><a href="#">Fabrication</a></li>
+                        <li><a href="#">Equipment Installation</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-widget">
+                <div class="footer-column footer-contact">
                     <h3>Contact Us</h3>
-                    <address>
-                        Sydney & Melbourne<br>
-                        Australia<br>
-                        <a href="tel:1300655496">1300 655 496</a><br>
-                        <a href="mailto:estimating@corellian.com.au">Estimating@corellian.com.au</a>
-                    </address>
+                    <p><strong>Phone:</strong> 1300 655 496</p>
+                    <p><strong>Email:</strong> estimating@corellian.com.au</p>
+                    <p><strong>Sydney Office:</strong><br>
+                    22 Kilto Crescent<br>
+                    Glendenning NSW 2761</p>
+                    <p><strong>Melbourne Office:</strong><br>
+                    29B Foden Ave<br>
+                    Campbellfield VIC 3061</p>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2025 Corellian. All rights reserved.</p>
+                <p>&copy; 2025 Corellian Rigging & Building Works. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -761,8 +862,6 @@
                     
                     menuToggle.setAttribute('aria-expanded', !expanded);
                     menu.classList.toggle('is-active');
-                    
-                    // Toggle menu icon animation
                     menuToggle.classList.toggle('is-active');
                 });
             }
@@ -826,6 +925,54 @@
                     behavior: 'smooth'
                 });
             });
+
+            // Add form animation on scroll
+            const animatedElements = document.querySelectorAll('.contact-form, .wp-block-file, .job-image');
+            
+            function checkIfInView() {
+                animatedElements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition.top < windowHeight * 0.8) {
+                        element.classList.add('animate');
+                    }
+                });
+            }
+            
+            // Add animation class in CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                .contact-form, .wp-block-file, .job-image {
+                    opacity: 0;
+                    transform: translateY(30px);
+                    transition: opacity 0.5s ease, transform 0.5s ease;
+                }
+                
+                .contact-form.animate, .wp-block-file.animate, .job-image.animate {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                
+                .wp-block-file {
+                    transition-delay: 0.2s;
+                }
+                
+                .contact-form {
+                    transition-delay: 0.4s;
+                }
+                
+                .job-image {
+                    transition-delay: 0.6s;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            window.addEventListener('scroll', checkIfInView);
+            window.addEventListener('load', checkIfInView);
+            
+            // Initial check if elements are in view
+            checkIfInView();
         });
     </script>
 </body>
