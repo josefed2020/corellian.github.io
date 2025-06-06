@@ -96,12 +96,11 @@
             color: var(--primary-color);
         }
 
+        /* FIXED: Removed global opacity rule, now all images are full opacity by default */
         img {
             max-width: 100%;
             height: auto;
-            opacity: 0.5; /* Adjust value between 0 (fully transparent) and 1 (fully opaque) */
         }
-
 
         ul, ol {
             margin-bottom: 1.5rem;
@@ -412,11 +411,13 @@
             height: 100%;
         }
 
+        /* NEW: Specific styling for project preview images to make them partially transparent */
         .project-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
+            opacity: 0.7; /* Only project images are partially transparent */
         }
 
         .project-overlay {
@@ -437,6 +438,7 @@
 
         .project-card:hover .project-image img {
             transform: scale(1.1);
+            opacity: 1; /* Full opacity on hover */
         }
 
         .project-card:hover .project-overlay {
@@ -646,11 +648,11 @@
             margin-bottom: 0.5rem;
         }
 
-            .credential-icon img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                opacity: 1;
+        .credential-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* Credential icons remain at full opacity */
         }
 
         .credential-title {
@@ -660,7 +662,7 @@
         }
         
          /* CTA section */
-                .cta-section {
+        .cta-section {
             padding: 5rem 0;
             background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('docs/assets/images/cta-bg.jpg') no-repeat center center/cover;
             color: var(--light-text);
@@ -1248,7 +1250,7 @@
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="./docs/assets/images/projects/joan-sutherland-theatre.webp" alt="Joan Sutherland Theatre – Machinery Package" class="transparent-image">
+                        <img src="./docs/assets/images/projects/joan-sutherland-theatre.webp" alt="Joan Sutherland Theatre – Machinery Package">
                     </div>
                     <div class="project-overlay">
                         <h3 class="project-title">Joan Sutherland Theatre – Machinery Package</h3>
@@ -1491,7 +1493,7 @@
                 <div class="client-logo-container" data-position="8">
                     <img src="docs/assets/images/partners/Laing-ORourke.png" alt="Laing O'Rourke" class="client-logo active">
                     <img src="docs/assets/images/partners/Multiplex_.png" alt="Multiplex" class="client-logo">
-                    <<img src="docs/assets/images/partners/New_Edge.png" alt="New Edge" class="client-logo">
+                    <img src="docs/assets/images/partners/New_Edge.png" alt="New Edge" class="client-logo">
                 </div>
                 <div class="client-logo-container" data-position="9">
                     <img src="docs/assets/images/partners/Nilson.png" alt="Nilson" class="client-logo active">
