@@ -460,6 +460,9 @@
         .testimonials-section {
             padding: 5rem 0;
             background-color: var(--light-bg);
+            height: 700px;
+            display: flex;
+            align-items: center;
         }
 
         .testimonials-carousel {
@@ -468,11 +471,13 @@
             margin: 0 auto;
             overflow: visible;
             padding: 0 60px;
+            height: 500px;
         }
 
         .testimonials-wrapper {
             display: flex;
             position: relative;
+            height: 500px;
         }
 
         .testimonial-slide {
@@ -482,6 +487,7 @@
             top: 0;
             left: 0;
             width: 100%;
+            height: 500px;
             transition: opacity 0.5s ease;
         }
 
@@ -497,6 +503,10 @@
             box-shadow: var(--box-shadow);
             position: relative;
             text-align: center;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .testimonial-card:before {
@@ -519,6 +529,15 @@
             z-index: 1;
             font-size: 1.1rem;
             line-height: 1.7;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .testimonial-content p {
+            margin: 0;
         }
 
         .testimonial-author {
@@ -622,9 +641,16 @@
         }
 
         .credential-icon {
-            font-size: 3rem;
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 0.5rem;
+        }
+
+            .credential-icon img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                opacity: 1;
         }
 
         .credential-title {
@@ -632,9 +658,9 @@
             margin-bottom: 1rem;
             color: var(--primary-color);
         }
-
-        /* CTA section */
-        .cta-section {
+        
+         /* CTA section */
+                .cta-section {
             padding: 5rem 0;
             background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('docs/assets/images/cta-bg.jpg') no-repeat center center/cover;
             color: var(--light-text);
@@ -668,22 +694,47 @@
             text-align: center;
         }
 
-        .client-logos {
+        .client-logos-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            margin: 3rem auto 0 auto;
+            max-width: 1200px;
+            justify-items: center;
+            padding: 0 1rem;
+        }
+
+        .client-logo-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
             display: flex;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 3rem;
-            margin-top: 3rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
         }
 
         .client-logo {
-            width: 150px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 160px;
+            object-fit: contain;
             filter: grayscale(100%);
-            opacity: 0.7;
-            transition: var(--transition);
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out, filter 0.3s ease;
         }
 
-        .client-logo:hover {
+        .client-logo.active {
+            opacity: 0.7;
+        }
+
+        .client-logo-container:hover .client-logo.active {
             filter: grayscale(0%);
             opacity: 1;
         }
@@ -932,6 +983,43 @@
             .next-arrow {
                 right: -50px;
             }
+
+            .client-logos-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
+                padding: 0 2rem;
+            }
+
+            .client-logo-container {
+                width: 160px;
+                height: 160px;
+            }
+
+            .client-logo {
+                width: 130px;
+                height: 130px;
+            }
+
+            .testimonials-section {
+                height: 650px;
+            }
+
+            .testimonials-carousel {
+                height: 450px;
+            }
+
+            .testimonials-wrapper {
+                height: 450px;
+            }
+
+            .testimonial-slide {
+                height: 450px;
+            }
+
+            .testimonial-card {
+                height: 400px;
+                padding: 2.5rem 2rem;
+            }
         }
 
         @media screen and (max-width: 768px) {
@@ -1005,10 +1093,12 @@
             
             .testimonial-card {
                 padding: 2rem 1.5rem;
+                height: 350px;
             }
             
             .testimonials-carousel {
                 padding: 0 20px;
+                height: 400px;
             }
             
             .carousel-arrows {
@@ -1023,6 +1113,34 @@
 
             .next-arrow {
                 right: -20px;
+            }
+
+            .testimonials-section {
+                height: 600px;
+            }
+
+            .testimonials-wrapper {
+                height: 400px;
+            }
+
+            .testimonial-slide {
+                height: 400px;
+            }
+
+            .client-logos-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+                padding: 0 1.5rem;
+            }
+
+            .client-logo-container {
+                width: 120px;
+                height: 120px;
+            }
+
+            .client-logo {
+                width: 100px;
+                height: 100px;
             }
         }
 
@@ -1040,12 +1158,41 @@
                 grid-template-columns: 1fr;
             }
 
-            .client-logos {
-                gap: 2rem;
+            .client-logos-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            .client-logo-container {
+                width: 140px;
+                height: 140px;
             }
 
             .client-logo {
                 width: 120px;
+                height: 120px;
+            }
+
+            .testimonials-section {
+                height: 550px;
+            }
+
+            .testimonial-card {
+                height: 300px;
+                padding: 1.5rem 1rem;
+            }
+
+            .testimonials-wrapper {
+                height: 350px;
+            }
+
+            .testimonial-slide {
+                height: 350px;
+            }
+
+            .testimonials-carousel {
+                height: 350px;
             }
         }
     </style>
@@ -1247,25 +1394,33 @@
             
             <div class="safety-grid">
                 <div class="credential-card">
-                    <div class="credential-icon">🛡️</div>
+                    <div class="credential-icon">
+                        <img src="docs/assets/images/Safety.png" alt="Safety Standards">
+                    </div>
                     <h3 class="credential-title">Safety Standards</h3>
                     <p>We maintain the highest industry safety standards with a comprehensive safety management system and regular training for all staff.</p>
                 </div>
-                
+
                 <div class="credential-card">
-                    <div class="credential-icon">📋</div>
+                    <div class="credential-icon">
+                        <img src="docs/assets/images/Certifications.png" alt="Certifications">
+                    </div>
                     <h3 class="credential-title">Certifications</h3>
                     <p>Our team is fully certified with all relevant industry qualifications including rigging licenses, high-risk work licenses, and more.</p>
                 </div>
-                
+
                 <div class="credential-card">
-                    <div class="credential-icon">🗜️</div>
+                    <div class="credential-icon">
+                        <img src="docs/assets/images/Equipment.png" alt="Equipment">
+                    </div>
                     <h3 class="credential-title">Equipment</h3>
                     <p>We utilize only the highest quality equipment, regularly inspected and maintained to ensure optimal performance and safety.</p>
                 </div>
-                
+
                 <div class="credential-card">
-                    <div class="credential-icon">👷</div>
+                    <div class="credential-icon">
+                        <img src="docs/assets/images/Expertise.png" alt="Expertise">
+                    </div>
                     <h3 class="credential-title">Expertise</h3>
                     <p>Our team has over 100 years of combined experience in the rigging and building trades, with specialists across multiple disciplines.</p>
                 </div>
@@ -1292,12 +1447,82 @@
                 <p>We're proud to have worked with some of Australia's leading companies across various industries.</p>
             </div>
             
-            <div class="client-logos">
-                <img src="docs/assets/images/client-logo-1.png" alt="Client Logo" class="client-logo">
-                <img src="docs/assets/images/client-logo-2.png" alt="Client Logo" class="client-logo">
-                <img src="docs/assets/images/client-logo-3.png" alt="Client Logo" class="client-logo">
-                <img src="docs/assets/images/client-logo-4.png" alt="Client Logo" class="client-logo">
-                <img src="docs/assets/images/client-logo-5.png" alt="Client Logo" class="client-logo">
+            <div class="client-logos-grid">
+                <div class="client-logo-container" data-position="0">
+                    <img src="docs/assets/images/partners/AG-Coombs-1.png" alt="AG Coombs" class="client-logo active">
+                    <img src="docs/assets/images/partners/Airmaster-1.png" alt="Airmaster" class="client-logo">
+                    <img src="docs/assets/images/partners/ARA-Mechanical.png" alt="ARA Mechanical" class="client-logo">
+                </div>
+                <div class="client-logo-container" data-position="1">
+                    <img src="docs/assets/images/partners/AW-Edwards.png" alt="AW Edwards" class="client-logo active">
+                    <img src="docs/assets/images/partners/Barnwell_Cambridge.png" alt="Barnwell Cambridge" class="client-logo">
+                    <img src="docs/assets/images/partners/AG-Coombs-1.png" alt="Client Logo 6" class="client-logo">
+                </div>
+                <div class="client-logo-container" data-position="2">
+                    <img src="docs/assets/images/partners/Brown_Moodie.png" alt="Brown Moodie" class="client-logo active">
+                    <img src="docs/assets/images/partners/BuildCorp-1.png" alt="BuildCorp" class="client-logo">
+                    <img src="docs/assets/images/partners/Built-1.png" alt="Built" class="client-logo">
+                </div>
+                <div class="client-logo-container" data-position="3">
+                    <img src="docs/assets/images/partners/CBRE.png" alt="CBRE" class="client-logo active">
+                    <img src="docs/assets/images/partners/Class-Power.png" alt="Class Power" class="client-logo">
+                    <img src="docs/assets/images/partners/Climatech.png" alt="Climatech" class="client-logo">
+                </div>
+                <div class="client-logo-container" data-position="4">
+                    <img src="docs/assets/images/partners/CPB_.png" alt="CPB" class="client-logo active">
+                    <img src="docs/assets/images/partners/Daikin.png" alt="Daikin" class="client-logo">
+                    <img src="docs/assets/images/partners/Delta-Elcom.png" alt="Delta Elcom" class="client-logo">
+                </div>
+                <div class="client-logo-container" data-position="5">
+                    <img src="docs/assets/images/partners/Equilibrium.png" alt="Equilibrium" class="client-logo active">
+                    <img src="docs/assets/images/partners/FDC_.png" alt="FDC" class="client-logo">
+                    <img src="docs/assets/images/partners/Fredon-1.png" alt="Fredon" class="client-logo">
+                </div>
+                <div class="client-logo-container" data-position="6">
+                    <img src="docs/assets/images/partners/Fusion.png" alt="Fusion" class="client-logo active">
+                    <img src="docs/assets/images/partners/GJWalker.png" alt="GJ Walker" class="client-logo">
+                    <img src="docs/assets/images/partners/Gordon-Brothers-1.png" alt="Gordon Brothers" class="client-logo">
+                </div>
+                <div class="client-logo-container" data-position="7">
+                    <img src="docs/assets/images/partners/Heyday.png" alt="Heyday" class="client-logo active">
+                    <img src="docs/assets/images/partners/ICR-Airconditioning.png" alt="ICR Airconditioning" class="client-logo">
+                    <img src="docs/assets/images/partners/JANDS.png" alt="JANDS" class="client-logo">
+                </div>
+                <div class="client-logo-container" data-position="8">
+                    <img src="docs/assets/images/partners/Laing-ORourke.png" alt="Laing O'Rourke" class="client-logo active">
+                    <img src="docs/assets/images/partners/Multiplex_.png" alt="Multiplex" class="client-logo">
+                    <<img src="docs/assets/images/partners/New_Edge.png" alt="New Edge" class="client-logo">
+                </div>
+                <div class="client-logo-container" data-position="9">
+                    <img src="docs/assets/images/partners/Nilson.png" alt="Nilson" class="client-logo active">
+                    <img src="docs/assets/images/partners/Parratech.png" alt="Parratech" class="client-logo">
+                    <img src="docs/assets/images/partners/PJS-Air.png" alt="PJS Air" class="client-logo">
+                </div>
+                <div class="client-logo-container" data-position="10">
+                    <img src="docs/assets/images/partners/RD_Air.png" alt="RD Air" class="client-logo active">
+                    <img src="docs/assets/images/partners/Star_Group.png" alt="Star Group" class="client-logo">
+                    <img src="docs/assets/images/partners/Stowe.png" alt="Stowe" class="client-logo">
+                </div>
+                <div class="client-logo-container" data-position="11">
+                    <img src="docs/assets/images/partners/Sydney-Airport.png" alt="Sydney Airport" class="client-logo active">
+                    <img src="docs/assets/images/partners/Taylor_.png" alt="Taylor" class="client-logo">
+                    <img src="docs/assets/images/partners/VAE_.png" alt="VAE" class="client-logo">
+                </div>
+                <div class="client-logo-container" data-position="12">
+                    <img src="docs/assets/images/partners/Vent-Mechanical.png" alt="Vent Mechanical" class="client-logo active">
+                    <img src="docs/assets/images/partners/Laing-ORourke.png" alt="Laing O'Rourke" class="client-logo">
+                    <img src="docs/assets/images/partners/BuildCorp-1.png" alt="BuildCorp" class="client-logo">
+                </div>
+                <div class="client-logo-container" data-position="13">
+                    <img src="docs/assets/images/partners/CBRE.png" alt="CBRE" class="client-logo active">
+                    <img src="docs/assets/images/partners/Built-1.png" alt="Built" class="client-logo">
+                    <img src="docs/assets/images/partners/CPB_.png" alt="CPB" class="client-logo">
+                </div>
+                <div class="client-logo-container" data-position="14">
+                    <img src="docs/assets/images/partners/Climatech.png" alt="Climatech" class="client-logo active">
+                    <img src="docs/assets/images/partners/Fredon-1.png" alt="Fredon" class="client-logo">
+                    <img src="docs/assets/images/partners/Multiplex_.png" alt="Multiplex" class="client-logo">
+                </div>
             </div>
         </div>
     </section>
@@ -1468,7 +1693,42 @@
             
             // Initialize testimonials carousel
             initializeTestimonials();
+            
+            // Initialize client logos cycling animation
+            initializeClientLogos();
         });
+
+        // Client Logos Cycling Animation
+        function initializeClientLogos() {
+            const logoContainers = document.querySelectorAll('.client-logo-container');
+            
+            logoContainers.forEach((container, index) => {
+                const logos = container.querySelectorAll('.client-logo');
+                let currentLogoIndex = 0;
+                
+                // Generate random initial delay between 1-8 seconds for each container
+                const randomInitialDelay = Math.random() * 7000 + 1000; // 1-8 seconds
+                
+                function cycleLogo() {
+                    // Fade out current logo
+                    logos[currentLogoIndex].classList.remove('active');
+                    
+                    // Move to next logo
+                    currentLogoIndex = (currentLogoIndex + 1) % logos.length;
+                    
+                    // Fade in new logo after a short delay
+                    setTimeout(() => {
+                        logos[currentLogoIndex].classList.add('active');
+                    }, 400);
+                }
+                
+                // Start cycling with random initial delay
+                setTimeout(() => {
+                    // Set up interval for this container (each cycles every 5 seconds after initial delay)
+                    setInterval(cycleLogo, 5000);
+                }, randomInitialDelay);
+            });
+        }
 
         // Testimonials Carousel Functionality
         let currentSlide = 1; // Start with second slide (index 1) as it has the "active" class in HTML
