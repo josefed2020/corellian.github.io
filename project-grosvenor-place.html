@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grosvenor Place - Complete HVAC Infrastructure Upgrade - Corellian</title>
+    <meta name="description" content="Corellian's comprehensive HVAC infrastructure upgrade at Grosvenor Place skyscraper in Sydney CBD, featuring rooftop cooling tower replacement and basement plant room construction.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛓️</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset & Base Styles */
+        :root {
+            --primary-color: #222222; /* Black */
+            --secondary-color: #e60000; /* Red */
+            --accent-color: #f2f2f2; /* Light grey */
+            --text-color: #333333;
+            --light-text: #ffffff;
+            --light-bg: #f9f9f9;
+            --border-color: #e0e0e0;
+            --font-main: 'Roboto', Arial, sans-serif;
+            --font-heading: 'Montserrat', 'Roboto', Arial, sans-serif;
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #ffffff;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .screen-reader-text {
+            border: 0;
+            clip: rect(1px, 1px, 1px, 1px);
+            clip-path: inset(50%);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+            word-wrap: normal !important;
+        }
+
+        /* Header */
+        .site-header {
+            padding: 1rem 0;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+
+        /* Navigation */
+        .main-navigation {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-item {
+            margin-left: 1.5rem;
+        }
+
+        .menu-item a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding-bottom: 0.25rem;
+        }
+
+        .menu-item a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .menu-item a:hover:after, 
+        .menu-item.current-menu-item a:after {
+            width: 100%;
+        }
+
+        .menu-item a:hover, 
+        .menu-item.current-menu-item a {
+            color: var(--secondary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-icon {
+            position: relative;
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .menu-icon:before,
+        .menu-icon:after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .menu-icon:before {
+            top: -8px;
+        }
+
+        .menu-icon:after {
+            bottom: -8px;
+        }
+
+        .menu-toggle.is-active .menu-icon {
+            background-color: transparent;
+        }
+
+        .menu-toggle.is-active .menu-icon:before {
+            transform: rotate(45deg);
+            top: 0;
+        }
+
+        .menu-toggle.is-active .menu-icon:after {
+            transform: rotate(-45deg);
+            bottom: 0;
+        }
+        
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background-color: #cc0000;
+        }
+
+        /* Main Content */
+        .site-content {
+            padding: 5rem 0;
+        }
+
+        /* Single Project Page Styles */
+        .single-project {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .entry-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .entry-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .entry-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 1rem auto 0;
+        }
+
+        .entry-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .author-name {
+            font-weight: 600;
+        }
+
+        .project-featured-image {
+            margin-bottom: 3rem;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .project-featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .project-content h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            color: var(--primary-color);
+        }
+
+        .project-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .project-content p strong {
+            color: var(--primary-color);
+        }
+
+        .project-content ul, 
+        .project-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .project-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-gallery {
+            margin: 3rem 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7), transparent);
+            color: var(--light-text);
+            padding: 2.5rem 1rem 0.75rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+
+        /* Inline gallery for article content */
+        .inline-gallery {
+            margin: 2rem 0;
+        }
+
+        .inline-gallery .gallery-grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            opacity: 1;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 95%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: calc(90vh - 80px);
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-caption {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--light-text);
+            padding: 1rem 2rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: center;
+            max-width: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .lightbox-close:hover {
+            background-color: #cc0000;
+            transform: rotate(90deg);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            margin: 3rem 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 6px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .spacer {
+            height: 44px;
+            margin-bottom: 2rem;
+        }
+
+        /* Post Navigation */
+        .post-navigation {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .post-navigation .nav-links {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .post-navigation .nav-previous,
+        .post-navigation .nav-next {
+            max-width: 45%;
+        }
+
+        .post-navigation a {
+            display: flex;
+            flex-direction: column;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .post-navigation a:hover {
+            color: var(--secondary-color);
+        }
+
+        .post-navigation .ast-post-nav {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .post-navigation svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 0.5rem;
+            fill: currentColor;
+        }
+
+        .post-navigation .nav-next .ast-post-nav svg {
+            margin-right: 0;
+            margin-left: 0.5rem;
+        }
+
+        .post-navigation p {
+            margin: 0;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 5rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .footer-contact p {
+            margin-bottom: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--light-text);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .entry-title {
+                font-size: 2.2rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: #fff;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 1rem 0;
+                z-index: 100;
+            }
+
+            .menu.is-active {
+                display: flex;
+            }
+
+            .menu-item {
+                margin: 0;
+            }
+
+            .menu-item a {
+                display: block;
+                padding: 0.75rem 1.5rem;
+            }
+
+            .menu-item a:after {
+                display: none;
+            }
+            
+            .post-navigation .nav-links {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .post-navigation .nav-previous,
+            .post-navigation .nav-next {
+                max-width: 100%;
+            }
+
+            /* Always show captions on mobile */
+            .gallery-caption {
+                opacity: 1;
+                font-size: 0.85rem;
+                padding: 2rem 0.75rem 0.5rem;
+            }
+
+            .lightbox-close {
+                top: 10px;
+                right: 10px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .lightbox-caption {
+                font-size: 0.9rem;
+                padding: 0.75rem 1rem;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="logo-container">
+                <img src="docs/assets/images/Cor_Logo_small.png" alt="CORELLIAN" class="logo">
+                <div class="tagline">Rigging and Building Works</div>
+            </div>
+            
+            <nav class="main-navigation">
+                <button class="menu-toggle" aria-expanded="false">
+                    <span class="screen-reader-text">Menu</span>
+                    <span class="menu-icon"></span>
+                </button>
+                
+                <ul class="menu">
+                    <li class="menu-item"><a href="index.html">Home</a></li>
+                    <li class="menu-item current-menu-item"><a href="projects.html">Projects</a></li>
+                    <li class="menu-item"><a href="about.html">About Us</a></li>
+                    <li class="menu-item"><a href="employment.html">Employment</a></li>
+                    <li class="menu-item"><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div id="content" class="site-content">
+        <div class="container">
+            <div id="primary" class="content-area">
+                <main id="main" class="site-main">
+                    <article class="single-project">
+                        <header class="entry-header">
+                            <h1 class="entry-title">Grosvenor Place <br> Complete HVAC Infrastructure Upgrade</h1>
+                            <div class="entry-meta">
+                                Completed <span class="published">2022</span>
+                            </div>
+                        </header>
+                        
+                        <div class="project-content">
+                            <h2><strong>Introduction</strong></h2>
+                            
+                            <p>Corellian undertook a comprehensive HVAC infrastructure upgrade at Grosvenor Place, one of Sydney CBD's premier office towers. This complex project required coordination across multiple building levels, from the rooftop cooling tower replacement to basement plant room construction, all while maintaining building operations. The scope demanded Corellian's expertise in high-rise rigging, confined space construction, and precision equipment installation across the full height of the skyscraper.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="Original roof cooling towers prior to replacement">
+                                        <img src="docs/assets/images/projects/grosvenor-place-1.jpg" alt="Original roof cooling towers">
+                                        <div class="gallery-caption">Original roof cooling towers prior to replacement</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Original plant room before refurbishment">
+                                        <img src="docs/assets/images/projects/grosvenor-place-2.jpg" alt="Original plant room">
+                                        <div class="gallery-caption">Original plant room before refurbishment</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Car park area before construction work commences">
+                                        <img src="docs/assets/images/projects/grosvenor-place-3.jpg" alt="Car park before work commences">
+                                        <div class="gallery-caption">Car park area before construction work commences</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2><strong>Stage 1: Rooftop Works - Cooling Tower Replacement</strong></h2>
+                            
+                            <p><strong>Demolition and Removal</strong></p>
+                            
+                            <p>The project commenced with the careful demolition and removal of the existing rooftop cooling towers. Working at height on a CBD skyscraper presented unique logistical challenges, requiring Corellian to coordinate tower crane operations for the safe removal of the old equipment. The team meticulously planned each lift to ensure safety while minimizing disruption to the building's occupants and surrounding properties.</p>
+
+                            <p><strong>Structural Support Construction</strong></p>
+                            
+                            <p>Following demolition, Corellian constructed new steel support structures, platforms, and catwalks to accommodate the replacement cooling towers. This structural work required precise engineering to integrate with the building's existing framework while providing robust foundations for the new equipment.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="Cooling tower support piers under construction on the rooftop">
+                                        <img src="docs/assets/images/projects/grosvenor-place-4.jpg" alt="Cooling tower piers under construction">
+                                        <div class="gallery-caption">Cooling tower support piers under construction on the rooftop</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p><strong>Cooling Tower Assembly</strong></p>
+                            
+                            <p>One of the project's most challenging aspects involved installing the new cooling towers on the rooftop. Due to lift capacity constraints, the cooling towers could not be delivered as complete units. Instead, Corellian coordinated the transport of cooling tower components through the building's small passenger lift, then assembled them in place on the rooftop. This required exceptional planning, with each component carefully sized to fit through lift dimensions while maintaining the ability to be assembled into fully functional cooling towers. The team's expertise in modular assembly ensured seamless integration of all components despite the challenging access conditions.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="Completed cooling tower with access platform - assembled from components delivered via passenger lift">
+                                        <img src="docs/assets/images/projects/grosvenor-place-5.jpg" alt="Completed cooling tower with platform">
+                                        <div class="gallery-caption">Completed cooling tower with access platform - assembled from components delivered via passenger lift</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Cooling tower installation showing modular assembly methodology">
+                                        <img src="docs/assets/images/projects/grosvenor-place-6.jpg" alt="Cooling tower assembly in progress">
+                                        <div class="gallery-caption">Cooling tower installation showing modular assembly methodology</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Final cooling tower installation with all structural support elements">
+                                        <img src="docs/assets/images/projects/grosvenor-place-7.jpg" alt="Final cooling tower installation">
+                                        <div class="gallery-caption">Final cooling tower installation with all structural support elements</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2><strong>Stage 2: Basement Plant Room Construction</strong></h2>
+                            
+                            <p><strong>New Main Chiller Plant Room</strong></p>
+                            
+                            <p>Concurrent with rooftop works, Corellian constructed a new basement plant room to house the building's HVAC equipment and backup generators. This work required extensive structural and architectural modifications to create a purpose-built space that would accommodate large-scale mechanical equipment while meeting stringent building codes and ventilation requirements.</p>
+
+                            <p>A critical feature of the new plant room was the installation of a permanent monorail beam system. This overhead rigging infrastructure provides ongoing capability for equipment maintenance, replacement, and repositioning throughout the life of the facility, demonstrating Corellian's commitment to long-term operational efficiency.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="Original chiller plant room prior to construction phase">
+                                        <img src="docs/assets/images/projects/grosvenor-place-21.jpg" alt="Original chiller plant room">
+                                        <div class="gallery-caption"> Original chiller plant room</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Completed structural and architectural elements of the chiller plant room">
+                                        <img src="docs/assets/images/projects/grosvenor-place-9.jpg" alt="Chiller plant room structural completion">
+                                        <div class="gallery-caption">Completed structural and architectural elements of the chiller plant room</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p><strong>Mezzanine Pump Room Construction</strong></p>
+                            
+                            <p>To optimize space utilization and create segregated areas for different mechanical systems, Corellian designed and constructed a mezzanine-level pump room within the basement. This elevated platform houses the chilled water and condenser water pumps, providing efficient access for maintenance while maximizing the available floor area for other equipment.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="Newly constructed mezzanine pump room housing chilled water and condenser water pumps">
+                                        <img src="docs/assets/images/projects/grosvenor-place-12.jpg" alt="Mezzanine pump room">
+                                        <div class="gallery-caption">Newly constructed mezzanine pump room housing chilled water and condenser water pumps</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2><strong>Stage 3: Chiller and Equipment Installation</strong></h2>
+                            
+                            <p><strong>Site Preparation and Equipment Positioning</strong></p>
+                            
+                            <p>Before the installation of new equipment, Corellian prepared the plant room floor with new reinforced concrete plinths engineered to support the substantial weight of the chillers and associated equipment. The team documented the existing conditions to ensure proper planning for equipment removal and replacement.</p>
+
+                            <p><strong>Precision Rigging Using Permanent Monorail</strong></p>
+                            
+                            <p>The new chillers were positioned beneath the permanent monorail system that Corellian had installed in the plant room ceiling. This overhead rigging infrastructure enabled precise control during the lifting and positioning operations, allowing the team to maneuver the heavy equipment with millimeter accuracy to align with mounting points and piping connections.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="Chiller positioned under the permanent monorail system ready for final placement">
+                                        <img src="docs/assets/images/projects/grosvenor-place-13.jpg" alt="Chiller positioned under monorail">
+                                        <div class="gallery-caption">Chiller positioned under the permanent monorail system ready for final placement</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p><strong>Complete Chiller Installation</strong></p>
+                            
+                            <p>Corellian successfully installed multiple new chillers, each rigged onto custom-fabricated plinths and connected to the building's water and electrical systems. The installation included all associated infrastructure such as doors, partitions, support steelwork, and the distinctive blue monorail system that now provides ongoing maintenance capabilities.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="Chiller No. 1 fully installed with doors, walls, blue monorail, and support steel in place">
+                                        <img src="docs/assets/images/projects/grosvenor-place-14.jpg" alt="New chiller No. 1 installed">
+                                        <div class="gallery-caption">Chiller No. 1 fully installed with doors, walls, blue monorail, and support steel in place</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Chiller No. 3 installation showing equipment configuration">
+                                        <img src="docs/assets/images/projects/grosvenor-place-15.jpg" alt="Chiller No. 3 installation">
+                                        <div class="gallery-caption">Chiller No. 3 installation showing equipment configuration</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Chiller No. 3 with associated pipework and systems integration">
+                                        <img src="docs/assets/images/projects/grosvenor-place-16.jpg" alt="Chiller No. 3 with pipework">
+                                        <div class="gallery-caption">Chiller No. 3 with associated pipework and systems integration</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2><strong>Stage 4: Vertical Services and Smoke Exhaust Riser</strong></h2>
+                            
+                            <p><strong>Full-Height Rigging Infrastructure</strong></p>
+                            
+                            <p>One of the project's most technically demanding aspects involved refurbishing the ventilation systems within the smoke exhaust riser that extends the full height of the tower. To enable access throughout this vertical shaft, Corellian designed and installed a custom man hoist system supported by a purpose-built mast structure.</p>
+
+                            <p>This infrastructure also served a dual purpose, with structural beams used to rig new condenser water pipework serving floors 1 through 26, and subsequently floors 26 through 45. The rigging beam system was engineered to handle the substantial weight of the piping while providing the precision control necessary for installation in the constrained riser space.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="Structural beam used to rig new condenser water pipe serving levels 1-26 and 26-45, and to support mast construction">
+                                        <img src="docs/assets/images/projects/grosvenor-place-17.jpg" alt="Beam for rigging condenser water pipe">
+                                        <div class="gallery-caption">Structural beam used to rig new condenser water pipe serving levels 1-26 and 26-45, and to support mast construction</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Mast riser structure supporting the man hoist for smoke exhaust riser refurbishment work">
+                                        <img src="docs/assets/images/projects/grosvenor-place-18.jpg" alt="Mast riser with man hoist">
+                                        <div class="gallery-caption">Mast riser structure supporting the man hoist for smoke exhaust riser refurbishment work</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p>The man hoist enabled Corellian's team to safely access all levels of the exhaust riser, facilitating the ventilation system refurbishment while maintaining compliance with confined space entry regulations and height safety requirements. This vertical access solution exemplified Corellian's capability to develop innovative rigging solutions for complex high-rise challenges.</p>
+
+                            <h2><strong>Conclusion</strong></h2>
+                            
+                            <p>The Grosvenor Place HVAC infrastructure upgrade showcased Corellian's comprehensive capabilities across every aspect of mechanical services construction. From rooftop cooling tower replacement using modular assembly techniques, through basement plant room construction with permanent rigging infrastructure, to full-building-height vertical services installation, the project demonstrated exceptional planning, engineering, and execution.</p>
+
+                            <p>Corellian's ability to coordinate complex multi-level operations while maintaining building functionality highlights their expertise in occupied high-rise construction environments. The installation of permanent monorail systems and the innovative solutions for equipment access through passenger lifts reflect Corellian's commitment to both immediate project success and long-term facility management efficiency.</p>
+
+                            <p>This project stands as a testament to Corellian's position as a premier provider of complex HVAC infrastructure solutions in challenging CBD environments, delivering precision results through expert rigging, construction, and project coordination.</p>
+                            
+                            <div class="spacer"></div>
+                        </div>
+                    </article>
+                    
+                    <!-- Post Navigation -->
+                    <nav class="post-navigation">
+                        <div class="nav-links">
+                            <div class="nav-previous">
+                                <a href="projects.html">
+                                    <span class="ast-post-nav">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"></path></svg>
+                                        All Projects
+                                    </span>
+                                    <p></p>
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </nav>
+                </main>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">×</button>
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>About Corellian</h3>
+                    <p>Corellian provides expert rigging and building services for the relocation of heavy and delicate equipment. With over 100 years of combined experience, our team delivers excellence at every stage of your project.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link">FB</a>
+                        <a href="#" class="social-link">IN</a>
+                        <a href="#" class="social-link">TW</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Expert Rigging</a></li>
+                        <li><a href="#">Building Works</a></li>
+                        <li><a href="#">Demolition</a></li>
+                        <li><a href="#">Fabrication</a></li>
+                        <li><a href="#">Equipment Installation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><strong>Phone:</strong> 1300 655 496</p>
+                    <p><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef8a9c9b86828e9b868188af8c809d8a8383868e81c18c8082c18e9a">[email&#160;protected]</a></p>
+                    <p><strong>Sydney Office:</strong><br>
+                    22 Kilto Crescent<br>
+                    Glendenning NSW 2761</p>
+                    <p><strong>Melbourne Office:</strong><br>
+                    29B Foden Ave<br>
+                    Campbellfield VIC 3061</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Corellian Rigging & Building Works. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <span>↑</span>
+    </div>
+    
+    <!-- Custom JavaScript -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const menuToggle = document.querySelector('.menu-toggle');
+            const menu = document.querySelector('.menu');
+            
+            // Toggle mobile menu
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+                    
+                    menuToggle.setAttribute('aria-expanded', !expanded);
+                    menu.classList.toggle('is-active');
+                    menuToggle.classList.toggle('is-active');
+                });
+            }
+            
+            // Gallery image lightbox
+            const galleryItems = document.querySelectorAll('.gallery-item img');
+            const lightboxModal = document.getElementById('lightboxModal');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            const lightboxClose = document.getElementById('lightboxClose');
+            
+            if (galleryItems.length > 0) {
+                galleryItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        const caption = this.closest('.gallery-item').getAttribute('data-caption');
+                        
+                        lightboxImage.src = this.src;
+                        lightboxImage.alt = this.alt;
+                        lightboxCaption.textContent = caption;
+                        
+                        lightboxModal.classList.add('active');
+                        document.body.style.overflow = 'hidden'; // Prevent scrolling
+                    });
+                });
+            }
+            
+            // Close lightbox
+            function closeLightbox() {
+                lightboxModal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+            
+            if (lightboxClose) {
+                lightboxClose.addEventListener('click', closeLightbox);
+            }
+            
+            // Close lightbox when clicking outside the image
+            if (lightboxModal) {
+                lightboxModal.addEventListener('click', function(e) {
+                    if (e.target === lightboxModal) {
+                        closeLightbox();
+                    }
+                });
+            }
+            
+            // Close lightbox with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightboxModal.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+            
+            // Scroll to top functionality
+            const scrollToTopButton = document.getElementById('scrollToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopButton.classList.add('visible');
+                } else {
+                    scrollToTopButton.classList.remove('visible');
+                }
+            });
+            
+            scrollToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Add animation on scroll for gallery and content elements
+            const animatedElements = document.querySelectorAll('.gallery-item, .project-featured-image, .video-container');
+            
+            function checkIfInView() {
+                animatedElements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition.top < windowHeight * 0.8) {
+                        element.classList.add('animate');
+                    }
+                });
+            }
+            
+            // Add animation class in CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                .gallery-item, .project-featured-image, .video-container {
+                    opacity: 0;
+                    transform: translateY(30px);
+                    transition: opacity 0.5s ease, transform 0.5s ease;
+                }
+                
+                .gallery-item.animate, .project-featured-image.animate, .video-container.animate {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                
+                .gallery-item:nth-child(2) {
+                    transition-delay: 0.2s;
+                }
+                
+                .gallery-item:nth-child(3) {
+                    transition-delay: 0.4s;
+                }
+                
+                .gallery-item:nth-child(4) {
+                    transition-delay: 0.6s;
+                }
+                
+                .gallery-item:nth-child(5) {
+                    transition-delay: 0.8s;
+                }
+                
+                .gallery-item:nth-child(6) {
+                    transition-delay: 1.0s;
+                }
+                
+                .video-container {
+                    transition-delay: 0.3s;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            window.addEventListener('scroll', checkIfInView);
+            checkIfInView();
+        });
+    </script>
+</body>
+</html>

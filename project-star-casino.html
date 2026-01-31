@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Star Sydney - Site Wide Infrastructure Project - Corellian</title>
+    <meta name="description" content="Corellian's comprehensive infrastructure upgrade work for Fredon's SWIS project at The Star Sydney casino and entertainment complex.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛓️</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset & Base Styles */
+        :root {
+            --primary-color: #222222; /* Black */
+            --secondary-color: #e60000; /* Red */
+            --accent-color: #f2f2f2; /* Light grey */
+            --text-color: #333333;
+            --light-text: #ffffff;
+            --light-bg: #f9f9f9;
+            --border-color: #e0e0e0;
+            --font-main: 'Roboto', Arial, sans-serif;
+            --font-heading: 'Montserrat', 'Roboto', Arial, sans-serif;
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #ffffff;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .screen-reader-text {
+            border: 0;
+            clip: rect(1px, 1px, 1px, 1px);
+            clip-path: inset(50%);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+            word-wrap: normal !important;
+        }
+
+        /* Header */
+        .site-header {
+            padding: 1rem 0;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+
+        /* Navigation */
+        .main-navigation {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-item {
+            margin-left: 1.5rem;
+        }
+
+        .menu-item a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding-bottom: 0.25rem;
+        }
+
+        .menu-item a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .menu-item a:hover:after, 
+        .menu-item.current-menu-item a:after {
+            width: 100%;
+        }
+
+        .menu-item a:hover, 
+        .menu-item.current-menu-item a {
+            color: var(--secondary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-icon {
+            position: relative;
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .menu-icon:before,
+        .menu-icon:after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .menu-icon:before {
+            top: -8px;
+        }
+
+        .menu-icon:after {
+            bottom: -8px;
+        }
+
+        .menu-toggle.is-active .menu-icon {
+            background-color: transparent;
+        }
+
+        .menu-toggle.is-active .menu-icon:before {
+            transform: rotate(45deg);
+            top: 0;
+        }
+
+        .menu-toggle.is-active .menu-icon:after {
+            transform: rotate(-45deg);
+            bottom: 0;
+        }
+        
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background-color: #cc0000;
+        }
+
+        /* Main Content */
+        .site-content {
+            padding: 5rem 0;
+        }
+
+        /* Single Project Page Styles */
+        .single-project {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .entry-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .entry-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .entry-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 1rem auto 0;
+        }
+
+        .entry-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .author-name {
+            font-weight: 600;
+        }
+
+        .project-featured-image {
+            margin-bottom: 3rem;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .project-featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .project-content h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            color: var(--primary-color);
+        }
+
+        .project-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .project-content p strong {
+            color: var(--primary-color);
+        }
+
+        .project-content ul, 
+        .project-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .project-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-gallery {
+            margin: 3rem 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7), transparent);
+            color: var(--light-text);
+            padding: 2.5rem 1rem 0.75rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+
+        /* Inline gallery for article content */
+        .inline-gallery {
+            margin: 2rem 0;
+        }
+
+        .inline-gallery .gallery-grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            opacity: 1;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 95%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: calc(90vh - 80px);
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-caption {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--light-text);
+            padding: 1rem 2rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: center;
+            max-width: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .lightbox-close:hover {
+            background-color: #cc0000;
+            transform: rotate(90deg);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            margin: 3rem 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 6px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .spacer {
+            height: 44px;
+            margin-bottom: 2rem;
+        }
+
+        /* Post Navigation */
+        .post-navigation {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .post-navigation .nav-links {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .post-navigation .nav-previous,
+        .post-navigation .nav-next {
+            max-width: 45%;
+        }
+
+        .post-navigation a {
+            display: flex;
+            flex-direction: column;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .post-navigation a:hover {
+            color: var(--secondary-color);
+        }
+
+        .post-navigation .ast-post-nav {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .post-navigation svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 0.5rem;
+            fill: currentColor;
+        }
+
+        .post-navigation .nav-next .ast-post-nav svg {
+            margin-right: 0;
+            margin-left: 0.5rem;
+        }
+
+        .post-navigation p {
+            margin: 0;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 5rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .footer-contact p {
+            margin-bottom: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--light-text);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .entry-title {
+                font-size: 2.2rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: #fff;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 1rem 0;
+                z-index: 100;
+            }
+
+            .menu.is-active {
+                display: flex;
+            }
+
+            .menu-item {
+                margin: 0;
+            }
+
+            .menu-item a {
+                display: block;
+                padding: 0.75rem 1.5rem;
+            }
+
+            .menu-item a:after {
+                display: none;
+            }
+            
+            .post-navigation .nav-links {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .post-navigation .nav-previous,
+            .post-navigation .nav-next {
+                max-width: 100%;
+            }
+
+            /* Always show captions on mobile */
+            .gallery-caption {
+                opacity: 1;
+                font-size: 0.85rem;
+                padding: 2rem 0.75rem 0.5rem;
+            }
+
+            .lightbox-close {
+                top: 10px;
+                right: 10px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .lightbox-caption {
+                font-size: 0.9rem;
+                padding: 0.75rem 1rem;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="logo-container">
+                <img src="docs/assets/images/Cor_Logo_small.png" alt="CORELLIAN" class="logo">
+                <div class="tagline">Rigging and Building Works</div>
+            </div>
+            
+            <nav class="main-navigation">
+                <button class="menu-toggle" aria-expanded="false">
+                    <span class="screen-reader-text">Menu</span>
+                    <span class="menu-icon"></span>
+                </button>
+                
+                <ul class="menu">
+                    <li class="menu-item"><a href="index.html">Home</a></li>
+                    <li class="menu-item current-menu-item"><a href="projects.html">Projects</a></li>
+                    <li class="menu-item"><a href="about.html">About Us</a></li>
+                    <li class="menu-item"><a href="employment.html">Employment</a></li>
+                    <li class="menu-item"><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div id="content" class="site-content">
+        <div class="container">
+            <div id="primary" class="content-area">
+                <main id="main" class="site-main">
+                    <article class="single-project">
+                        <header class="entry-header">
+                            <h1 class="entry-title">The Star Sydney <br> Site Wide Infrastructure Project</h1>
+                            <div class="entry-meta">
+                                Completed <span class="published">2020</span>
+                            </div>
+                        </header>
+                        
+                        <div class="project-content">
+                            <h2><strong>Introduction</strong></h2>
+                            
+                            <p>Corellian's whole-package rigging skill was brought in to assist with undertaking an impressive scope of work for Fredon's Site Wide Infrastructure (SWIS) project at The Star Sydney casino and entertainment complex in Pyrmont, NSW. The project required Corellian to showcase their expertise in rigging and various construction trades to support the complex infrastructure upgrade. Let's take a closer look at the chronological steps involved in completing each stage of the work performed by Corellian.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="Initial inspections of the unused space to be developed">
+                                        <img src="docs/assets/images/projects/star-casino-1.jpg" alt="Initial inspections of the unused space to be developed">
+                                        <div class="gallery-caption">Initial inspections of the unused space to be developed</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Former seawater pump plant room to be upgraded">
+                                        <img src="docs/assets/images/projects/star-casino-2.jpg" alt="Former seawater pump plant room to be upgraded">
+                                        <div class="gallery-caption">Former seawater pump plant room to be upgraded</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2><strong>Stage 1: Planning and Preparation</strong></h2>
+                            
+                            <p>Before the commencement of the project, Corellian worked closely with Fredon to develop a comprehensive plan for the execution of the work. This involved conducting site surveys, reviewing drawings and specifications, and identifying potential challenges. Corellian also prepared detailed method statements and risk assessments to ensure the safety and efficiency of the project.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="Stakeholders review and approve Corellian's plan of action">
+                                        <img src="docs/assets/images/projects/star-casino-3.jpg" alt="Stakeholders review and approve Corellian's plan of action">
+                                        <div class="gallery-caption">Stakeholders review and approve Corellian's plan of action</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2><strong>Stage 2: Demolition and Structural Preparations</strong></h2>
+                            
+                            <p>Corellian began their work by demolishing and removing rock, earth, gravel and blockwork within the B4 plant room, and coordinated the rigging and removal of the old diesel tanks. This stage was crucial in preparing the area for the subsequent structural works. The team's specialists then started skillfully disassembling and cutting apart the existing plant within the B4 and B2 plant rooms. This process required careful planning and execution to ensure the safe removal of the equipment without damaging the surrounding structures. The team utilized specialized equipment, such as a Brokk hammer, to carefully demolish and remove the existing sandstone substrate while preventing damage to any adjacent fixtures.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="The brokk hammer being used to excavate sandstone and expand the size of the plantroom">
+                                        <img src="docs/assets/images/projects/star-casino-4.jpg" alt="The brokk hammer being used to excavate sandstone and expand the size of the plantroom">
+                                        <div class="gallery-caption">The brokk hammer being used to excavate sandstone and expand the size of the plantroom</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Demolished plant is disassembled, cut apart and removed from site. Some of the old equipment had become completely obstructed over time">
+                                        <img src="docs/assets/images/projects/star-casino-5.jpg" alt="Demolished plant is disassembled, cut apart and removed from site">
+                                        <div class="gallery-caption">Demolished plant is disassembled, cut apart and removed from site. Some of the old equipment had become completely obstructed over time</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p>Once the demolition was complete, Corellian proceeded to construct new structural and architectural elements, including concrete slabs, hobs, plinths, blockwork, rock anchors, and structural steel. The team showcased their skills in establishing a multilevel static concrete pump lines, and arranging the formwork and pouring alongside their steel fabrication to ensure the structural integrity of the new elements and the existing structure.</p>
+
+                            <p>The plant room extension required extensive excavation of up to 600m³ of sandstone rock to create a floor area for the new plant room layout. This created excavation depths below the invert of the diaphragm wall thus requiring coordination and installation of a series of ground anchors to a depth of 12.4m at 45 degrees.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="Structural steel fabricated off-site, delivered and rigged to position">
+                                        <img src="docs/assets/images/projects/star-casino-6.jpg" alt="Structural steel fabricated off-site, delivered and rigged to position">
+                                        <div class="gallery-caption">Structural steel fabricated off-site, delivered and rigged to position</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Heavy loads are rigged with precision to protect floor surfaces and parts">
+                                        <img src="docs/assets/images/projects/star-casino-7.jpg" alt="Heavy loads are rigged with precision to protect floor surfaces and parts">
+                                        <div class="gallery-caption">Heavy loads are rigged with precision to protect floor surfaces and parts</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Structural steel installed in place and built to last">
+                                        <img src="docs/assets/images/projects/star-casino-8.jpg" alt="Structural steel installed in place and built to last">
+                                        <div class="gallery-caption">Structural steel installed in place and built to last</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Reinforced concrete is prepared and poured throughout the site">
+                                        <img src="docs/assets/images/projects/star-casino-9.jpg" alt="Reinforced concrete is prepared and poured throughout the site">
+                                        <div class="gallery-caption">Reinforced concrete is prepared and poured throughout the site</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Rock anchors are drilled into the stone to shore up the wall">
+                                        <img src="docs/assets/images/projects/star-casino-10.jpg" alt="Rock anchors are drilled into the stone to shore up the wall">
+                                        <div class="gallery-caption">Rock anchors are drilled into the stone to shore up the wall</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="The rock anchors are installed deep into the sandstone at an angle to protect the structure over time">
+                                        <img src="docs/assets/images/projects/star-casino-11.jpg" alt="The rock anchors are installed deep into the sandstone at an angle">
+                                        <div class="gallery-caption">The rock anchors are installed deep into the sandstone at an angle to protect the structure over time</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2><strong>Stage 3: Materials Handling and Hoisting Infrastructure</strong></h2>
+                            
+                            <p>To facilitate the efficient movement of materials and equipment, Corellian installed a temporary vertical materials hoist operating between the B2 and B4 levels by removing asphalt at street level, installing the loadbearing structure. This hoist was essential in transporting construction materials and waste throughout the project, and the openings were resealed to a professional finish at the end of the project. The team also created a new slab penetration in the B2 plant room with a second material hoist customised to accommodate the new chiller components, demonstrating their precision in core drilling and concrete cutting.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="The hoist installed on the concrete penetration with structural steel and wood panelling, and electric hoists rigged and ready">
+                                        <img src="docs/assets/images/projects/star-casino-12.jpg" alt="The hoist installed on the concrete penetration">
+                                        <div class="gallery-caption">The hoist installed on the concrete penetration with structural steel and wood panelling, and electric hoists rigged and ready</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="A Franna crane is used to lower loads down through the street level hatch that Corellian has installed">
+                                        <img src="docs/assets/images/projects/star-casino-13.jpg" alt="A Franna crane is used to lower loads down through the street level hatch">
+                                        <div class="gallery-caption">A Franna crane is used to lower loads down through the street level hatch that Corellian has installed</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Material hoists are used to lower loads down vertical tracks">
+                                        <img src="docs/assets/images/projects/star-casino-14.jpg" alt="Material hoists are used to lower loads down vertical tracks">
+                                        <div class="gallery-caption">Material hoists are used to lower loads down vertical tracks</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="When the work is done, the hatches are sealed">
+                                        <img src="docs/assets/images/projects/star-casino-15.jpg" alt="When the work is done, the hatches are sealed">
+                                        <div class="gallery-caption">When the work is done, the hatches are sealed</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p>Additionally, Corellian coordinated the logistics of material delivery and waste removal, coordinating traffic management and marking temporary roads through the car park to minimize disruption to public vehicles. The road surfaces and asphalt were also restored to a trade finish at the end of the work.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="Traffic is managed carefully to divert pedestrians and cars around the work on public roads and in the private carpark underground">
+                                        <img src="docs/assets/images/projects/star-casino-16.jpg" alt="Traffic is managed carefully to divert pedestrians and cars">
+                                        <div class="gallery-caption">Traffic is managed carefully to divert pedestrians and cars around the work on public roads and in the private carpark underground</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2><strong>Stage 4: Core Drilling and Penetrations</strong></h2>
+                            
+                            <p>With the structural preparations and materials handling infrastructure in place, Corellian proceeded to carry out a significant number of core drill penetrations through concrete slabs, internal walls, and external walls across multiple levels of the building to accommodate the new chilled water and condenser water pipework system. These penetrations were meticulously planned and executed to accommodate new pipework and services while minimizing the impact on any nearby works.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="Core holes are cut in the concrete and protected safely with wooden covers">
+                                        <img src="docs/assets/images/projects/star-casino-17.jpg" alt="Core holes are cut in the concrete and protected safely with wooden covers">
+                                        <div class="gallery-caption">Core holes are cut in the concrete and protected safely with wooden covers</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Wet cutting techniques are used to prevent silica dust">
+                                        <img src="docs/assets/images/projects/star-casino-18.jpg" alt="Wet cutting techniques are used to prevent silica dust">
+                                        <div class="gallery-caption">Wet cutting techniques are used to prevent silica dust</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p>Corellian's team utilized dustless work techniques and implemented proper protection measures to ensure a clean and efficient process. The precision and accuracy of the core drilling were critical in ensuring the smooth installation of the new services with a priority on preventing any compromise to the structural integrity of the building.</p>
+
+                            <h2><strong>Stage 5: Rigging and Equipment Installation</strong></h2>
+                            
+                            <p>In the final stage of their scope, Corellian demonstrated their expertise in rigging by taking delivery of approximately 15 new chillwater pumps, condenser water pumps, seawater pumps, large diesel tank components, delicate switchboards, and the broad and awkwardly shaped 1.2m diameter GRP seawater header sections.</p>
+
+                            <p>The main challenge of the project involved the installation of a 25 tonne, 5 mega watt Trane water-cooled Chiller into the newly constructed B4 plantroom at the lowest level of the works. This first required taking delivery of the chiller in component form at the curbside of the road and hoisting the parts from a crane down through the ground level hatch. From here it was moved into the B2 plantroom and the material hoist was disassembled to make space for the next stage of the move. To descend from B2 down to lower levels, a custom hoist was constructed from a structural steel framework and 3 phase electric chain hoists were installed to perform synchronised lifts by remote control. This hoist was used to lower the chiller down from B2 to a mezzanine. Twin monorails were installed above the mezzanine to move the suspended load down toward the B4 level, to manoeuvre it in space, and to assemble parts in their final position on the newly fabricated plinths. Every aspect of the work was controlled and finessed, with further adjustments being made to align with changes to the architect's design. Finally, the surfaces were painted to deliver on the project's complete vision.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="The chiller components are safely transported to site">
+                                        <img src="docs/assets/images/projects/star-casino-19.jpg" alt="The chiller components are safely transported to site">
+                                        <div class="gallery-caption">The chiller components are safely transported to site</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="The chiller is rigged to be lowered by the fabricated steel custom hoist">
+                                        <img src="docs/assets/images/projects/star-casino-20.jpg" alt="The chiller is rigged to be lowered by the fabricated steel custom hoist">
+                                        <div class="gallery-caption">The chiller is rigged to be lowered by the fabricated steel custom hoist</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Monorails are installed throughout the site for precise rigging exactly where it is needed">
+                                        <img src="docs/assets/images/projects/star-casino-21.jpg" alt="Monorails are installed throughout the site">
+                                        <div class="gallery-caption">Monorails are installed throughout the site for precise rigging exactly where it is needed</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Twin monorails are used for additional safety with heavier loads">
+                                        <img src="docs/assets/images/projects/star-casino-22.jpg" alt="Twin monorails are used for additional safety with heavier loads">
+                                        <div class="gallery-caption">Twin monorails are used for additional safety with heavier loads</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="The chiller is slowly moved from the mezzanine to the B4 floor">
+                                        <img src="docs/assets/images/projects/star-casino-23.jpg" alt="The chiller is slowly moved from the mezzanine to the B4 floor">
+                                        <div class="gallery-caption">The chiller is slowly moved from the mezzanine to the B4 floor</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Seawater pumps are rigged for precise movement">
+                                        <img src="docs/assets/images/projects/star-casino-24.jpg" alt="Seawater pumps are rigged for precise movement">
+                                        <div class="gallery-caption">Seawater pumps are rigged for precise movement</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p>The rigging process required meticulous planning and orchestration of Franna craneage, lift plans and permits. Coordinated use of chain blocks, precise engineering of the lifts using available lifting points, and careful protection of the equipment completed job with success. Corellian's team carefully stored the pumps and chiller components until they were ready to be transported to the site and skillfully rigged all loads down into position, assembling the suspended loads in location. The team's attention to detail and adherence to safety protocols were evident throughout the rigging process.</p>
+
+                            <p>Corellian also coordinated traffic control and arranged permits and lift plans for Franna cranes on Jones Bay Road to facilitate the delivery and hoisting of the new plant equipment and components. The precise and safe installation of the new equipment marked the successful completion of Corellian's scope of work, contributing to the overall success of Fredon's SWIS project.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="The corridor space before the project commenced">
+                                        <img src="docs/assets/images/projects/star-casino-25.jpg" alt="The corridor space before the project commenced">
+                                        <div class="gallery-caption">The corridor space before the project commenced</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="The corridor area toward the end of the refurbishment project">
+                                        <img src="docs/assets/images/projects/star-casino-26.jpg" alt="The corridor area toward the end of the refurbishment project">
+                                        <div class="gallery-caption">The corridor area toward the end of the refurbishment project</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2><strong>Milestone Achievements</strong></h2>
+                            
+                            <p>Throughout the project, Corellian achieved several significant milestones that demonstrated their commitment to delivering high-quality work.</p>
+
+                            <h3><strong>Construction and delivery of the diesel tank room with all finishes</strong></h3>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="The completed diesel tank room as viewed from above">
+                                        <img src="docs/assets/images/projects/star-casino-27.jpg" alt="The completed diesel tank room as viewed from above">
+                                        <div class="gallery-caption">The completed diesel tank room as viewed from above</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3><strong>Installation of two diesel tanks, ready for connection and diesel transfer</strong></h3>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="The finishes and walkways surrounding the diesel tanks">
+                                        <img src="docs/assets/images/projects/star-casino-28.jpg" alt="The finishes and walkways surrounding the diesel tanks">
+                                        <div class="gallery-caption">The finishes and walkways surrounding the diesel tanks</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3><strong>Construction and installation of the new seawater header, culvert and thrust box</strong></h3>
+                            
+                            <p>This milestone was completed to coincide with the site annual maintenance shutdown of the seawater system.</p>
+
+                            <h3><strong>Closure of the street hatch and alteration of the lower levels hatch</strong></h3>
+                            
+                            <p>New precast concrete panels were installed for future access.</p>
+
+                            <h3><strong>Installation of handrails, firedoors, stairs, access platforms, walkways, blockwork, passive fire installations, gravel, floor and wall finishes</strong></h3>
+                            
+                            <p>All installations were completed to meet BCA compliance.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="Toward the end of the refurbishment project, showing handrails, gravel, finishes and doors for the access to the plant rooms">
+                                        <img src="docs/assets/images/projects/star-casino-29.jpg" alt="Toward the end of the refurbishment project">
+                                        <div class="gallery-caption">Toward the end of the refurbishment project, showing handrails, gravel, finishes and doors for the access to the plant rooms</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Professional finishes on all surfaces and fixtures with signage as required">
+                                        <img src="docs/assets/images/projects/star-casino-30.jpg" alt="Professional finishes on all surfaces and fixtures">
+                                        <div class="gallery-caption">Professional finishes on all surfaces and fixtures with signage as required</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3><strong>Reinstatement and making good on all car park, footpaths, B2 plant rooms, and back of house area alterations</strong></h3>
+                            
+                            <p>All areas were restored to meet existing conditions.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="The private carpark returned to its former condition">
+                                        <img src="docs/assets/images/projects/star-casino-31.jpg" alt="The private carpark returned to its former condition">
+                                        <div class="gallery-caption">The private carpark returned to its former condition</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Catwalks and access, doors and finishes installed throughout the project">
+                                        <img src="docs/assets/images/projects/star-casino-32.jpg" alt="Catwalks and access, doors and finishes installed">
+                                        <div class="gallery-caption">Catwalks and access, doors and finishes installed throughout the project</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Catwalks and access, doors and finishes installed throughout the project">
+                                        <img src="docs/assets/images/projects/star-casino-33.jpg" alt="Catwalks and access, doors and finishes installed">
+                                        <div class="gallery-caption">Catwalks and access, doors and finishes installed throughout the project</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Catwalks and access, doors and finishes installed throughout the project">
+                                        <img src="docs/assets/images/projects/star-casino-34.jpg" alt="Catwalks and access, doors and finishes installed">
+                                        <div class="gallery-caption">Catwalks and access, doors and finishes installed throughout the project</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3><strong>Alteration and refurbishment of the seawater plant room</strong></h3>
+                            
+                            <p>This included rigging in of new seawater pumps with structural restraints.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="Refurbishment of the seawater plant">
+                                        <img src="docs/assets/images/projects/star-casino-35.jpg" alt="Refurbishment of the seawater plant">
+                                        <div class="gallery-caption">Refurbishment of the seawater plant</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3><strong>Construction and installation of the chiller plant room</strong></h3>
+                            
+                            <p>This milestone included rigging in of all major equipment.</p>
+                            
+                            <div class="inline-gallery">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item" data-caption="The new chiller installed in the refurbished plant room">
+                                        <img src="docs/assets/images/projects/star-casino-36.jpg" alt="The new chiller installed in the refurbished plant room">
+                                        <div class="gallery-caption">The new chiller installed in the refurbished plant room</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="The plant room with all equipment installed">
+                                        <img src="docs/assets/images/projects/star-casino-37.jpg" alt="The plant room with all equipment installed">
+                                        <div class="gallery-caption">The plant room with all equipment installed</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2><strong>Conclusion</strong></h2>
+                            
+                            <p>Corellian's work on Fredon's SWIS project at The Star Sydney showcased their expertise in rigging and various construction trades. From the initial planning stages to the final installation of equipment, Corellian demonstrated their ability to execute complex projects with precision, safety, and efficiency on a site with the most demanding access and underground conditions.</p>
+
+                            <p>The successful completion of this project is a testament to Corellian's commitment to delivering exceptional results and their ability to overcome challenges in a dynamic construction environment. With their skilled team and extensive experience, Corellian continues to be a trusted partner for clients seeking high-quality rigging and construction services.</p>
+                            
+                            <div class="spacer"></div>
+                        </div>
+                    </article>
+                    
+                    <!-- Post Navigation -->
+                    <nav class="post-navigation">
+                        <div class="nav-links">
+                            <div class="nav-previous">
+                                <a href="projects.html">
+                                    <span class="ast-post-nav">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"></path></svg>
+                                        All Projects
+                                    </span>
+                                    <p></p>
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </nav>
+                </main>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">×</button>
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>About Corellian</h3>
+                    <p>Corellian provides expert rigging and building services for the relocation of heavy and delicate equipment. With over 100 years of combined experience, our team delivers excellence at every stage of your project.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link">FB</a>
+                        <a href="#" class="social-link">IN</a>
+                        <a href="#" class="social-link">TW</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Expert Rigging</a></li>
+                        <li><a href="#">Building Works</a></li>
+                        <li><a href="#">Demolition</a></li>
+                        <li><a href="#">Fabrication</a></li>
+                        <li><a href="#">Equipment Installation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><strong>Phone:</strong> 1300 655 496</p>
+                    <p><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef8a9c9b86828e9b868188af8c809d8a8383868e81c18c8082c18e9a">[email&#160;protected]</a></p>
+                    <p><strong>Sydney Office:</strong><br>
+                    22 Kilto Crescent<br>
+                    Glendenning NSW 2761</p>
+                    <p><strong>Melbourne Office:</strong><br>
+                    29B Foden Ave<br>
+                    Campbellfield VIC 3061</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Corellian Rigging & Building Works. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <span>↑</span>
+    </div>
+    
+    <!-- Custom JavaScript -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const menuToggle = document.querySelector('.menu-toggle');
+            const menu = document.querySelector('.menu');
+            
+            // Toggle mobile menu
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+                    
+                    menuToggle.setAttribute('aria-expanded', !expanded);
+                    menu.classList.toggle('is-active');
+                    menuToggle.classList.toggle('is-active');
+                });
+            }
+            
+            // Gallery image lightbox
+            const galleryItems = document.querySelectorAll('.gallery-item img');
+            const lightboxModal = document.getElementById('lightboxModal');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            const lightboxClose = document.getElementById('lightboxClose');
+            
+            if (galleryItems.length > 0) {
+                galleryItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        const caption = this.closest('.gallery-item').getAttribute('data-caption');
+                        
+                        lightboxImage.src = this.src;
+                        lightboxImage.alt = this.alt;
+                        lightboxCaption.textContent = caption;
+                        
+                        lightboxModal.classList.add('active');
+                        document.body.style.overflow = 'hidden'; // Prevent scrolling
+                    });
+                });
+            }
+            
+            // Close lightbox
+            function closeLightbox() {
+                lightboxModal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+            
+            if (lightboxClose) {
+                lightboxClose.addEventListener('click', closeLightbox);
+            }
+            
+            // Close lightbox when clicking outside the image
+            if (lightboxModal) {
+                lightboxModal.addEventListener('click', function(e) {
+                    if (e.target === lightboxModal) {
+                        closeLightbox();
+                    }
+                });
+            }
+            
+            // Close lightbox with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightboxModal.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+            
+            // Scroll to top functionality
+            const scrollToTopButton = document.getElementById('scrollToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopButton.classList.add('visible');
+                } else {
+                    scrollToTopButton.classList.remove('visible');
+                }
+            });
+            
+            scrollToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Add animation on scroll for gallery and content elements
+            const animatedElements = document.querySelectorAll('.gallery-item, .project-featured-image, .video-container');
+            
+            function checkIfInView() {
+                animatedElements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition.top < windowHeight * 0.8) {
+                        element.classList.add('animate');
+                    }
+                });
+            }
+            
+            // Add animation class in CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                .gallery-item, .project-featured-image, .video-container {
+                    opacity: 0;
+                    transform: translateY(30px);
+                    transition: opacity 0.5s ease, transform 0.5s ease;
+                }
+                
+                .gallery-item.animate, .project-featured-image.animate, .video-container.animate {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                
+                .gallery-item:nth-child(2) {
+                    transition-delay: 0.2s;
+                }
+                
+                .gallery-item:nth-child(3) {
+                    transition-delay: 0.4s;
+                }
+                
+                .gallery-item:nth-child(4) {
+                    transition-delay: 0.6s;
+                }
+                
+                .gallery-item:nth-child(5) {
+                    transition-delay: 0.8s;
+                }
+                
+                .gallery-item:nth-child(6) {
+                    transition-delay: 1.0s;
+                }
+                
+                .video-container {
+                    transition-delay: 0.3s;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            window.addEventListener('scroll', checkIfInView);
+            checkIfInView();
+        });
+    </script>
+</body>
+</html>
