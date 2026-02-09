@@ -408,24 +408,36 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* Services Overview Modal */
+        /* 
+         * ===================================================================
+         * SERVICES OVERVIEW MODAL STYLES
+         * ===================================================================
+         * This section controls the appearance and behavior of the modal
+         * The modal starts as display:none and becomes display:block when
+         * the .active class is added via JavaScript
+         * ===================================================================
+         */
+        
+        /* Modal overlay - covers entire viewport with semi-transparent background */
         .services-overview-modal {
-            position: fixed;
+            position: fixed;              /* Fixed positioning to cover viewport */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            display: none;
-            overflow-y: auto;
+            background-color: rgba(0, 0, 0, 0.8);  /* Dark semi-transparent overlay */
+            z-index: 1000;                /* High z-index to appear above other content */
+            display: none;                /* Hidden by default */
+            overflow-y: auto;             /* Allow scrolling if content is tall */
             padding: 2rem 0;
         }
 
+        /* When modal has .active class, it becomes visible */
         .services-overview-modal.active {
-            display: block;
+            display: block;               /* Make modal visible */
         }
 
+        /* Modal content container - the white box that holds the actual content */
         .services-modal-content {
             background: white;
             border-radius: 6px;
@@ -435,6 +447,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
+        /* Modal header section - contains title and close button */
         .services-modal-header {
             padding: 2rem 2rem 1rem;
             border-bottom: 3px solid var(--secondary-color);
@@ -452,6 +465,7 @@
             display: none;
         }
 
+        /* Close button (X) in top right of modal */
         .close-modal {
             background: none;
             border: none;
@@ -472,12 +486,14 @@
             color: white;
         }
 
+        /* Service tabs navigation - horizontal tab buttons */
         .services-tabs {
             display: flex;
             background-color: var(--light-bg);
             padding: 0 2rem;
         }
 
+        /* Individual tab button styling */
         .service-tab {
             background: none;
             border: none;
@@ -493,6 +509,7 @@
             letter-spacing: 0.5px;
         }
 
+        /* Bottom border animation for tabs */
         .service-tab:after {
             content: '';
             position: absolute;
@@ -504,25 +521,30 @@
             transition: width 0.3s ease;
         }
 
+        /* Active and hover states for tabs */
         .service-tab:hover,
         .service-tab.active {
             color: var(--secondary-color);
         }
 
+        /* Show full width bottom border on active tab */
         .service-tab.active:after {
             width: 100%;
         }
 
+        /* Container for service panel content */
         .service-content {
             padding: 2rem;
         }
 
+        /* Individual service panel - hidden by default */
         .service-panel {
-            display: none;
+            display: none;                /* Hidden by default */
         }
 
+        /* When panel has .active class, it becomes visible */
         .service-panel.active {
-            display: block;
+            display: block;               /* Make panel visible */
         }
 
         .service-panel-grid {
@@ -805,8 +827,14 @@
             bottom: 0;
             left: 0;
             width: 50px;
-            height: 3px;
+            height: 2px;
             background-color: var(--secondary-color);
+        }
+
+        .footer-column p {
+            line-height: 1.8;
+            color: #cccccc;
+            margin-bottom: 1rem;
         }
 
         .footer-links {
@@ -820,7 +848,7 @@
         }
 
         .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
+            color: #cccccc;
             transition: var(--transition);
         }
 
@@ -829,9 +857,10 @@
             padding-left: 5px;
         }
 
-        .footer-contact p {
-            margin-bottom: 0.75rem;
-            color: rgba(255, 255, 255, 0.8);
+        .footer-contact strong {
+            color: var(--light-text);
+            display: inline-block;
+            min-width: 80px;
         }
 
         .social-links {
@@ -846,33 +875,34 @@
             justify-content: center;
             width: 40px;
             height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: var(--secondary-color);
             color: var(--light-text);
             border-radius: 50%;
             transition: var(--transition);
+            font-weight: 600;
         }
 
         .social-link:hover {
-            background-color: var(--secondary-color);
+            background-color: #cc0000;
+            transform: translateY(-3px);
         }
 
         .copyright {
             text-align: center;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.875rem;
+            border-top: 1px solid #444;
+            color: #999;
         }
 
         /* Scroll to top button */
         .scroll-top {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 2rem;
+            right: 2rem;
             width: 50px;
             height: 50px;
             background-color: var(--secondary-color);
-            color: var(--light-text);
+            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -883,7 +913,7 @@
             visibility: hidden;
             transition: var(--transition);
             z-index: 99;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--box-shadow);
         }
 
         .scroll-top.active {
@@ -892,39 +922,36 @@
         }
 
         .scroll-top:hover {
-            background-color: #cc0000;
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
         }
 
-        /* Responsive styles */
-        @media screen and (max-width: 1024px) {
+        /* Responsive Design */
+        @media (max-width: 1024px) {
             .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+
+            .service-panel-grid {
+                grid-template-columns: 1fr;
+            }
+
             .directors-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .overview-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
 
-        @media screen and (max-width: 768px) {
+        @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
             }
 
             h2 {
-                font-size: 1.75rem;
+                font-size: 1.5rem;
             }
 
             .entry-title {
-                font-size: 2.5rem;
-            }
-
-            .menu-toggle {
-                display: block;
+                font-size: 2rem;
             }
 
             .menu {
@@ -933,11 +960,10 @@
                 top: 100%;
                 left: 0;
                 right: 0;
+                background: white;
                 flex-direction: column;
-                background-color: #fff;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                padding: 1rem 0;
-                z-index: 100;
+                padding: 1rem;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
 
             .menu.is-active {
@@ -945,110 +971,72 @@
             }
 
             .menu-item {
-                margin: 0;
+                margin: 0.5rem 0;
             }
 
-            .menu-item a {
+            .menu-toggle {
                 display: block;
-                padding: 0.75rem 1.5rem;
-            }
-
-            .menu-item a:after {
-                display: none;
             }
 
             .overview-stats {
                 grid-template-columns: 1fr;
             }
 
-            .team-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            /* Services Modal Mobile */
-            .services-overview-modal {
-                padding: 1rem;
-            }
-
-            .services-modal-header {
-                padding: 1.5rem 1rem 1rem;
-            }
-
             .services-tabs {
-                padding: 0 1rem;
-                flex-wrap: wrap;
+                flex-direction: column;
+                padding: 0;
             }
 
             .service-tab {
-                padding: 0.75rem 1rem;
-                font-size: 0.9rem;
+                text-align: left;
+                padding: 1rem;
+                border-bottom: 1px solid var(--border-color);
             }
 
-            .service-content {
-                padding: 1.5rem 1rem;
-            }
-
-            .service-panel-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .service-image img {
-                height: 200px;
-            }
-
-            .services-modal-footer {
-                padding: 1.5rem 1rem 2rem;
-            }
-
-            .modal-social-links {
-                gap: 1rem;
-            }
-
-            .modal-social-link {
-                width: 45px;
-                height: 45px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media screen and (max-width: 576px) {
             .footer-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .team-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .site-content {
+                padding: 3rem 0;
+            }
+
+            .company-overview {
+                padding: 3rem 0;
+            }
+
+            .services-modal-content {
+                margin: 1rem;
+            }
+
+            .services-modal-header,
+            .service-content,
+            .services-modal-footer {
+                padding: 1rem;
+            }
+
+            .scroll-top {
+                bottom: 1rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="site-header">
-        <div class="container">
-            <div class="logo-container">
-                <img src="docs/assets/images/Cor_Logo_small.png" alt="CORELLIAN" class="logo">
-                <div class="tagline">Rigging and Building Works</div>
-            </div>
-            
-            <nav class="main-navigation">
-                <button class="menu-toggle" aria-expanded="false">
-                    <span class="screen-reader-text">Menu</span>
-                    <span class="menu-icon"></span>
-                </button>
-                
-                <ul class="menu">
-                    <li class="menu-item"><a href="index.html">Home</a></li>
-                    <li class="menu-item"><a href="projects.html">Projects</a></li>
-                    <li class="menu-item current-menu-item"><a href="about.html">About Us</a></li>
-                    <li class="menu-item"><a href="employment.html">Employment</a></li>
-                    <li class="menu-item"><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
+    <div id="header-placeholder"></div>
+   
     <!-- Main Content -->
     <div id="content" class="site-content">
         <div class="container">
@@ -1070,7 +1058,7 @@
                     
                     <div class="overview-stats">
                         <div class="stat-item">
-                            <span class="stat-number">100+</span>
+                            <span class="stat-number">200+</span>
                             <div class="stat-label">Years Combined Experience</div>
                         </div>
                         <div class="stat-item">
@@ -1083,6 +1071,14 @@
                         </div>
                     </div>
                     
+                    <!-- 
+                        =================================================================
+                        MODAL TRIGGER BUTTON (Main)
+                        =================================================================
+                        This button opens the services modal when clicked
+                        ID: servicesOverviewBtn - referenced in JavaScript event listener
+                        =================================================================
+                    -->
                     <div class="services-overview-btn-container">
                         <button class="primary-button" id="servicesOverviewBtn">Explore Our Services</button>
                     </div>
@@ -1090,23 +1086,54 @@
             </div>
         </section>
 
-        <!-- Services Overview Modal -->
+        <!-- 
+            =====================================================================
+            SERVICES OVERVIEW MODAL - MAIN HTML STRUCTURE
+            =====================================================================
+            This is the modal popup that displays service information
+            
+            Key Elements:
+            1. Modal Container (id="servicesOverviewModal")
+               - Initially hidden (display: none in CSS)
+               - Becomes visible when .active class is added
+            
+            2. Close Button (id="closeModalBtn")
+               - Closes the modal when clicked
+            
+            3. Service Tabs (class="service-tab")
+               - Switches between different service panels
+               - Uses data-service attribute to identify which panel to show
+            
+            4. Service Panels (class="service-panel")
+               - Content sections that display for each service
+               - Initially hidden, shown when .active class is added
+            =====================================================================
+        -->
         <section class="services-overview-modal" id="servicesOverviewModal">
             <div class="container">
                 <div class="services-modal-content">
+                    <!-- Modal Header with Close Button -->
                     <div class="services-modal-header">
                         <h2>Our Services Overview</h2>
+                        <!-- Close button - clicking this will close the modal -->
                         <button class="close-modal" id="closeModalBtn">&times;</button>
                     </div>
                     
+                    <!-- 
+                        Service Tabs Navigation
+                        Each button has a data-service attribute that matches
+                        the ID of its corresponding panel (e.g., data-service="rigging"
+                        corresponds to id="rigging-panel")
+                    -->
                     <div class="services-tabs">
                         <button class="service-tab active" data-service="rigging">Rigging</button>
                         <button class="service-tab" data-service="demolition">Demolition</button>
                         <button class="service-tab" data-service="building">Building Works</button>
                     </div>
                     
+                    <!-- Service Panel Content -->
                     <div class="service-content">
-                        <!-- Rigging Content -->
+                        <!-- Rigging Panel - Active by default -->
                         <div class="service-panel active" id="rigging-panel">
                             <div class="service-panel-grid">
                                 <div class="service-text">
@@ -1127,7 +1154,7 @@
                             </div>
                         </div>
                         
-                        <!-- Demolition Content -->
+                        <!-- Demolition Panel - Hidden by default -->
                         <div class="service-panel" id="demolition-panel">
                             <div class="service-panel-grid">
                                 <div class="service-text">
@@ -1148,7 +1175,7 @@
                             </div>
                         </div>
                         
-                        <!-- Building Works Content -->
+                        <!-- Building Works Panel - Hidden by default -->
                         <div class="service-panel" id="building-panel">
                             <div class="service-panel-grid">
                                 <div class="service-text">
@@ -1170,12 +1197,11 @@
                         </div>
                     </div>
                     
+                    <!-- Modal Footer with Social Links -->
                     <div class="services-modal-footer">
-                        <!-- gallery of work -->
                         <h3><a href="https://imgur.com/a/rigging-delicate-machinery-OqjlhpG#5t3xLJE" style="color: var(--primary-color); text-decoration: none;">See Us Work</a></h3>
                         <div class="modal-social-links">
                             <a href="https://www.facebook.com/corellianservices/" class="modal-social-link" title="Facebook">FB</a>
-                            <!-- gallery of work -->
                             <a href="https://imgur.com/a/rigging-delicate-machinery-OqjlhpG#5t3xLJE" class="modal-social-link" title="Project Gallery">IG</a>
                             <a href="https://www.linkedin.com/company/corellian-pty-ltd/" class="modal-social-link" title="LinkedIn">LI</a>
                         </div>
@@ -1243,7 +1269,7 @@
                         </div>
                         <div class="member-info">
                             <h4 class="member-name">Ricky Kelderman</h4>
-                            <div class="member-position">Operations Lead</div>
+                            <div class="member-position">Rigging Supervisor / Project Manager</div>
                             <div class="member-experience">15 years experience in heavy machinery rigging and project management</div>
                         </div>
                     </div>
@@ -1265,7 +1291,7 @@
                         </div>
                         <div class="member-info">
                             <h4 class="member-name">Tony Farrell</h4>
-                            <div class="member-position">Project Manager</div>
+                            <div class="member-position">Preconstruction Manager</div>
                             <div class="member-experience">18 years in machining and rigging works</div>
                         </div>
                     </div>
@@ -1320,8 +1346,52 @@
                         </div>
                         <div class="member-info">
                             <h4 class="member-name">Glen Preskett</h4>
-                            <div class="member-position">Construction Manager</div>
+                            <div class="member-position">Senior Project Manager</div>
                             <div class="member-experience">20 years in mechanical project management</div>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="./docs/assets/images/team/Rosa.jpg" alt="Rosabella">
+                        </div>
+                        <div class="member-info">
+                            <h4 class="member-name">Rosabella</h4>
+                            <div class="member-position">Customer Service & Administration</div>
+                            <div class="member-experience">20 years in customer service and administration</div>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="./docs/assets/images/team/cameron.jpg" alt="Cameron">
+                        </div>
+                        <div class="member-info">
+                            <h4 class="member-name">Cameron</h4>
+                            <div class="member-position">Operations Manager</div>
+                            <div class="member-experience">15 years in crane and rigging projects</div>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="./docs/assets/images/team/david-kairouz.jpg" alt="David Kairouz">
+                        </div>
+                        <div class="member-info">
+                            <h4 class="member-name">David Kairouz</h4>
+                            <div class="member-position">Rigging Safety Officer</div>
+                            <div class="member-experience">3 years in rigging safety</div>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="./docs/assets/images/team/Fatima.jpg" alt="Fatima">
+                        </div>
+                        <div class="member-info">
+                            <h4 class="member-name">Fatima</h4>
+                            <div class="member-position">Accounts Manager</div>
+                            <div class="member-experience">5 years in accounts management</div>
                         </div>
                     </div>
                 </div>
@@ -1329,70 +1399,45 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <h3>About Corellian</h3>
-                    <p>Corellian provides expert rigging and building services for the relocation of heavy and delicate equipment. With over 100 years of combined experience, our team delivers excellence at every stage of your project.</p>
-                    
-                    <div class="social-links">
-                        <a href="#" class="social-link">FB</a>
-                        <a href="#" class="social-link">IN</a>
-                        <a href="#" class="social-link">TW</a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Our Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="#" onclick="openServicesModal(); return false;">Expert Rigging</a></li>
-                        <li><a href="#" onclick="openServicesModal(); return false;">Building Works</a></li>
-                        <li><a href="#" onclick="openServicesModal(); return false;">Demolition</a></li>
-                        <li><a href="#" onclick="openServicesModal(); return false;">Fabrication</a></li>
-                        <li><a href="#" onclick="openServicesModal(); return false;">Equipment Installation</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column footer-contact">
-                    <h3>Contact Us</h3>
-                    <p><strong>Phone:</strong> 1300 655 496</p>
-                    <p><strong>Email:</strong> <a href="mailto:estimating@corellian.com.au">estimating@corellian.com.au</a></p>
-                    <p><strong>Sydney Office:</strong><br>
-                    22 Kilto Crescent<br>
-                    Glendenning NSW 2761</p>
-                    <p><strong>Melbourne Office:</strong><br>
-                    29B Foden Ave<br>
-                    Campbellfield VIC 3061</p>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2025 Corellian Rigging & Building Works. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
     <!-- Scroll to top button -->
     <div class="scroll-top" id="scrollTop">
         <span>↑</span>
     </div>
 
-    <!-- Embedded JavaScript -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <!-- 
+        =====================================================================
+        JAVASCRIPT - MAIN FUNCTIONALITY
+        =====================================================================
+        This section contains all the JavaScript that makes the page interactive
+        =====================================================================
+    -->
+    <script>
+        /*
+         * =====================================================================
+         * MODAL DEBUG CODE INSERTION POINT
+         * =====================================================================
+         * If you need to debug the modal, paste the debug code snippet
+         * (provided separately) RIGHT HERE, before the DOMContentLoaded event
+         * 
+         * To enable debugging:
+         * 1. Copy the debug code from the separate file provided
+         * 2. Paste it here
+         * 3. Open your browser's Developer Console (F12)
+         * 4. Watch the console messages as you interact with the modal
+         * 
+         * To disable debugging:
+         * 1. Simply remove or comment out the debug code
+         * =====================================================================
+         */
+
+        // Wait for the DOM to be fully loaded before running scripts
         document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
+            
+            // ================================================================
+            // MOBILE MENU TOGGLE
+            // ================================================================
+            // Handles the hamburger menu on mobile devices
+            // ================================================================
             const menuToggle = document.querySelector('.menu-toggle');
             const menu = document.querySelector('.menu');
             
@@ -1406,7 +1451,11 @@
                 });
             }
             
-            // Scroll to top functionality
+            // ================================================================
+            // SCROLL TO TOP BUTTON
+            // ================================================================
+            // Shows/hides the scroll-to-top button based on scroll position
+            // ================================================================
             const scrollTopBtn = document.getElementById('scrollTop');
             
             window.addEventListener('scroll', function() {
@@ -1424,58 +1473,117 @@
                 });
             });
 
-            // Services Overview Modal functionality
-            const servicesBtn = document.getElementById('servicesOverviewBtn');
-            const modal = document.getElementById('servicesOverviewModal');
-            const closeBtn = document.getElementById('closeModalBtn');
-            const serviceTabs = document.querySelectorAll('.service-tab');
-            const servicePanels = document.querySelectorAll('.service-panel');
+            /*
+             * ================================================================
+             * SERVICES MODAL FUNCTIONALITY
+             * ================================================================
+             * This section handles ALL modal operations:
+             * 1. Opening the modal (via button or footer links)
+             * 2. Closing the modal (via close button, overlay click, or ESC key)
+             * 3. Switching between service tabs
+             * ================================================================
+             */
 
-            // Open modal
-            servicesBtn.addEventListener('click', function() {
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
+            // Get references to all modal-related DOM elements
+            const servicesBtn = document.getElementById('servicesOverviewBtn');  // Main "Explore Services" button
+            const modal = document.getElementById('servicesOverviewModal');      // The modal container
+            const closeBtn = document.getElementById('closeModalBtn');           // The X close button
+            const serviceTabs = document.querySelectorAll('.service-tab');       // All tab buttons
+            const servicePanels = document.querySelectorAll('.service-panel');   // All content panels
 
-            // Close modal
-            closeBtn.addEventListener('click', closeModal);
+            /*
+             * OPEN MODAL - Main Button Click
+             * Triggered when user clicks "Explore Our Services" button
+             * Adds .active class to modal and prevents body scrolling
+             */
+            if (servicesBtn) {
+                servicesBtn.addEventListener('click', function() {
+                    modal.classList.add('active');           // Show the modal
+                    document.body.style.overflow = 'hidden';  // Prevent background scrolling
+                });
+            }
+
+            /*
+             * CLOSE MODAL - Close Button Click
+             * Triggered when user clicks the X button
+             */
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeModal);
+            }
             
-            // Close modal when clicking outside
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
+            /*
+             * CLOSE MODAL - Click Outside
+             * Triggered when user clicks on the dark overlay (but not the modal content)
+             */
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    // Only close if clicking directly on the modal overlay, not its children
+                    if (e.target === modal) {
+                        closeModal();
+                    }
+                });
+            }
 
-            // Close modal with escape key
+            /*
+             * CLOSE MODAL - ESC Key Press
+             * Triggered when user presses the Escape key while modal is open
+             */
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && modal.classList.contains('active')) {
                     closeModal();
                 }
             });
 
+            /*
+             * CLOSE MODAL FUNCTION
+             * Centralized function to close the modal
+             * Removes .active class and restores body scrolling
+             */
             function closeModal() {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
+                modal.classList.remove('active');        // Hide the modal
+                document.body.style.overflow = '';       // Restore body scrolling
             }
 
-            // Service tabs functionality
+            /*
+             * SERVICE TABS FUNCTIONALITY
+             * Handles clicking on tabs to switch between service content panels
+             * 
+             * How it works:
+             * 1. User clicks a tab button
+             * 2. Get the service name from data-service attribute
+             * 3. Remove .active class from all tabs and panels
+             * 4. Add .active class to clicked tab and corresponding panel
+             */
             serviceTabs.forEach(tab => {
                 tab.addEventListener('click', function() {
+                    // Get which service this tab represents (e.g., "rigging", "demolition")
                     const service = this.getAttribute('data-service');
                     
                     // Remove active class from all tabs and panels
                     serviceTabs.forEach(t => t.classList.remove('active'));
                     servicePanels.forEach(p => p.classList.remove('active'));
                     
-                    // Add active class to clicked tab and corresponding panel
+                    // Add active class to the clicked tab
                     this.classList.add('active');
-                    document.getElementById(service + '-panel').classList.add('active');
+                    
+                    // Add active class to the corresponding panel
+                    // Panel ID format: [service]-panel (e.g., "rigging-panel")
+                    const targetPanel = document.getElementById(service + '-panel');
+                    if (targetPanel) {
+                        targetPanel.classList.add('active');
+                    }
                 });
             });
         });
 
-        // Director details toggle functionality
+        /*
+         * =====================================================================
+         * DIRECTOR DETAILS TOGGLE
+         * =====================================================================
+         * Expands/collapses director biography details
+         * Called via onclick attribute in HTML
+         * =====================================================================
+         */
         function toggleDirectorDetails(directorId) {
             const details = document.getElementById(directorId + '-details');
             const button = event.target;
@@ -1491,12 +1599,37 @@
             }
         }
 
-        // Function to open services modal (for footer links)
+        /*
+         * =====================================================================
+         * OPEN SERVICES MODAL FUNCTION (for footer links)
+         * =====================================================================
+         * This function is called by the footer service links via onclick
+         * It opens the modal the same way as the main button
+         * 
+         * Usage in HTML: onclick="openServicesModal(); return false;"
+         * The "return false" prevents the default link navigation
+         * =====================================================================
+         */
         function openServicesModal() {
             const modal = document.getElementById('servicesOverviewModal');
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            if (modal) {
+                modal.classList.add('active');           // Show the modal
+                document.body.style.overflow = 'hidden';  // Prevent background scrolling
+            }
         }
     </script>
+    <div id="footer-placeholder"></div>
+```html
+<script>
+    // Load header and footer
+    fetch('header.html')
+        .then(response => response.text())
+        .then(html => document.getElementById('header-placeholder').innerHTML = html);
+    
+    fetch('footer.html')
+        .then(response => response.text())
+        .then(html => document.getElementById('footer-placeholder').innerHTML = html);
+</script>
+```
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>General Labourer / Rigger - Corellian</title>
-    <meta name="description" content="Career opportunity as a General Labourer / Rigger at Corellian, specialists in rigging and building works.">
+    <title>Employment Opportunities - Corellian</title>
+    <meta name="description" content="Career opportunities at Corellian - specialists in rigging and building works. Traineeships, rigging positions, and more.">
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛓️</text></svg>">
@@ -223,39 +223,22 @@
             padding: 0;
         }
 
-        .menu-item {
-            margin-left: 1.5rem;
+        .menu li {
+            margin: 0 1rem;
         }
 
-        .menu-item a {
+        .menu a {
             color: var(--primary-color);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-            position: relative;
-            padding-bottom: 0.25rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
         }
 
-        .menu-item a:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--secondary-color);
-            transition: width 0.3s ease;
-        }
-
-        .menu-item a:hover:after, 
-        .menu-item.current-menu-item a:after {
-            width: 100%;
-        }
-
-        .menu-item a:hover, 
-        .menu-item.current-menu-item a {
+        .menu a:hover {
             color: var(--secondary-color);
+            border-bottom-color: var(--secondary-color);
         }
 
         .menu-toggle {
@@ -266,53 +249,322 @@
             padding: 0.5rem;
         }
 
-        .menu-icon {
-            display: block;
+        .menu-toggle .hamburger {
             width: 25px;
-            height: 3px;
+            height: 2px;
             background-color: var(--primary-color);
+            display: block;
             position: relative;
             transition: var(--transition);
         }
 
-        .menu-icon:before,
-        .menu-icon:after {
+        .menu-toggle .hamburger:before,
+        .menu-toggle .hamburger:after {
             content: '';
-            display: block;
-            width: 100%;
-            height: 3px;
+            width: 25px;
+            height: 2px;
             background-color: var(--primary-color);
+            display: block;
             position: absolute;
             transition: var(--transition);
         }
 
-        .menu-icon:before {
+        .menu-toggle .hamburger:before {
             top: -8px;
         }
 
-        .menu-icon:after {
+        .menu-toggle .hamburger:after {
             bottom: -8px;
         }
 
-        .menu-toggle.is-active .menu-icon {
+        .menu-toggle.is-active .hamburger {
             background-color: transparent;
         }
 
-        .menu-toggle.is-active .menu-icon:before {
-            transform: rotate(45deg);
+        .menu-toggle.is-active .hamburger:before {
             top: 0;
+            transform: rotate(45deg);
         }
 
-        .menu-toggle.is-active .menu-icon:after {
-            transform: rotate(-45deg);
+        .menu-toggle.is-active .hamburger:after {
             bottom: 0;
+            transform: rotate(-45deg);
         }
-        
-        /* Scroll to top button */
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            flex: 1;
+            min-width: 200px;
+            padding: 1.25rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-align: center;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border: 3px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-heading);
+            letter-spacing: 0.5px;
+        }
+
+        .tab-button:hover {
+            background-color: #e8e8e8;
+            border-color: var(--secondary-color);
+        }
+
+        .tab-button.active {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            border-color: var(--secondary-color);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form Styles */
+        .contact-form {
+            background-color: var(--light-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            margin-top: 2rem;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form input[type="tel"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form input[type="tel"]:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .contact-form input[type="submit"] {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-heading);
+        }
+
+        .contact-form input[type="submit"]:hover {
+            background-color: #cc0000;
+        }
+
+        /* Embedded Form Container */
+        .embedded-form {
+            margin: 2rem 0;
+            min-height: 600px;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .embedded-form iframe {
+            width: 100%;
+            min-height: 800px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        /* Jobs List Section */
+        .jobs-section {
+            margin: 2rem 0;
+        }
+
+        .jobs-list {
+            background-color: var(--light-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+        }
+
+        .job-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+        }
+
+        .job-item:last-child {
+            border-bottom: none;
+        }
+
+        .job-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .job-meta {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .job-description {
+            margin-bottom: 1rem;
+        }
+
+        .job-link {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .job-link:hover {
+            background-color: #cc0000;
+            color: var(--light-text);
+        }
+
+        /* Content area */
+        .site-content {
+            padding: 3rem 0;
+            min-height: calc(100vh - 300px);
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-column p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .social-link:hover {
+            background-color: var(--light-text);
+            color: var(--secondary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Scroll to top */
         .scroll-to-top {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 2rem;
+            right: 2rem;
             width: 50px;
             height: 50px;
             background-color: var(--secondary-color);
@@ -321,526 +573,170 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
             cursor: pointer;
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
             z-index: 99;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            font-size: 1.5rem;
+            font-weight: bold;
         }
-        
+
         .scroll-to-top.visible {
             opacity: 1;
             visibility: visible;
         }
 
         .scroll-to-top:hover {
-            background-color: #cc0000;
-        }
-
-        /* Job Post Content */
-        .site-content {
-            padding: 5rem 0;
-        }
-
-        .entry-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .entry-title {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .entry-title:after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background-color: var(--secondary-color);
-            margin: 1rem auto 0;
-        }
-
-        .entry-meta {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 2rem;
-        }
-
-        .entry-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        .entry-content p {
-            margin-bottom: 1.5rem;
-            font-size: 1.05rem;
-        }
-
-        /* Form Styles */
-        .wp-block-file {
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background-color: var(--light-bg);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: var(--box-shadow);
-        }
-
-        .wp-block-file a {
-            font-weight: 600;
-            color: var(--secondary-color);
-            display: flex;
-            align-items: center;
-        }
-
-        .wp-block-file a:before {
-            content: "📄";
-            margin-right: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .contact-form {
-            margin-top: 3rem;
-            background-color: var(--light-bg);
-            padding: 2.5rem;
-            border-radius: 6px;
-            box-shadow: var(--box-shadow);
-        }
-
-        .contact-form form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .contact-form label {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            display: block;
-            color: var(--primary-color);
-        }
-
-        .contact-form input[type="text"],
-        .contact-form input[type="email"],
-        .contact-form textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-family: var(--font-main);
-            transition: var(--transition);
-        }
-
-        .contact-form input[type="text"]:focus,
-        .contact-form input[type="email"]:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 2px rgba(230, 0, 0, 0.1);
-        }
-
-        .contact-form input[type="file"] {
-            padding: 0.5rem 0;
-        }
-
-        .contact-form input[type="submit"] {
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            font-family: var(--font-heading);
-            align-self: flex-start;
-            transition: var(--transition);
-            letter-spacing: 0.5px;
-        }
-
-        .contact-form input[type="submit"]:hover {
-            background-color: #cc0000;
-        }
-
-        .job-image {
-            text-align: center;
-            margin: 3rem 0;
-        }
-        
-        .job-image img {
-            max-width: 410px;
-            height: auto;
-            border-radius: 6px;
-            box-shadow: var(--box-shadow);
-        }
-
-        .post-navigation {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .post-navigation .nav-links {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .post-navigation .nav-previous,
-        .post-navigation .nav-next {
-            max-width: 45%;
-        }
-
-        .post-navigation a {
-            display: flex;
-            flex-direction: column;
-            color: var(--text-color);
-        }
-
-        .post-navigation .ast-post-nav {
-            font-size: 0.9rem;
-            color: var(--secondary-color);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .post-navigation svg {
-            width: 16px;
-            height: 16px;
-            margin-right: 0.5rem;
-            fill: currentColor;
-        }
-
-        .post-navigation p {
-            margin: 0;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        /* Footer */
-        .site-footer {
             background-color: var(--primary-color);
-            color: var(--light-text);
-            padding: 5rem 0 2rem;
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.25rem;
-            margin-bottom: 1.5rem;
-            color: var(--light-text);
-        }
-
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--secondary-color);
-            padding-left: 5px;
-        }
-
-        .footer-contact p {
-            margin-bottom: 0.75rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--light-text);
-            border-radius: 50%;
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            background-color: var(--secondary-color);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.875rem;
-        }
-
-        /* Responsive styles */
-        @media screen and (max-width: 992px) {
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 1.75rem;
-            }
-
-            .entry-title {
-                font-size: 1.75rem;
-            }
-
+        /* Responsive */
+        @media (max-width: 768px) {
             .menu-toggle {
                 display: block;
             }
 
             .menu {
                 display: none;
+                flex-direction: column;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 right: 0;
-                flex-direction: column;
-                background-color: #fff;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                background-color: #ffffff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 padding: 1rem 0;
-                z-index: 100;
             }
 
             .menu.is-active {
                 display: flex;
             }
 
-            .menu-item {
+            .menu li {
                 margin: 0;
+                padding: 0.5rem 1.5rem;
             }
 
-            .menu-item a {
-                display: block;
-                padding: 0.75rem 1.5rem;
+            h1 {
+                font-size: 2rem;
             }
 
-            .menu-item a:after {
-                display: none;
+            h2 {
+                font-size: 1.5rem;
             }
-            
-            .post-navigation .nav-links {
+
+            .tab-navigation {
                 flex-direction: column;
-                gap: 1.5rem;
             }
-            
-            .post-navigation .nav-previous,
-            .post-navigation .nav-next {
-                max-width: 100%;
-            }
-        }
 
-        @media screen and (max-width: 576px) {
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-form {
-                padding: 1.5rem;
+            .tab-button {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="site-header">
-        <div class="container">
-            <div class="logo-container">
-                <img src="docs/assets/images/Cor_Logo_small.png" alt="CORELLIAN" class="logo">
-                <div class="tagline">Rigging and Building Works</div>
-            </div>
-            
-            <nav class="main-navigation">
-                <button class="menu-toggle" aria-expanded="false">
-                    <span class="screen-reader-text">Menu</span>
-                    <span class="menu-icon"></span>
-                </button>
-                
-                <ul class="menu">
-                    <li class="menu-item"><a href="index.html">Home</a></li>
-                    <li class="menu-item"><a href="projects.html">Projects</a></li>
-                    <li class="menu-item"><a href="about.html">About Us</a></li>
-                    <li class="menu-item current-menu-item"><a href="employment.html">Employment</a></li>
-                    <li class="menu-item"><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
+    <div id="header-placeholder"></div>
+    
     <!-- Main Content -->
-    <div id="content" class="site-content">
+    <div class="site-content">
         <div class="container">
-            <div id="primary" class="content-area">
-                <main id="main" class="site-main">
-                    <article class="post">
-                        <header class="entry-header">
-                            <h2 class="entry-title">General Labourer / Rigger</h2>
-                            <div class="entry-meta">
-                                Currently <span class="author">OPEN for applications</span> from <span class="date">January 2026</span>
-                            </div>
-                        </header>
-                        
-                        <div class="entry-content">
-                            <p>Are you looking for a challenging and rewarding career in the construction industry? Have a look at our General Labourer / Rigger position! As a General Labourer, you'll have the opportunity to work on a wide range of projects, including demolition and rigging assistance work, associated building works, and site maintenance. You'll also have the chance to operate a variety of construction equipment as you gather training and licences, such as forklifts, HIABs, EWPs, and telehandlers. We have a fleet of utes and a handful of trucks, so alongside loading and unloading, yard and workshop duties, there are opportunities for MR and HR licence holders to spend some time driving trucks to site.</p>
-                            
-                            <p>But that's not all – as you gain experience and prove yourself on the job, you'll have the opportunity to "learn the ropes" and become a Corellian specialist Rigger. As a specialist Rigger, you'll take on additional responsibilities to apply our unique industry-leading rigging techniques and have the chance to advance your career even further. And if you're ready to take on a leadership role, you may even have the rewarding opportunity to become a Team Leader, where you'll manage and coordinate your team's work, ensure compliance with safety procedures, and assist with project and contract management.</p>
-                            
-                            <p>At our company, we value hard work, dedication, and a commitment to safety. That's why we offer competitive pay, benefits, and opportunities for growth and advancement. If you're ready to take the next step in your career and join a dynamic and supportive team, apply now for our General Labourer / Rigger position. We can't wait to see what you'll achieve with us!</p>
-                            
-                            <p>Complete and download the application form here and send it with your resume to our recruitment@Corellian.com.au email address or upload it with the contact form below. You will also find our job live at Seek <a href="https://www.seek.com.au/job/89887167">here!</a></p>
-                            
-                            <div class="wp-block-file">
-                                <a href="docs/assets/files/Corellian-APPLICATION-FOR-EMPLOYMENT-2024.pdf" target="_blank">Corellian - APPLICATION FOR EMPLOYMENT 2024</a>
-                            </div>
-                            
-                            <div class="contact-form">
-                                <form id="applicationForm" action="#" method="post" enctype="multipart/form-data">
-                                    <p>
-                                        <label for="name">Your name</label>
-                                        <input type="text" id="name" name="your-name" required>
-                                    </p>
-                                    
-                                    <p>
-                                        <label for="email">Your email</label>
-                                        <input type="email" id="email" name="your-email" required>
-                                    </p>
-                                    
-                                    <p>
-                                        <label for="application-form">Your completed application form</label>
-                                        <input type="file" id="application-form" name="ApplicationForm" accept=".pdf" required>
-                                    </p>
-                                    
-                                    <p>
-                                        <label for="resume">Your resume</label>
-                                        <input type="file" id="resume" name="Resume" accept=".pdf,.docx,.doc" required>
-                                    </p>
-                                    
-                                    <p>
-                                        <label for="tickets">Combined image, document or ZIP folder with licences and tickets. Maximum 7MB.</label>
-                                        <input type="file" id="tickets" name="Tickets" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.webp,.gif,.zip,.rar,.7z" required>
-                                    </p>
-                                    
-                                    <p>
-                                        <input type="submit" value="Submit Application">
-                                    </p>
-                                </form>
-                            </div>
-                            
-                            <div class="job-image">
-                                <img src="docs/assets/images/25-swinglift-edited.png" alt="Rigging operations" width="410">
-                            </div>
-                        </div>
-                    </article>
-                    
-                    <!-- Post Navigation -->
-                    <nav class="post-navigation">
-                        <div class="nav-links">
-                            <div class="nav-previous">
-                                <a href="projects.html">
-                                    <span class="ast-post-nav">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"></path></svg>
-                                        Previous
-                                    </span>
-                                    <p>View Our Projects</p>
-                                </a>
-                            </div>
-                        </div>
-                    </nav>
-                </main>
-            </div>
-        </div>
-    </div>
+            <main>
+                <h1>Employment Opportunities</h1>
+                <p>Join the Corellian team and be part of a company with over 100 years of combined experience in expert rigging and building services.</p>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <h3>About Corellian</h3>
-                    <p>Corellian provides expert rigging and building services for the relocation of heavy and delicate equipment. With over 100 years of combined experience, our team delivers excellence at every stage of your project.</p>
+                <!-- Tab Navigation -->
+                <div class="tab-navigation">
+                    <button class="tab-button active" data-tab="traineeships">Traineeships</button>
+                    <button class="tab-button" data-tab="rigging">Rigging</button>
+                    <button class="tab-button" data-tab="other">Other Roles</button>
+                </div>
+
+                <!-- Traineeships Tab -->
+                <div id="traineeships" class="tab-content active">
+                    <h2>Traineeship Programs</h2>
+                    <p>Start your career in the rigging and building services industry with a Corellian traineeship. We offer structured training programs that combine hands-on experience with formal qualifications.</p>
                     
-                    <div class="social-links">
-                        <a href="#" class="social-link">FB</a>
-                        <a href="#" class="social-link">IN</a>
-                        <a href="#" class="social-link">TW</a>
+                    <div class="embedded-form">
+                        <h3>Apply for a Traineeship</h3>
+                        <p style="color: #666; margin-bottom: 2rem;">Complete the form below to apply for our traineeship program.</p>
+                        <!-- Placeholder for Google Form -->
+                        <div style="background-color: #e0e0e0; padding: 3rem; border-radius: 4px; border: 2px dashed #999;">
+                            <p style="color: #666; font-style: italic;">Google Form will be embedded here</p>
+                            <p style="color: #999; font-size: 0.9rem; margin-top: 1rem;">Replace this section with your Google Form embed code:<br>
+                            &lt;iframe src="YOUR_GOOGLE_FORM_URL"&gt;&lt;/iframe&gt;</p>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
+
+                <!-- Rigging Tab -->
+                <div id="rigging" class="tab-content">
+                    <h2>Rigging Positions</h2>
+                    <p>We're looking for experienced riggers to join our team. Our riggers work on complex projects involving heavy equipment relocation, installation, and building services.</p>
+                    
+                    <div class="embedded-form">
+                        <h3>Apply for Rigging Positions</h3>
+                        <p style="color: #666; margin-bottom: 2rem;">Complete the form below to apply for rigging positions.</p>
+                        <!-- Placeholder for Google Form -->
+                        <div style="background-color: #e0e0e0; padding: 3rem; border-radius: 4px; border: 2px dashed #999;">
+                            <p style="color: #666; font-style: italic;">Google Form will be embedded here</p>
+                            <p style="color: #999; font-size: 0.9rem; margin-top: 1rem;">Replace this section with your Google Form embed code:<br>
+                            &lt;iframe src="YOUR_GOOGLE_FORM_URL"&gt;&lt;/iframe&gt;</p>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="footer-column">
-                    <h3>Our Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Expert Rigging</a></li>
-                        <li><a href="#">Building Works</a></li>
-                        <li><a href="#">Demolition</a></li>
-                        <li><a href="#">Fabrication</a></li>
-                        <li><a href="#">Equipment Installation</a></li>
-                    </ul>
+
+                <!-- Other Roles Tab -->
+                <div id="other" class="tab-content">
+                    <h2>Other Opportunities</h2>
+                    
+                    <!-- Current Job Listings -->
+                    <div class="jobs-section">
+                        <h3>Current Openings</h3>
+                        <div class="jobs-list" id="currentJobs">
+                            <p style="text-align: center; color: #666;">Loading current positions...</p>
+                        </div>
+                    </div>
+
+                    <!-- Expression of Interest Form -->
+                    <h3>Expression of Interest</h3>
+                    <p>Don't see a position that matches your skills? Submit an expression of interest and we'll keep your details on file for future opportunities.</p>
+                    
+                    <form class="contact-form" id="eoiForm">
+                        <p>
+                            <label for="eoi-name">Full Name *</label>
+                            <input type="text" id="eoi-name" name="name" required>
+                        </p>
+                        
+                        <p>
+                            <label for="eoi-email">Email Address *</label>
+                            <input type="email" id="eoi-email" name="email" required>
+                        </p>
+                        
+                        <p>
+                            <label for="eoi-phone">Phone Number *</label>
+                            <input type="tel" id="eoi-phone" name="phone" required>
+                        </p>
+                        
+                        <p>
+                            <label for="eoi-position">Position of Interest</label>
+                            <input type="text" id="eoi-position" name="position" placeholder="e.g., General Labourer, Administration, etc.">
+                        </p>
+                        
+                        <p>
+                            <label for="eoi-message">Tell us about yourself and your experience *</label>
+                            <textarea id="eoi-message" name="message" required placeholder="Include relevant skills, experience, and qualifications"></textarea>
+                        </p>
+                        
+                        <p>
+                            <input type="submit" value="Submit Expression of Interest">
+                        </p>
+                    </form>
                 </div>
-                
-                <div class="footer-column footer-contact">
-                    <h3>Contact Us</h3>
-                    <p><strong>Phone:</strong> 1300 655 496</p>
-                    <p><strong>Email:</strong> estimating@corellian.com.au</p>
-                    <p><strong>Sydney Office:</strong><br>
-                    22 Kilto Crescent<br>
-                    Glendenning NSW 2761</p>
-                    <p><strong>Melbourne Office:</strong><br>
-                    29B Foden Ave<br>
-                    Campbellfield VIC 3061</p>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2025 Corellian Rigging & Building Works. All rights reserved.</p>
-            </div>
+            </main>
         </div>
-    </footer>
+    </div>
 
     <!-- Scroll to top button -->
     <div class="scroll-to-top" id="scrollToTop">
@@ -853,7 +749,9 @@
             // Elements
             const menuToggle = document.querySelector('.menu-toggle');
             const menu = document.querySelector('.menu');
-            const applicationForm = document.getElementById('applicationForm');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const eoiForm = document.getElementById('eoiForm');
             
             // Toggle mobile menu
             if (menuToggle) {
@@ -866,20 +764,54 @@
                 });
             }
             
-            // Handle application form submission
-            if (applicationForm) {
-                applicationForm.addEventListener('submit', function(e) {
+            // Tab switching
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button and corresponding content
+                    this.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                });
+            });
+            
+            // Load jobs list from external file
+            fetch('jobs-list.html')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Jobs list not found');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    document.getElementById('currentJobs').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error loading jobs:', error);
+                    document.getElementById('currentJobs').innerHTML = `
+                        <p style="text-align: center; color: #666;">
+                            No current openings at this time. Please submit an expression of interest below.
+                        </p>
+                    `;
+                });
+            
+            // Handle EOI form submission
+            if (eoiForm) {
+                eoiForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     
                     // Validate the form
-                    const name = document.getElementById('name').value;
-                    const email = document.getElementById('email').value;
-                    const applicationFile = document.getElementById('application-form').files[0];
-                    const resumeFile = document.getElementById('resume').files[0];
-                    const ticketsFile = document.getElementById('tickets').files[0];
+                    const name = document.getElementById('eoi-name').value;
+                    const email = document.getElementById('eoi-email').value;
+                    const phone = document.getElementById('eoi-phone').value;
+                    const message = document.getElementById('eoi-message').value;
                     
-                    if (!name || !email || !applicationFile || !resumeFile || !ticketsFile) {
-                        alert('Please fill in all required fields and upload all required documents.');
+                    if (!name || !email || !phone || !message) {
+                        alert('Please fill in all required fields.');
                         return;
                     }
                     
@@ -890,21 +822,14 @@
                         return;
                     }
                     
-                    // Check file sizes
-                    const maxSize = 7 * 1024 * 1024; // 7MB
-                    if (applicationFile.size > maxSize || resumeFile.size > maxSize || ticketsFile.size > maxSize) {
-                        alert('One or more files exceed the maximum size of 7MB.');
-                        return;
-                    }
-                    
                     // In a real implementation, you would send this data to your server
-                    console.log('Application submitted:', { name, email, applicationFile, resumeFile, ticketsFile });
+                    console.log('Expression of Interest submitted:', { name, email, phone, message });
                     
                     // Show success message
-                    alert('Thank you for your application! We will review your submission and get back to you soon.');
+                    alert('Thank you for your expression of interest! We will review your submission and contact you if a suitable position becomes available.');
                     
                     // Reset form
-                    applicationForm.reset();
+                    eoiForm.reset();
                 });
             }
             
@@ -925,55 +850,20 @@
                     behavior: 'smooth'
                 });
             });
-
-            // Add form animation on scroll
-            const animatedElements = document.querySelectorAll('.contact-form, .wp-block-file, .job-image');
-            
-            function checkIfInView() {
-                animatedElements.forEach(element => {
-                    const elementPosition = element.getBoundingClientRect();
-                    const windowHeight = window.innerHeight;
-                    
-                    if (elementPosition.top < windowHeight * 0.8) {
-                        element.classList.add('animate');
-                    }
-                });
-            }
-            
-            // Add animation class in CSS
-            const style = document.createElement('style');
-            style.textContent = `
-                .contact-form, .wp-block-file, .job-image {
-                    opacity: 0;
-                    transform: translateY(30px);
-                    transition: opacity 0.5s ease, transform 0.5s ease;
-                }
-                
-                .contact-form.animate, .wp-block-file.animate, .job-image.animate {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-                
-                .wp-block-file {
-                    transition-delay: 0.2s;
-                }
-                
-                .contact-form {
-                    transition-delay: 0.4s;
-                }
-                
-                .job-image {
-                    transition-delay: 0.6s;
-                }
-            `;
-            document.head.appendChild(style);
-            
-            window.addEventListener('scroll', checkIfInView);
-            window.addEventListener('load', checkIfInView);
-            
-            // Initial check if elements are in view
-            checkIfInView();
         });
     </script>
+    <div id="footer-placeholder"></div>
+    ```html
+<script>
+    // Load header and footer
+    fetch('header.html')
+        .then(response => response.text())
+        .then(html => document.getElementById('header-placeholder').innerHTML = html);
+    
+    fetch('footer.html')
+        .then(response => response.text())
+        .then(html => document.getElementById('footer-placeholder').innerHTML = html);
+</script>
+```
 </body>
 </html>
