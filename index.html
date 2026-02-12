@@ -626,6 +626,23 @@
 
         .next-arrow {
             right: -60px;
+            animation: gentleSway 2.4s ease-in-out infinite;
+        }
+
+        .next-arrow.sway-stopped {
+            animation: none;
+        }
+
+        @keyframes gentleSway {
+            0% {
+                transform: translateY(calc(-50% - 10px));
+            }
+            50% {
+                transform: translateY(calc(-50% + 10px));
+            }
+            100% {
+                transform: translateY(calc(-50% - 10px));
+            }
         }
 
         /* Safety and credentials section */
@@ -1647,6 +1664,15 @@
             
             // Initialize client logos cycling animation
             initializeClientLogos();
+            
+            // Stop sway on first click of next arrow
+            const nextArrow = document.querySelector('.next-arrow');
+            if (nextArrow) {
+                nextArrow.addEventListener('click', function stopSway() {
+                    nextArrow.classList.add('sway-stopped');
+                    nextArrow.removeEventListener('click', stopSway);
+                });
+            }
         });
 
         // Client Logos Cycling Animation
@@ -1727,8 +1753,8 @@
             showSlide(currentSlide);
         }
 
-        // Auto-advance testimonials every 6 seconds
-        setInterval(nextTestimonial, 6000);
+        // Auto-advance testimonials every 35 seconds
+        setInterval(nextTestimonial, 35000);
 
         // Keyboard navigation
         document.addEventListener('keydown', function(e) {
