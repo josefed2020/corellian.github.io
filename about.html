@@ -1248,7 +1248,7 @@
                         <h3><a href="https://imgur.com/a/rigging-delicate-machinery-OqjlhpG#5t3xLJE" style="color: var(--primary-color); text-decoration: none;">See Us Work</a></h3>
                         <div class="modal-social-links">
                             <a href="https://www.facebook.com/corellianservices/" class="modal-social-link" title="Facebook">FB</a>
-                            <a href="https://imgur.com/a/rigging-delicate-machinery-OqjlhpG#5t3xLJE" class="modal-social-link" title="Project Gallery">IG</a>
+                            
                             <a href="https://www.linkedin.com/company/corellian-pty-ltd/" class="modal-social-link" title="LinkedIn">LI</a>
                         </div>
                     </div>
@@ -1275,7 +1275,7 @@
                             <p class="director-summary">Industry veteran with over 30+ years of experience in rigging and construction operations.</p>
                             <button class="expand-btn" onclick="toggleDirectorDetails('anthony')">Learn More</button>
                             <div class="director-details" id="anthony-details">
-                                <p>Anthony co-founded Corellian in 2009 with a vision to revolutionize the HVAC rigging industry through comprehensive, whole-package rigging solutions. With over three decades of hands-on experience, he has personally overseen some of Australia's most challenging rigging projects.</p>
+                                <p>Anthony co-founded Corellian in 2009 with a vision to revolutionise the HVAC rigging industry through comprehensive, whole-package rigging solutions. With over three decades of hands-on experience, he has personally overseen some of Australia's most challenging rigging projects.</p>
                                 <p>His expertise spans across all aspects of heavy lifting, from delicate medical equipment installations to massive industrial machinery relocations. Anthony's commitment to safety, integrity, and innovation has established Corellian as a trusted name in the industry.</p>
                                 <p>Under his leadership, Corellian has grown from a small specialized team to Australia's premier equipment rigging service provider, maintaining the highest standards of quality and safety across all operations.</p>
                             </div>
@@ -1600,6 +1600,15 @@
              * 3. Remove .active class from all tabs and panels
              * 4. Add .active class to clicked tab and corresponding panel
              */
+            /*
+             * DEEP LINK: Open modal automatically if URL contains #services
+             * e.g. linking from another page: about.html#services
+             */
+            if (window.location.hash === '#services') {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
             serviceTabs.forEach(tab => {
                 tab.addEventListener('click', function() {
                     // Get which service this tab represents (e.g., "rigging", "demolition")
