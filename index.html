@@ -1308,7 +1308,7 @@
                     <div class="testimonial-slide">
                         <div class="testimonial-card">
                             <div class="testimonial-content">
-                                <p>The team at Corellian planned, engineered and successfully executed all of our rigging and craneage requirements for the works. All personnel involved on the project from supervisors & schedulers, site engineers, riggers, crane crew to directors were instrumental with their dedication to getting the project delivered to a high standard given the complexities around the placement and handling of all equipment. Kane & Global Switch commend Corellian and look forward to working with you on the next project.</p>
+                                <p>The team at Corellian planned, engineered and successfully executed all of our rigging and craneage requirements for the works. All personnel involved on the project from supervisors & schedulers, site engineers, riggers, crane crew to directors were instrumental with their dedication to getting the project delivered to a high standard given the complexities around the placement and handling of all equipment. Kane & DigiCo commend Corellian and look forward to working with you on the next project.</p>
                             </div>
                             <div class="testimonial-author">
                                 <div class="author-name">James Pearce</div>
@@ -1580,20 +1580,22 @@
             // Scroll to top functionality
             const scrollTopBtn = document.getElementById('scrollTop');
             
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
-                    scrollTopBtn.classList.add('active');
-                } else {
-                    scrollTopBtn.classList.remove('active');
-                }
-            });
-            
-            scrollTopBtn.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
+            if (scrollTopBtn) {
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        scrollTopBtn.classList.add('active');
+                    } else {
+                        scrollTopBtn.classList.remove('active');
+                    }
                 });
-            });
+                
+                scrollTopBtn.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
             
             // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1708,53 +1710,46 @@
         }
 
         // Testimonials Carousel Functionality
-        let currentSlide = 1; // Start with second slide (index 1) as it has the "active" class in HTML
+        let currentSlide = 0;
         const slides = document.querySelectorAll('.testimonial-slide');
         const dots = document.querySelectorAll('.nav-dot');
         const totalSlides = slides.length;
+        let testimonialTimer = null;
 
         function initializeTestimonials() {
-            // Set up the initial state
             showSlide(currentSlide);
+            startTestimonialTimer();
+        }
+
+        function startTestimonialTimer() {
+            if (testimonialTimer) clearInterval(testimonialTimer);
+            testimonialTimer = setInterval(nextTestimonial, 35000);
         }
 
         function showSlide(index) {
-            // Hide all slides
-            slides.forEach((slide, i) => {
-                slide.classList.remove('active');
-            });
-            
-            // Remove active class from all dots
-            dots.forEach(dot => {
-                dot.classList.remove('active');
-            });
-            
-            // Show current slide and activate dot
-            if (slides[index]) {
-                slides[index].classList.add('active');
-            }
-            if (dots[index]) {
-                dots[index].classList.add('active');
-            }
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            if (slides[index]) slides[index].classList.add('active');
+            if (dots[index]) dots[index].classList.add('active');
         }
 
         function nextTestimonial() {
             currentSlide = (currentSlide + 1) % totalSlides;
             showSlide(currentSlide);
+            startTestimonialTimer();
         }
 
         function prevTestimonial() {
             currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
             showSlide(currentSlide);
+            startTestimonialTimer();
         }
 
         function currentTestimonial(index) {
             currentSlide = index - 1;
             showSlide(currentSlide);
+            startTestimonialTimer();
         }
-
-        // Auto-advance testimonials every 35 seconds
-        setInterval(nextTestimonial, 35000);
 
         // Keyboard navigation
         document.addEventListener('keydown', function(e) {
