@@ -1,3 +1,177 @@
+<style>
+    /* ── Corellian footer – self-contained styles ──────────────────────────────
+       These rules use explicit values (no CSS variables) so the footer looks
+       identical regardless of which page includes it. All selectors are scoped
+       to .site-footer so nothing leaks upward into the page. The !important
+       declarations on colour / background properties guard against variable
+       overrides from parent stylesheets.
+    ── */
+
+    .site-footer {
+        background-color: #222222 !important;
+        color: #ffffff !important;
+        padding: 5rem 0 2rem;
+        font-family: 'Roboto', Arial, sans-serif;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .site-footer .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        box-sizing: border-box;
+    }
+
+    .site-footer .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .site-footer .footer-column h3 {
+        font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: #ffffff !important;
+    }
+
+    .site-footer p {
+        margin-bottom: 0.75rem;
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    /* Footer nav links */
+    .site-footer .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .site-footer .footer-links li {
+        margin-bottom: 0.75rem;
+    }
+
+    .site-footer .footer-links a {
+        color: rgba(255, 255, 255, 0.8) !important;
+        text-decoration: none;
+        transition: color 0.3s ease, padding-left 0.3s ease;
+    }
+
+    .site-footer .footer-links a:hover {
+        color: #e60000 !important;
+        padding-left: 5px;
+    }
+
+    /* Contact column */
+    .site-footer .footer-contact p {
+        margin-bottom: 0.75rem;
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    .site-footer .footer-contact a {
+        color: rgba(255, 255, 255, 0.8) !important;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .site-footer .footer-contact a:hover {
+        color: #e60000 !important;
+    }
+
+    .site-footer strong {
+        color: #ffffff !important;
+    }
+
+    /* Social links */
+    .site-footer .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .site-footer .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        color: #ffffff !important;
+        border-radius: 50%;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+
+    .site-footer .social-link:hover {
+        background-color: #e60000 !important;
+        color: #ffffff !important;
+    }
+
+    /* Copyright bar */
+    .site-footer .copyright {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7) !important;
+        font-size: 0.875rem;
+    }
+
+    .site-footer .copyright p {
+        color: rgba(255, 255, 255, 0.7) !important;
+        margin-bottom: 0;
+    }
+
+    /* Scroll-to-top button (included in footer.html) */
+    .scroll-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background-color: #e60000 !important;
+        color: #ffffff !important;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 99;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .scroll-top.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .scroll-top:hover {
+        background-color: #cc0000 !important;
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 1024px) {
+        .site-footer .footer-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        .site-footer .footer-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
 <footer class="site-footer">
     <div class="container">
         <div class="footer-grid">
@@ -7,8 +181,8 @@
                 
                 <div class="social-links">
                     <a href="https://www.facebook.com/corellianservices/" class="social-link">FB</a>
-                    <a href="https://imgur.com/a/rigging-delicate-machinery-OqjlhpG#5t3xLJE" class="social-link">IMG</a>
-                    <a href="https://www.linkedin.com/company/corellian-pty-ltd/" class="social-link">LI</a>
+                    <a href="https://www.linkedin.com/company/corellian-pty-ltd/" class="social-link">NSW</a>
+                    <a href="https://au.linkedin.com/company/corellian-victoria-pty-ltd" class="social-link">VIC</a>
                 </div>
             </div>
             
@@ -17,7 +191,7 @@
                 <ul class="footer-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="projects.html">Projects</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
+                    /* <li><a href="gallery.html">Gallery</a></li> */
                     <li><a href="about.html">About</a></li>
                     <li><a href="employment.html">Employment</a></li>
                     <li><a href="contact.html">Contact</a></li>
@@ -27,11 +201,11 @@
             <div class="footer-column">
                 <h3>Our Services</h3>
                 <ul class="footer-links">
-                    <li><a href="about.html">Expert Rigging</a></li>
-                    <li><a href="about.html">Building Works</a></li>
-                    <li><a href="about.html">Demolition</a></li>
-                    <li><a href="about.html">Fabrication</a></li>
-                    <li><a href="about.html">Equipment Installation</a></li>
+                    <li><a href="about.html#services">Expert Rigging</a></li>
+                    <li><a href="about.html#services">Building Works</a></li>
+                    <li><a href="about.html#services">Demolition</a></li>
+                    <li><a href="about.html#services">Fabrication</a></li>
+                    <li><a href="about.html#services">Equipment Installation</a></li>
                 </ul>
             </div>
             
