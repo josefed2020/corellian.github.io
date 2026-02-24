@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- CORRECTED VERSION - File completed and fixed - February 5, 2026 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -625,6 +626,23 @@
 
         .next-arrow {
             right: -60px;
+            animation: gentleSway 2.4s ease-in-out infinite;
+        }
+
+        .next-arrow.sway-stopped {
+            animation: none;
+        }
+
+        @keyframes gentleSway {
+            0% {
+                transform: translateY(calc(-50% - 10px));
+            }
+            50% {
+                transform: translateY(calc(-50% + 10px));
+            }
+            100% {
+                transform: translateY(calc(-50% - 10px));
+            }
         }
 
         /* Safety and credentials section */
@@ -1208,29 +1226,8 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="site-header">
-        <div class="container">
-            <div class="logo-container">
-                <img src="docs/assets/images/Cor_Logo_small.svg" alt="CORELLIAN" class="logo">
-                <div class="tagline">Rigging and Building Works</div>
-            </div>
-            
-            <nav class="main-navigation">
-                <button class="menu-toggle" aria-expanded="false">
-                    <span class="screen-reader-text">Menu</span>
-                    <span class="menu-icon"></span>
-                </button>
-                
-                <ul class="menu">
-                    <li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
-                    <li class="menu-item"><a href="projects.html">Projects</a></li>
-                    <li class="menu-item"><a href="about.html">About Us</a></li>
-                    <li class="menu-item"><a href="employment.html">Employment</a></li>
-                    <li class="menu-item"><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -1279,10 +1276,10 @@
                 
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="./docs/assets/images/projects/data-center.jpg" alt="Data Center Equipment Relocation">
+                        <img src="./docs/assets/images/projects/data-centre.jpg" alt="Data Centre Equipment Relocation">
                     </div>
                     <div class="project-overlay">
-                        <h3 class="project-title">Data Center Equipment Relocation</h3>
+                        <h3 class="project-title">Data Centre Equipment Relocation</h3>
                         <p>Seamless relocation of sensitive server equipment</p>
                         <a href="projects.html" class="view-project">View Project</a>
                     </div>
@@ -1550,71 +1547,21 @@
     </section>
 
     <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <h3>About Corellian</h3>
-                    <p>Corellian provides expert rigging and building services for the relocation of heavy and delicate equipment. With over 100 years of combined experience, our team delivers excellence at every stage of your project.</p>
-                    
-                    <div class="social-links">
-                        <a href="#" class="social-link">FB</a>
-                        <a href="#" class="social-link">IN</a>
-                        <a href="#" class="social-link">TW</a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Our Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="services.html">Expert Rigging</a></li>
-                        <li><a href="services.html">Building Works</a></li>
-                        <li><a href="services.html">Demolition</a></li>
-                        <li><a href="services.html">Fabrication</a></li>
-                        <li><a href="services.html">Equipment Installation</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column footer-contact">
-                    <h3>Contact Us</h3>
-                    <p><strong>Sydney Office:</strong><br>
-                    123 Industry Way<br>
-                    Sydney, NSW 2000<br>
-                    Phone: (02) 1234 5678</p>
-                    
-                    <p><strong>Melbourne Office:</strong><br>
-                    456 Construction Road<br>
-                    Melbourne, VIC 3000<br>
-                    Phone: (03) 9876 5432</p>
-                    
-                    <p><strong>Email:</strong><br>
-                    <a href="mailto:estimating@corellian.com.au">estimating@corellian.com.au</a></p>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2025 Corellian Rigging & Building Works. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
 
-    <!-- Scroll to top button -->
-    <div class="scroll-top" id="scrollTop">
-        <span>↑</span>
-    </div>
 
     <!-- Embedded JavaScript -->
     <script>
+        // Load header and footer first
+        fetch('header.html')
+            .then(response => response.text())
+            .then(html => document.getElementById('header-placeholder').innerHTML = html);
+        
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(html => document.getElementById('footer-placeholder').innerHTML = html);
+        
         document.addEventListener('DOMContentLoaded', function() {
             // Mobile menu toggle
             const menuToggle = document.querySelector('.menu-toggle');
@@ -1717,6 +1664,15 @@
             
             // Initialize client logos cycling animation
             initializeClientLogos();
+            
+            // Stop sway on first click of next arrow
+            const nextArrow = document.querySelector('.next-arrow');
+            if (nextArrow) {
+                nextArrow.addEventListener('click', function stopSway() {
+                    nextArrow.classList.add('sway-stopped');
+                    nextArrow.removeEventListener('click', stopSway);
+                });
+            }
         });
 
         // Client Logos Cycling Animation
@@ -1797,8 +1753,8 @@
             showSlide(currentSlide);
         }
 
-        // Auto-advance testimonials every 6 seconds
-        setInterval(nextTestimonial, 6000);
+        // Auto-advance testimonials every 35 seconds
+        setInterval(nextTestimonial, 35000);
 
         // Keyboard navigation
         document.addEventListener('keydown', function(e) {

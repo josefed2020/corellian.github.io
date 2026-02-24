@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joan Sutherland Theatre - Machinery Package - Corellian</title>
-    <meta name="description" content="Corellian's extensive theatre renovation work at the Joan Sutherland Theatre in Sydney Opera House.">
+    <title>George Place - Rooftop Plant Room Construction - Corellian</title>
+    <meta name="description" content="Corellian's comprehensive rooftop plant room construction at George Place, featuring structural steel installation and louvered enclosure.">
     
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛓️</text></svg>">
@@ -222,22 +222,21 @@
         }
 
         .menu-icon {
+            position: relative;
             display: block;
             width: 25px;
-            height: 3px;
+            height: 2px;
             background-color: var(--primary-color);
-            position: relative;
             transition: var(--transition);
         }
 
         .menu-icon:before,
         .menu-icon:after {
             content: '';
-            display: block;
-            width: 100%;
-            height: 3px;
-            background-color: var(--primary-color);
             position: absolute;
+            width: 25px;
+            height: 2px;
+            background-color: var(--primary-color);
             transition: var(--transition);
         }
 
@@ -395,6 +394,7 @@
             overflow: hidden;
             box-shadow: var(--box-shadow);
             transition: var(--transition);
+            position: relative;
         }
 
         .gallery-item:hover {
@@ -413,6 +413,104 @@
 
         .gallery-item:hover img {
             transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7), transparent);
+            color: var(--light-text);
+            padding: 2.5rem 1rem 0.75rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            opacity: 1;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 95%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: calc(90vh - 80px);
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-caption {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--light-text);
+            padding: 1rem 2rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: center;
+            max-width: 90%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .lightbox-close:hover {
+            background-color: #cc0000;
+            transform: rotate(90deg);
         }
 
         .video-container {
@@ -636,6 +734,25 @@
             .post-navigation .nav-next {
                 max-width: 100%;
             }
+
+            /* Always show captions on mobile */
+            .gallery-caption {
+                opacity: 1;
+                font-size: 0.85rem;
+                padding: 2rem 0.75rem 0.5rem;
+            }
+
+            .lightbox-close {
+                top: 10px;
+                right: 10px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .lightbox-caption {
+                font-size: 0.9rem;
+                padding: 0.75rem 1rem;
+            }
         }
 
         @media screen and (max-width: 576px) {
@@ -659,64 +776,76 @@
                 <main id="main" class="site-main">
                     <article class="single-project">
                         <header class="entry-header">
-                            <h1 class="entry-title">Joan Sutherland Theatre <br> Machinery Package</h1>
+                            <h1 class="entry-title">George Place <br> Rooftop Plant Room Construction</h1>
                             <div class="entry-meta">
                                 Completed <span class="published">2018</span>
                             </div>
                         </header>
                         
                         <div class="project-content">
-                            <p><strong>Comprehensive Theatre Renovation by Corellian at Sydney Opera House</strong></p>
+                            <p><strong>Complete Rooftop HVAC Infrastructure Upgrade by Corellian</strong></p>
                             
-                            <p>The iconic Sydney Opera House underwent a major renovation of the theatre machinery within its Joan Sutherland Theatre. As a leading rigging and construction expert, Corellian was subcontracted to spearhead the extensive deconstruction, preservation, and installation work.</p>
+                            <p>The George Place project showcased Corellian's expertise in complex rooftop mechanical installations, combining precision demolition, heavy lifting operations, and structural construction to deliver a complete plant room solution. This comprehensive project transformed the building's rooftop HVAC infrastructure from concept to completion.</p>
                             
                             <div class="project-featured-image">
-                                <img src="docs/assets/images/projects/joan-sutherland-theatre.webp" alt="Joan Sutherland Theatre - Sydney Opera House">
+                                <img src="docs/assets/images/projects/george-place-featured.jpg" alt="George Place Rooftop Plant Room">
                             </div>
                             
                             <h2><strong>The Job</strong></h2>
                             
-                            <p><strong>Deconstructing the Existing Theatre Space</strong></p>
+                            <p><strong>Demolition and Site Preparation</strong></p>
                             
-                            <p>The initial phase involved the complete deconstruction and removal of extensive theatre machinery by Corellian's skilled team. They carefully dismantled the theatre's intricate stage lifts, equalizer platforms, hoists, winches, portal bridge, and counterweight system. Corellian's crew systematically removed every associated cable, rope line, fly batten, and curtain.</p>
+                            <p>The project commenced with the careful removal of existing rooftop infrastructure. Corellian's team executed the complete demolition and removal of outdated Air Handling Units (AHUs) and associated ductwork, clearing the rooftop to make way for the new mechanical systems. This phase required meticulous planning to ensure safe removal while maintaining building operations below.</p>
                             
-                            <p><strong>Preserving Heritage Theatre Elements</strong></p>
+                            <p><strong>Precision Tower Crane Lifting Operations</strong></p>
                             
-                            <p>With the Opera House holding heritage listing status, the project required meticulous handling of certain original components. Corellian collaborated closely with the Sydney Opera House Trust to properly salvage and catalogue all heritage-listed machinery elements for preservation.</p>
+                            <p>One of the project's most challenging aspects involved the delivery and placement of three new AHUs via tower crane lift. Corellian coordinated the complex rigging and lifting operations, ensuring the safe positioning of these critical mechanical units on the rooftop. The precision required for this phase demonstrated Corellian's expertise in managing high-value equipment installations in constrained urban environments.</p>
                             
-                            <p><strong>Rigging and Positioning New Theatre Machinery</strong></p>
+                            <p><strong>Structural Steel Framework Construction</strong></p>
                             
-                            <p>Once the existing machinery was deconstructed, Corellian commenced their vital role of rigging the newly supplied theatre equipment into position. This included the complex lifting, positioning and installation of the new rear stage elevator, windlass, and cable reelers that will enable the theatre's productions going forward.</p>
+                            <p>Following the AHU installation, Corellian's team supplied and installed all galvanized structural steel required to construct the new plant room framework. The structural work formed the backbone of the rooftop enclosure, engineered to support the mechanical equipment while withstanding environmental loads and providing long-term durability through galvanized protection.</p>
                             
-                            <p>Corellian's exceptional skills for large-scale theatre deconstruction and new equipment rigging were on full display during this project. Their successful execution showcased their unmatched capabilities for managing comprehensive theatre renovations while upholding heritage preservation standards.</p>
+                            <p><strong>Louvered Plant Room Enclosure</strong></p>
                             
-                            <p>No theatre renovation project is too large or complex for the specialized team at Corellian. Their experience with delicate rigging work in heritage venues is unparalleled. Corellian's commitment to quality and safety makes them a trusted partner for upgrades to performance venues, theatres, and other challenging renovation projects requiring rigging expertise.</p>
+                            <p>The final construction phase saw the installation of a sophisticated louvered wall system surrounding the plant room. These louvers provide essential ventilation for the mechanical equipment while creating a weather-resistant enclosure. The louvered design allows optimal airflow to the AHUs while protecting equipment from the elements and maintaining aesthetic integration with the building's architecture.</p>
+                            
+                            <p><strong>Mechanical Fixture Installation</strong></p>
+                            
+                            <p>Corellian completed the project by delivering, preparing, and placing all mechanical fixtures and fittings, readying them for final connection by the building's plumbing contractors. This comprehensive approach ensured seamless coordination between trades and a successful project handover.</p>
+                            
+                            <p>The George Place project exemplifies Corellian's ability to manage multifaceted construction challenges, from demolition through to precision installation of complex mechanical systems. Their expertise in rigging, structural steel work, and building enclosures makes them the trusted partner for demanding rooftop infrastructure projects requiring technical precision and flawless execution.</p>
                             
                             <div class="spacer"></div>
                             
-                            <div class="video-container">
-                                <iframe src="https://www.youtube.com/embed/npc2wDnLt-M?si=h6eg6VKXjAF98Cok" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                            
                             <div class="project-gallery">
                                 <div class="gallery-grid">
-                                    <div class="gallery-item">
-                                        <img src="docs/assets/images/projects/joan-sutherland-1.jpg" alt="Joan Sutherland Theatre Project">
+                                    <div class="gallery-item" data-caption="Steel going in">
+                                        <img src="docs/assets/images/projects/george-place-1.jpg" alt="Steel going in">
+                                        <div class="gallery-caption">Steel going in</div>
                                     </div>
-                                    <div class="gallery-item">
-                                        <img src="docs/assets/images/projects/joan-sutherland-2.jpg" alt="Theatre machinery work">
+                                    <div class="gallery-item" data-caption="BAC cooling tower and condenser water pipework">
+                                        <img src="docs/assets/images/projects/george-place-2.jpg" alt="BAC cooling tower and condenser water pipework">
+                                        <div class="gallery-caption">BAC cooling tower and condenser water pipework</div>
                                     </div>
-                                    <div class="gallery-item">
-                                        <img src="docs/assets/images/projects/joan-sutherland-3.jpg" alt="Theatre renovation">
+                                    <div class="gallery-item" data-caption="Steel platform completed with supports visible">
+                                        <img src="docs/assets/images/projects/george-place-3.jpg" alt="Steel platform completed with supports visible">
+                                        <div class="gallery-caption">Steel platform completed with supports visible</div>
                                     </div>
-                                    <div class="gallery-item">
-                                        <img src="docs/assets/images/projects/joan-sutherland-4.jpg" alt="Theatre equipment installation">
+                                    <div class="gallery-item" data-caption="Site prep for louvred enclosure">
+                                        <img src="docs/assets/images/projects/george-place-4.jpg" alt="Site prep for louvred enclosure">
+                                        <div class="gallery-caption">Site prep for louvred enclosure</div>
                                     </div>
-                                    <div class="gallery-item">
-                                        <img src="docs/assets/images/projects/joan-sutherland-5.jpg" alt="Rear stage lifts installation">
+                                    <div class="gallery-item" data-caption="Plant room enclosure going in">
+                                        <img src="docs/assets/images/projects/george-place-5.jpg" alt="Plant room enclosure going in">
+                                        <div class="gallery-caption">Plant room enclosure going in</div>
                                     </div>
-                                    <div class="gallery-item">
-                                        <img src="docs/assets/images/projects/joan-sutherland-6.jpg" alt="Theatre machinery work">
+                                    <div class="gallery-item" data-caption="Louvres installed">
+                                        <img src="docs/assets/images/projects/george-place-6.jpg" alt="Louvres installed">
+                                        <div class="gallery-caption">Louvres installed</div>
+                                    </div>
+                                    <div class="gallery-item" data-caption="Steel frame and louvre">
+                                        <img src="docs/assets/images/projects/george-place-7.jpg" alt="Steel frame and louvre">
+                                        <div class="gallery-caption">Steel frame and louvre</div>
                                     </div>
                                 </div>
                             </div>
@@ -743,6 +872,15 @@
         </div>
     </div>
     
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">×</button>
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+        </div>
+    </div>
+    
     
     <!-- Scroll to top button -->
     <div class="scroll-to-top" id="scrollToTop">
@@ -750,7 +888,7 @@
     </div>
     
     <!-- Custom JavaScript -->
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         document.addEventListener('DOMContentLoaded', function() {
             // Elements
             const menuToggle = document.querySelector('.menu-toggle');
@@ -767,17 +905,53 @@
                 });
             }
             
-            // Gallery image lightbox (simple implementation)
+            // Gallery image lightbox
             const galleryItems = document.querySelectorAll('.gallery-item img');
+            const lightboxModal = document.getElementById('lightboxModal');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            const lightboxClose = document.getElementById('lightboxClose');
             
             if (galleryItems.length > 0) {
                 galleryItems.forEach(item => {
                     item.addEventListener('click', function() {
-                        // Simple lightbox - open image in new tab
-                        window.open(this.src, '_blank');
+                        const caption = this.closest('.gallery-item').getAttribute('data-caption');
+                        
+                        lightboxImage.src = this.src;
+                        lightboxImage.alt = this.alt;
+                        lightboxCaption.textContent = caption;
+                        
+                        lightboxModal.classList.add('active');
+                        document.body.style.overflow = 'hidden'; // Prevent scrolling
                     });
                 });
             }
+            
+            // Close lightbox
+            function closeLightbox() {
+                lightboxModal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+            
+            if (lightboxClose) {
+                lightboxClose.addEventListener('click', closeLightbox);
+            }
+            
+            // Close lightbox when clicking outside the image
+            if (lightboxModal) {
+                lightboxModal.addEventListener('click', function(e) {
+                    if (e.target === lightboxModal) {
+                        closeLightbox();
+                    }
+                });
+            }
+            
+            // Close lightbox with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightboxModal.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
             
             // Scroll to top functionality
             const scrollToTopButton = document.getElementById('scrollToTop');
@@ -845,6 +1019,10 @@
                     transition-delay: 1.0s;
                 }
                 
+                .gallery-item:nth-child(7) {
+                    transition-delay: 1.2s;
+                }
+                
                 .video-container {
                     transition-delay: 0.3s;
                 }
@@ -852,9 +1030,6 @@
             document.head.appendChild(style);
             
             window.addEventListener('scroll', checkIfInView);
-            window.addEventListener('load', checkIfInView);
-            
-            // Initial check if elements are in view
             checkIfInView();
         });
     </script>
