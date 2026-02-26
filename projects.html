@@ -208,6 +208,7 @@
         .main-navigation {
             display: flex;
             align-items: center;
+            position: relative;
         }
 
         .menu {
@@ -257,7 +258,11 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 0.5rem;
+            padding: 0.75rem;
+            min-width: 44px;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
         }
 
         .menu-icon {
@@ -640,15 +645,15 @@
             }
 
             .menu-toggle {
-                display: block;
+                display: flex;
             }
 
             .menu {
                 display: none;
                 position: absolute;
                 top: 100%;
-                left: 0;
                 right: 0;
+                min-width: 200px;
                 flex-direction: column;
                 background-color: #fff;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -849,21 +854,8 @@
     <!-- Custom JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Elements
-            const menuToggle = document.querySelector('.menu-toggle');
-            const menu = document.querySelector('.menu');
             
-            // Toggle mobile menu
-            if (menuToggle) {
-                menuToggle.addEventListener('click', function() {
-                    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-                    
-                    menuToggle.setAttribute('aria-expanded', !expanded);
-                    menu.classList.toggle('is-active');
-                    menuToggle.classList.toggle('is-active');
-                });
-            }
-            
+                        
             // Scroll to top functionality
             const scrollToTopButton = document.getElementById('scrollToTop');
             
@@ -940,17 +932,22 @@
         });
     </script>
     <div id="footer-placeholder"></div>
-    ```html
+    
 <script>
     // Load header and footer
     fetch('header.html')
         .then(response => response.text())
-        .then(html => document.getElementById('header-placeholder').innerHTML = html);
-    
+        .then(html => {
+            const placeholder = document.getElementById('header-placeholder');
+            const range = document.createRange();
+            range.selectNodeContents(placeholder);
+            placeholder.appendChild(range.createContextualFragment(html));
+        });
+
     fetch('footer.html')
         .then(response => response.text())
         .then(html => document.getElementById('footer-placeholder').innerHTML = html);
 </script>
-```
+
 </body>
 </html>

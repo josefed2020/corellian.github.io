@@ -212,6 +212,7 @@
         .main-navigation {
             display: flex;
             align-items: center;
+            position: relative;
         }
 
         .menu {
@@ -261,7 +262,11 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 0.5rem;
+            padding: 0.75rem;
+            min-width: 44px;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
         }
 
         .menu-icon {
@@ -958,8 +963,8 @@
                 display: none;
                 position: absolute;
                 top: 100%;
-                left: 0;
                 right: 0;
+                min-width: 200px;
                 background: white;
                 flex-direction: column;
                 padding: 1rem;
@@ -971,11 +976,20 @@
             }
 
             .menu-item {
-                margin: 0.5rem 0;
+                margin: 0;
+            }
+
+            .menu-item a {
+                display: block;
+                padding: 0.75rem 1.5rem;
+            }
+
+            .menu-item a:after {
+                display: none;
             }
 
             .menu-toggle {
-                display: block;
+                display: flex;
             }
 
             .overview-stats {
@@ -1480,24 +1494,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             
             // ================================================================
-            // MOBILE MENU TOGGLE
-            // ================================================================
-            // Handles the hamburger menu on mobile devices
-            // ================================================================
-            const menuToggle = document.querySelector('.menu-toggle');
-            const menu = document.querySelector('.menu');
-            
-            if (menuToggle) {
-                menuToggle.addEventListener('click', function() {
-                    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-                    
-                    menuToggle.setAttribute('aria-expanded', !expanded);
-                    menu.classList.toggle('is-active');
-                    menuToggle.classList.toggle('is-active');
-                });
-            }
-            
-            // ================================================================
             // SCROLL TO TOP BUTTON
             // ================================================================
             // Shows/hides the scroll-to-top button based on scroll position
@@ -1674,17 +1670,20 @@
         }
     </script>
     <div id="footer-placeholder"></div>
-```html
 <script>
     // Load header and footer
     fetch('header.html')
         .then(response => response.text())
-        .then(html => document.getElementById('header-placeholder').innerHTML = html);
+        .then(html => {
+            const placeholder = document.getElementById('header-placeholder');
+            const range = document.createRange();
+            range.selectNodeContents(placeholder);
+            placeholder.appendChild(range.createContextualFragment(html));
+        });
     
     fetch('footer.html')
         .then(response => response.text())
         .then(html => document.getElementById('footer-placeholder').innerHTML = html);
 </script>
-```
 </body>
 </html>
