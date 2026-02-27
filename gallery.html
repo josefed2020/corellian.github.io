@@ -132,6 +132,7 @@
         .main-navigation {
             display: flex;
             align-items: center;
+            position: relative;
         }
 
         .menu {
@@ -177,10 +178,12 @@
             display: none;
             background: none;
             border: none;
-            font-size: 1.5rem;
             cursor: pointer;
-            color: var(--primary-color);
-            padding: 0.5rem;
+            padding: 0.75rem;
+            min-width: 44px;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Hero Section */
@@ -438,20 +441,20 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .menu-toggle {
-                display: block;
+                display: flex;
             }
 
             .menu {
                 display: none;
-                flex-direction: column;
                 position: absolute;
                 top: 100%;
-                left: 0;
                 right: 0;
-                background-color: #ffffff;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                padding: 1rem;
-                gap: 0;
+                min-width: 200px;
+                flex-direction: column;
+                background-color: #fff;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 1rem 0;
+                z-index: 100;
             }
 
             .menu.is-active {
@@ -459,12 +462,16 @@
             }
 
             .menu-item {
-                padding: 0.75rem 0;
-                border-bottom: 1px solid var(--border-color);
+                margin: 0;
             }
 
-            .menu-item:last-child {
-                border-bottom: none;
+            .menu-item a {
+                display: block;
+                padding: 0.75rem 1.5rem;
+            }
+
+            .menu-item a:after {
+                display: none;
             }
 
             .page-hero h1 {
@@ -530,103 +537,214 @@
     <div class="gallery-section">
         <div class="gallery-container">
             <div class="gallery-grid">
-                <!-- Row 1 -->
-                <div class="gallery-item" data-caption="Precision rigging installation for major industrial equipment">
-                    <img src="./docs/assets/images/gallery/project-01.jpg" alt="Project 1">
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/DRUPS4.png" alt="DRUPS4">
                 </div>
-                <div class="gallery-item" data-caption="Heavy machinery relocation completed on schedule">
-                    <img src="./docs/assets/images/gallery/project-02.jpg" alt="Project 2">
+                                
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/26.09 (17).jpg" alt="26.09 (17)">
                 </div>
-                <div class="gallery-item feature" data-caption="Complex multi-floor installation at leading Sydney data center">
-                    <img src="./docs/assets/images/gallery/feature-01.jpg" alt="Featured Project 1">
+                
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20220121_132844_resized.jpg" alt="20220121_132844_resized">
                 </div>
-                <div class="gallery-item" data-caption="Structural steel fabrication and installation">
-                    <img src="./docs/assets/images/gallery/project-03.jpg" alt="Project 3">
-                </div>
-                <div class="gallery-item" data-caption="HVAC equipment crane lift and positioning">
-                    <img src="./docs/assets/images/gallery/project-04.jpg" alt="Project 4">
-                </div>
-
-                <!-- Row 2 -->
-                <div class="gallery-item" data-caption="Medical equipment installation with precision alignment">
-                    <img src="./docs/assets/images/gallery/project-05.jpg" alt="Project 5">
-                </div>
-                <div class="gallery-item" data-caption="Casino gaming equipment delivery and setup">
-                    <img src="./docs/assets/images/gallery/project-06.jpg" alt="Project 6">
-                </div>
-                <div class="gallery-item" data-caption="Industrial machinery dismantling and removal">
-                    <img src="./docs/assets/images/gallery/project-07.jpg" alt="Project 7">
-                </div>
-                <div class="gallery-item" data-caption="Chiller unit replacement at commercial facility">
-                    <img src="./docs/assets/images/gallery/project-08.jpg" alt="Project 8">
-                </div>
-                <div class="gallery-item" data-caption="Specialized transport and rigging solutions">
-                    <img src="./docs/assets/images/gallery/project-09.jpg" alt="Project 9">
+               
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG_0113.JPG" alt="IMG_0113">
                 </div>
 
-                <!-- Row 3 -->
-                <div class="gallery-item" data-caption="High-rise crane lift operations">
-                    <img src="./docs/assets/images/gallery/project-10.jpg" alt="Project 10">
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20.jpg" alt="20">
                 </div>
-                <div class="gallery-item feature" data-caption="Major hospital MRI installation through building facade">
-                    <img src="./docs/assets/images/gallery/feature-02.jpg" alt="Featured Project 2">
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20140418_143802.jpg" alt="20140418_143802">
                 </div>
-                <div class="gallery-item" data-caption="Electrical switchboard relocation">
-                    <img src="./docs/assets/images/gallery/project-11.jpg" alt="Project 11">
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20160911_073527.jpg" alt="20160911_073527">
                 </div>
-                <div class="gallery-item" data-caption="Custom fabricated support structures">
-                    <img src="./docs/assets/images/gallery/project-12.jpg" alt="Project 12">
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20170620_141112_resized_1.jpg" alt="20170620_141112_resized_1">
                 </div>
-
-                <!-- Row 4 -->
-                <div class="gallery-item" data-caption="Generator installation and commissioning">
-                    <img src="./docs/assets/images/gallery/project-13.jpg" alt="Project 13">
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20180606_162007_resized.jpg" alt="20180606_162007_resized">
                 </div>
-                <div class="gallery-item" data-caption="Precision leveling and alignment services">
-                    <img src="./docs/assets/images/gallery/project-14.jpg" alt="Project 14">
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20180606_162107_resized.jpg" alt="20180606_162107_resized">
                 </div>
-                <div class="gallery-item" data-caption="Complex rigging in confined spaces">
-                    <img src="./docs/assets/images/gallery/project-15.jpg" alt="Project 15">
-                </div>
-                <div class="gallery-item" data-caption="Industrial plant equipment upgrade">
-                    <img src="./docs/assets/images/gallery/project-16.jpg" alt="Project 16">
-                </div>
-                <div class="gallery-item" data-caption="Rooftop equipment crane lift">
-                    <img src="./docs/assets/images/gallery/project-17.jpg" alt="Project 17">
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20180606_162404_resized.jpg" alt="20180606_162404_resized">
                 </div>
 
-                <!-- Row 5 -->
-                <div class="gallery-item" data-caption="Mechanical room equipment installation">
-                    <img src="./docs/assets/images/gallery/project-18.jpg" alt="Project 18">
+                <div class="gallery-item feature" data-caption="">
+                    <img src="./docs/assets/images/gallery/20241207_081546.jpg" alt="Thumbs-up">
                 </div>
-                <div class="gallery-item" data-caption="Safe demolition and site clearance">
-                    <img src="./docs/assets/images/gallery/project-19.jpg" alt="Project 19">
+                
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20190905_160112_resized.jpg" alt="20190905_160112_resized">
                 </div>
-                <div class="gallery-item feature" data-caption="Complete facility relocation - 50+ equipment pieces moved">
-                    <img src="./docs/assets/images/gallery/feature-03.jpg" alt="Featured Project 3">
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20191002_180104_resized_1.jpg" alt="20191002_180104_resized_1">
                 </div>
-                <div class="gallery-item" data-caption="Precision machinery alignment">
-                    <img src="./docs/assets/images/gallery/project-20.jpg" alt="Project 20">
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20191219_103841.jpg" alt="20191219_103841">
                 </div>
-                <div class="gallery-item" data-caption="Heavy load floor reinforcement">
-                    <img src="./docs/assets/images/gallery/project-21.jpg" alt="Project 21">
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20200724_091317_resized.jpg" alt="20200724_091317_resized">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20200724_091443_resized2.jpg" alt="20200724_091443_resized2">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20201112_121948_resized.jpg" alt="20201112_121948_resized">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20201112_122000_resized.jpg" alt="20201112_122000_resized">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20210418_074454.jpg" alt="20210418_074454">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20211019_112211.jpg" alt="20211019_112211">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20220121_134349_resized.jpg" alt="20220121_134349_resized">
                 </div>
 
-                <!-- Row 6 -->
-                <div class="gallery-item" data-caption="Specialized rigging for delicate equipment">
-                    <img src="./docs/assets/images/gallery/project-22.jpg" alt="Project 22">
+                <div class="gallery-item feature" data-caption="">
+                    <img src="./docs/assets/images/gallery/20220121_141719_resized.jpg" alt="20220121_141719_resized">
                 </div>
-                <div class="gallery-item" data-caption="Commercial HVAC system installation">
-                    <img src="./docs/assets/images/gallery/project-23.jpg" alt="Project 23">
+
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20221213_154018_resized_1.jpg" alt="20221213_154018_resized_1">
                 </div>
-                <div class="gallery-item" data-caption="Industrial fan replacement">
-                    <img src="./docs/assets/images/gallery/project-24.jpg" alt="Project 24">
+                
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG_0487.JPG" alt="IMG_0487">
                 </div>
-                <div class="gallery-item" data-caption="Structural modifications and support">
-                    <img src="./docs/assets/images/gallery/project-25.jpg" alt="Project 25">
+                
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/20260122_105649.jpg" alt="20260122_105649">
                 </div>
-                <div class="gallery-item" data-caption="Equipment skidding and relocation">
-                    <img src="./docs/assets/images/gallery/project-26.jpg" alt="Project 26">
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/23.JPG" alt="23">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/27.jpg" alt="27">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/39.jpg" alt="39">
+                </div>
+
+                <div class="gallery-item feature" data-caption="">
+                    <img src="./docs/assets/images/gallery/DRUPS7.png" alt="DRUPS7">
+                </div>
+
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/AHU.png" alt="AHU">
+                </div>
+
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/Baida Tamworth - HEX unit platform.png" alt="Baida Tamworth - HEX unit platform">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/DRUPS1.png" alt="DRUPS1">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/1.JPG" alt="1">
+                
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/DRUPS5.png" alt="DRUPS5">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/DRUPS6.png" alt="DRUPS6">
+                </div>
+                
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/image0021.jpg" alt="image0021">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG-20220326-WA0006.jpg" alt="IMG-20220326-WA0006">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG-20221111-WA0005.jpg" alt="IMG-20221111-WA0005">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG-20230115-WA0001.jpg" alt="IMG-20230115-WA0001">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG-20230318-WA0000.jpg" alt="IMG-20230318-WA0000">
+                </div>
+
+                <div class="gallery-item feature" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG_2563.jpg" alt="IMG_2563">
+                </div>
+
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG-20230318-WA0015.jpg" alt="Zitron-IMG-20230318-WA0015">
+                </div>
+                
+                
+                
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG-20241125-WA0015.jpg" alt="IMG-20241125-WA0015">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG-20241125-WA0019.jpg" alt="IMG-20241125-WA0019">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG-20241125-WA0023.jpg" alt="IMG-20241125-WA0023">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG-20260213-WA0004.jpg" alt="IMG-20260213-WA0004">
+                </div>
+                
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/1000050826.jpg" alt="1000050826">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG_0373.JPG" alt="IMG_0373">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG_0378.JPG" alt="IMG_0378">
+                </div>
+                <div class="gallery-item feature" data-caption="">
+                    <img src="./docs/assets/images/gallery/20241207_080705.jpg" alt="20241207_080705">
+                </div>
+                
+                
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG_6781.JPG" alt="IMG_6781">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG_7330.JPG" alt="IMG_7330">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/MACTEL FDC - Loading platform.png" alt="MACTEL FDC - Loading platform">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/Steel frame and louver.jpg" alt="Steel frame and louver">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/4220240817_154032.jpg" alt="4220240817_154032">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/42IMG-20230805-WA0004.jpg" alt="42IMG-20230805-WA0004">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG-20230505-WA0002.jpg" alt="IMG-20230505-WA0002">
+                </div>
+                <div class="gallery-item feature" data-caption="">
+                    <img src="./docs/assets/images/gallery/IMG-20230629-WA0002.jpg" alt="IMG-20230629-WA0002">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/42IMG_0939.JPG" alt="42IMG_0939">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/Westfield Paramatta - Temporary loading platform.png" alt="Westfield Paramatta - Temporary loading platform">
+                </div>
+                <div class="gallery-item" data-caption="">
+                    <img src="./docs/assets/images/gallery/WhatsApp Image 2024-10-19 at 10.59.54_6ce02ef6.jpg" alt="WhatsApp Image 2024-10-19 at 10.59.54_6ce02ef6">
                 </div>
             </div>
         </div>
@@ -649,20 +767,6 @@
     <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
-            const menuToggle = document.querySelector('.menu-toggle');
-            const menu = document.querySelector('.menu');
-            
-            if (menuToggle) {
-                menuToggle.addEventListener('click', function() {
-                    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-                    
-                    menuToggle.setAttribute('aria-expanded', !expanded);
-                    menu.classList.toggle('is-active');
-                    menuToggle.classList.toggle('is-active');
-                });
-            }
-            
             // Scroll to top functionality
             const scrollTopBtn = document.getElementById('scrollTop');
             
@@ -732,8 +836,13 @@
     // Load header and footer
     fetch('header.html')
         .then(response => response.text())
-        .then(html => document.getElementById('header-placeholder').innerHTML = html);
-    
+        .then(html => {
+            const placeholder = document.getElementById('header-placeholder');
+            const range = document.createRange();
+            range.selectNodeContents(placeholder);
+            placeholder.appendChild(range.createContextualFragment(html));
+        });
+
     fetch('footer.html')
         .then(response => response.text())
         .then(html => document.getElementById('footer-placeholder').innerHTML = html);
