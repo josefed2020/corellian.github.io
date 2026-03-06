@@ -1,0 +1,496 @@
+<!--
+  contact-form.html
+  ─────────────────────────────────────────────────────────────────────────────
+  Fetched and injected into contact.html's #contactFormContainer div.
+  Inherits all base styles (fonts, colours, CSS variables) from contact.html.
+  All three fields are required.
+
+  To update in future:
+    • Edit placeholder text or labels below — no need to touch contact.html.
+    • Replace the two placeholder values in the <script> block before going live.
+  ─────────────────────────────────────────────────────────────────────────────
+-->
+
+<style>
+  /* Scoped to .cf-wrapper to avoid conflicts with contact.html base styles */
+
+  .cf-wrapper { text-align: left; }
+
+  /* Field wrapper */
+  .cf-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .cf-field label {
+    font-weight: 500;
+    font-size: 0.92rem;
+    color: var(--primary-color);
+  }
+
+  .cf-field label .req { color: var(--secondary-color); margin-left: 2px; }
+
+  /* Inputs — styled to match contact.html's existing contact-form inputs */
+  .cf-wrapper input[type="text"],
+  .cf-wrapper input[type="email"],
+  .cf-wrapper textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    color: var(--text-color);
+    background: #fff;
+    transition: var(--transition);
+    box-sizing: border-box;
+  }
+
+  .cf-wrapper input[type="text"]:focus,
+  .cf-wrapper input[type="email"]:focus,
+  .cf-wrapper textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+  }
+
+  .cf-wrapper textarea {
+    min-height: 140px;
+    resize: vertical;
+  }
+
+  /* Invalid highlights */
+  .cf-invalid,
+  .cf-invalid:focus {
+    border-color: var(--secondary-color) !important;
+    background-color: #fff5f5 !important;
+  }
+
+  /* Submit button */
+  #cf-submit-btn {
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+    margin-top: 0.25rem;
+  }
+
+  #cf-submit-btn:hover    { background-color: #cc0000; }
+  #cf-submit-btn:disabled { background-color: #bbb; cursor: not-allowed; }
+
+  /* Error status */
+  #cf-status {
+    display: none;
+    margin-top: 1rem;
+    padding: 0.85rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  #cf-status.error {
+    display: block;
+    background: #fef0f0;
+    border: 2px solid var(--secondary-color);
+    color: #c0392b;
+  }
+
+  /* Spinner */
+  .cf-spinner {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: cf-spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+
+  @keyframes cf-spin { to { transform: rotate(360deg); } }
+
+  /* Validation modal */
+  .cf-valmodal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 600;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cf-valmodal-overlay.active { display: flex; }
+
+  .cf-valmodal-box {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    border-top: 5px solid var(--secondary-color);
+    padding: 2rem;
+    max-width: 400px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .cf-valmodal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: #fef0f0;
+    border: 3px solid var(--secondary-color);
+    margin: 0 auto 1rem;
+    font-size: 1.3rem;
+    color: var(--secondary-color);
+    font-weight: 700;
+  }
+
+  .cf-valmodal-box h3 {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .cf-valmodal-box > p {
+    font-size: 0.87rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .cf-valmodal-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    border: 1px solid #fcc;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .cf-valmodal-list li {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.87rem;
+    color: #333;
+    border-bottom: 1px solid #fcc;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .cf-valmodal-list li:last-child { border-bottom: none; }
+
+  .cf-valmodal-list li::before {
+    content: '!';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .cf-valmodal-btn {
+    display: block;
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.65rem;
+    font-family: var(--font-heading);
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .cf-valmodal-btn:hover { background-color: #cc0000; }
+
+  /* Thank-you modal */
+  .cf-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 600;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cf-modal-overlay.active { display: flex; }
+
+  .cf-modal-box {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    border-top: 5px solid var(--secondary-color);
+    padding: 2.5rem 2rem;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+  }
+
+  .cf-modal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: #eafaf1;
+    border: 3px solid #27ae60;
+    margin: 0 auto 1.25rem;
+    font-size: 1.6rem;
+    color: #27ae60;
+  }
+
+  .cf-modal-box h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+  }
+
+  .cf-modal-box p {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .cf-modal-box p:last-of-type { margin-bottom: 1.5rem; }
+
+  .cf-modal-close {
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.6rem 1.75rem;
+    font-family: var(--font-heading);
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .cf-modal-close:hover { background-color: #cc0000; }
+</style>
+
+<!-- reCAPTCHA v3 loader -->
+<script>
+(function() {
+  var SITE_KEY = '6LevpIEsAAAAACfJgzI4bKa7ZKH-caxyKHbVmPD7';
+  var s = document.createElement('script');
+  s.src = 'https://www.google.com/recaptcha/api.js?render=' + SITE_KEY;
+  s.async = true;
+  document.head.appendChild(s);
+})();
+</script>
+
+<div class="cf-wrapper">
+
+  <form id="contactForm" novalidate>
+
+    <!-- Honeypot -->
+    <div style="display:none;" aria-hidden="true">
+      <input type="text" name="website" id="cf-honeypot" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="cf-field">
+      <label for="cf-name">Name <span class="req">*</span></label>
+      <input type="text" id="cf-name" name="name" required placeholder="Your full name">
+    </div>
+
+    <div class="cf-field">
+      <label for="cf-email">Email <span class="req">*</span></label>
+      <input type="email" id="cf-email" name="email" required placeholder="your@email.com">
+    </div>
+
+    <div class="cf-field">
+      <label for="cf-message">How Can We Help? <span class="req">*</span></label>
+      <textarea id="cf-message" name="message" required
+        placeholder="Tell us about your project requirements"></textarea>
+    </div>
+
+    <button type="submit" id="cf-submit-btn">Send Message</button>
+    <div id="cf-status"></div>
+
+  </form>
+</div><!-- /.cf-wrapper -->
+
+<!-- Validation modal -->
+<div class="cf-valmodal-overlay" id="cf-valModal" role="dialog" aria-modal="true">
+  <div class="cf-valmodal-box">
+    <div class="cf-valmodal-icon">!</div>
+    <h3>Please Complete Required Fields</h3>
+    <p>The following fields need attention. They have been highlighted on the form.</p>
+    <ul class="cf-valmodal-list" id="cf-valModalList"></ul>
+    <button class="cf-valmodal-btn" id="cf-valModalClose">Go Back and Fix</button>
+  </div>
+</div>
+
+<!-- Thank-you modal -->
+<div class="cf-modal-overlay" id="cf-thankyouModal" role="dialog" aria-modal="true">
+  <div class="cf-modal-box">
+    <div class="cf-modal-icon">&#10003;</div>
+    <h3>Message Sent</h3>
+    <p>Thank you for getting in touch with Corellian.</p>
+    <p>We'll review your enquiry and get back to you shortly.</p>
+    <button class="cf-modal-close" id="cf-modalClose">Close</button>
+  </div>
+</div>
+
+<script>
+(function () {
+
+  var RECAPTCHA_SITE_KEY = '6LevpIEsAAAAACfJgzI4bKa7ZKH-caxyKHbVmPD7';
+  var APPS_SCRIPT_URL    = 'https://script.google.com/macros/s/AKfycby_qpdVA4YqG6Sg87Gey3plG8Yp814VD5SoDVow0Ou_0HWZlZp2Ux-aYNf57i82JJNnWA/exec';
+
+  /* ── Required fields ── */
+  var REQUIRED_FIELDS = [
+    { label: 'Name',              id: 'cf-name' },
+    { label: 'Email',             id: 'cf-email' },
+    { label: 'How Can We Help?',  id: 'cf-message' },
+  ];
+
+  /* ── Clear highlights ── */
+  function clearHighlights() {
+    document.querySelectorAll('.cf-invalid').forEach(function (el) {
+      el.classList.remove('cf-invalid');
+    });
+  }
+
+  /* ── Live clear on correction ── */
+  REQUIRED_FIELDS.forEach(function (f) {
+    var el = document.getElementById(f.id);
+    if (el) {
+      el.addEventListener('input',  function () { el.classList.remove('cf-invalid'); });
+      el.addEventListener('change', function () { el.classList.remove('cf-invalid'); });
+    }
+  });
+
+  /* ── Validate ── */
+  function validateForm() {
+    clearHighlights();
+    var missing = [];
+
+    REQUIRED_FIELDS.forEach(function (f) {
+      var el      = document.getElementById(f.id);
+      var invalid = !el || !el.value.trim() ||
+        (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value));
+      if (invalid) {
+        missing.push(f.label);
+        if (el) el.classList.add('cf-invalid');
+      }
+    });
+
+    return missing;
+  }
+
+  /* ── Validation modal ── */
+  function closeValModal() {
+    document.getElementById('cf-valModal').classList.remove('active');
+    var first = document.querySelector('.cf-invalid');
+    if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  document.getElementById('cf-valModalClose').addEventListener('click', closeValModal);
+  document.getElementById('cf-valModal').addEventListener('click', function (e) {
+    if (e.target === this) closeValModal();
+  });
+
+  /* ── Thank-you modal ── */
+  function closeThankYou() {
+    document.getElementById('cf-thankyouModal').classList.remove('active');
+    var c = document.getElementById('contactFormContainer');
+    if (c) c.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.getElementById('cf-modalClose').addEventListener('click', closeThankYou);
+  document.getElementById('cf-thankyouModal').addEventListener('click', function (e) {
+    if (e.target === this) closeThankYou();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closeValModal(); closeThankYou(); }
+  });
+
+  /* ── Submit ── */
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form     = e.target;
+    var btn      = document.getElementById('cf-submit-btn');
+    var statusEl = document.getElementById('cf-status');
+
+    var missing = validateForm();
+    if (missing.length > 0) {
+      var list = document.getElementById('cf-valModalList');
+      list.innerHTML = missing.map(function (m) { return '<li>' + m + '</li>'; }).join('');
+      document.getElementById('cf-valModal').classList.add('active');
+      return;
+    }
+
+    var data = {
+      formType:    'contact',
+      name:        document.getElementById('cf-name').value.trim(),
+      email:       document.getElementById('cf-email').value.trim(),
+      message:     document.getElementById('cf-message').value.trim(),
+      submittedAt: new Date().toLocaleString('en-AU', { timeZone: 'Australia/Sydney' })
+    };
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="cf-spinner"></span>Sending\u2026';
+    statusEl.className = '';
+    statusEl.style.display = 'none';
+
+    grecaptcha.ready(function () {
+      grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_contact' })
+        .then(function (token) {
+
+          data.recaptchaToken = token;
+          data.website        = document.getElementById('cf-honeypot').value;
+
+          fetch(APPS_SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
+            .then(function (res) { return res.json(); })
+            .then(function (result) {
+              if (result.status === 'success') {
+                document.getElementById('cf-thankyouModal').classList.add('active');
+                form.reset();
+              } else {
+                throw new Error(result.message || 'Unknown error');
+              }
+            })
+            .catch(function (err) {
+              statusEl.className = 'error';
+              statusEl.textContent = '\u2716 Message could not be sent. Please call 1300 655 496 or email estimating@corellian.com.au directly.';
+              console.error(err);
+            })
+            .finally(function () {
+              btn.disabled = false;
+              btn.innerHTML = 'Send Message';
+            });
+
+        }); // end grecaptcha.execute.then
+    });     // end grecaptcha.ready
+
+  });  // end addEventListener('submit')
+
+})();
+</script>

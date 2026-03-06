@@ -677,34 +677,17 @@
                         <div class="contact-columns">
                             <div class="contact-info-column">
                                 <div class="contact-info">
-                                    <div id="ff-compose"></div>
-<script async defer src="https://formfacade.com/include/103992123606760156396/form/1FAIpQLSeGIderuFS8nCDAYrMB4P-EcXaRq3F8N8BHEhma56ONAh3FRg/classic.js?div=ff-compose"></script>
+                                    <div id="contactFormContainer">
+                                        <p style="color:#999;font-style:italic;">Loading contact form…</p>
+                                    </div>
+                                </div>
+
+                                <div class="contact-info" style="margin-top: 1.5rem;">
                                     <h3>Get in Touch</h3>
                                     <p><strong>Phone:</strong> <a href="tel:1300655496">1300 655 496</a></p>
                                     <p><strong>Email:</strong> <a href="mailto:estimating@corellian.com.au">estimating@corellian.com.au</a></p>
                                 </div>
-                                
-                                <!--<div class="contact-form">
-                                    <h3>Quick Contact Form</h3>
-                                    <form id="contactForm" action="#" method="post">
-                                        <div class="form-group">
-                                            <label for="name">Name (required)</label>
-                                            <input type="text" id="name" name="your-name" class="form-control" required>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label for="email">Email (required)</label>
-                                            <input type="email" id="email" name="your-email" class="form-control" required>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label for="message">How can we help?</label>
-                                            <textarea id="message" name="your-message" class="form-control" rows="6" placeholder="Tell us about your project requirements..."></textarea>
-                                        </div>
-                                        
-                                        <button type="submit" class="submit-button">Send Message</button>
-                                    </form>
-                                </div>-->
+
                             </div>
                             
                             <div class="contact-map-column">
@@ -762,43 +745,26 @@
     </div>
     
     <!-- Custom JavaScript -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Handle contact form submission
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Get form data
-                    const name = document.getElementById('name').value;
-                    const email = document.getElementById('email').value;
-                    const message = document.getElementById('message').value;
-                    
-                    // Form validation
-                    if (!name || !email) {
-                        alert('Please fill in all required fields.');
-                        return;
-                    }
-                    
-                    // Email validation
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(email)) {
-                        alert('Please enter a valid email address.');
-                        return;
-                    }
-                    
-                    // In a real implementation, you would send this data to your server
-                    console.log('Form submitted:', { name, email, message });
-                    
-                    // Show success message
-                    alert('Thank you for your message! We\'ll get back to you soon.');
-                    
-                    // Reset form
-                    contactForm.reset();
+
+            // Load contact form
+            fetch('contact-form.html')
+                .then(function(response) {
+                    if (!response.ok) throw new Error('Form not found');
+                    return response.text();
+                })
+                .then(function(html) {
+                    var container = document.getElementById('contactFormContainer');
+                    var fragment  = document.createRange().createContextualFragment(html);
+                    container.innerHTML = '';
+                    container.appendChild(fragment);
+                })
+                .catch(function() {
+                    document.getElementById('contactFormContainer').innerHTML =
+                        '<p style="color:#666;">Unable to load the contact form. Please call <a href="tel:1300655496">1300 655 496</a> or email <a href="mailto:estimating@corellian.com.au">estimating@corellian.com.au</a>.</p>';
                 });
-            }
-            
+
             // Scroll to top functionality
             const scrollTopBtn = document.getElementById('scrollTop');
             
@@ -826,11 +792,4 @@
         .then(html => {
             const placeholder = document.getElementById('header-placeholder');
             const range = document.createRange();
-            range.selectNodeContents(placeholder);
-            placeholder.appendChild(range.createContextualFragment(html));
-        });
-
-    fetch('footer.html')
-        .then(response => response.text())
-        .then(html => document.getElementById('footer-placeholder').innerHTML = html);
-</script>
+            range.selectNodeContents(placeho

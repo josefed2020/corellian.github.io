@@ -662,25 +662,18 @@
 
                 <!-- Tab Navigation -->
                 <div class="tab-navigation">
-                    <button class="tab-button active" data-tab="traineeships">Traineeships</button>
+                    <button class="tab-button" data-tab="traineeships">Traineeships</button>
                     <button class="tab-button" data-tab="rigging">Rigging</button>
-                    <button class="tab-button" data-tab="other">Other Roles</button>
+                    <button class="tab-button active" data-tab="other">Other Roles</button>
                 </div>
 
                 <!-- Traineeships Tab -->
-                <div id="traineeships" class="tab-content active">
+                <div id="traineeships" class="tab-content">
                     <h2>Traineeship Programs</h2>
                     <p>Start your career in the rigging and building services industry with a Corellian traineeship. We offer structured training programs that combine hands-on experience with formal qualifications.</p>
-                    
-                    <div class="embedded-form">
-                        <h3>Apply for a Traineeship</h3>
-                        <p style="color: #666; margin-bottom: 2rem;">Complete the form below to apply for our traineeship program.</p>
-                        <!-- Placeholder for Google Form -->
-                        <div style="background-color: #e0e0e0; padding: 3rem; border-radius: 4px; border: 2px dashed #999;">
-                            <p style="color: #666; font-style: italic;">Google Form will be embedded here</p>
-                            <p style="color: #999; font-size: 0.9rem; margin-top: 1rem;">Replace this section with your Google Form embed code:<br>
-                            &lt;iframe src="YOUR_GOOGLE_FORM_URL"&gt;&lt;/iframe&gt;</p>
-                        </div>
+
+                    <div class="embedded-form" id="traineeFormContainer">
+                        <p style="color: #999; font-style: italic;">Loading application form…</p>
                     </div>
                 </div>
 
@@ -695,7 +688,7 @@
                 </div>
 
                 <!-- Other Roles Tab -->
-                <div id="other" class="tab-content">
+                <div id="other" class="tab-content active">
                     <h2>Other Opportunities</h2>
                     
                     <!-- Current Job Listings -->
@@ -709,37 +702,10 @@
                     <!-- Expression of Interest Form -->
                     <h3>Expression of Interest</h3>
                     <p>Don't see a position that matches your skills? Submit an expression of interest and we'll keep your details on file for future opportunities.</p>
-                    
-                    <form class="contact-form" id="eoiForm">
-                        <p>
-                            <label for="eoi-name">Full Name *</label>
-                            <input type="text" id="eoi-name" name="name" required>
-                        </p>
-                        
-                        <p>
-                            <label for="eoi-email">Email Address *</label>
-                            <input type="email" id="eoi-email" name="email" required>
-                        </p>
-                        
-                        <p>
-                            <label for="eoi-phone">Phone Number *</label>
-                            <input type="tel" id="eoi-phone" name="phone" required>
-                        </p>
-                        
-                        <p>
-                            <label for="eoi-position">Position of Interest</label>
-                            <input type="text" id="eoi-position" name="position" placeholder="e.g., General Labourer, Administration, etc.">
-                        </p>
-                        
-                        <p>
-                            <label for="eoi-message">Tell us about yourself and your experience *</label>
-                            <textarea id="eoi-message" name="message" required placeholder="Include relevant skills, experience, and qualifications"></textarea>
-                        </p>
-                        
-                        <p>
-                            <input type="submit" value="Submit Expression of Interest">
-                        </p>
-                    </form>
+
+                    <div class="embedded-form" id="eoiFormContainer">
+                        <p style="color: #999; font-style: italic;">Loading application form…</p>
+                    </div>
                 </div>
             </main>
         </div>
@@ -756,7 +722,6 @@
             // Elements
             const tabButtons = document.querySelectorAll('.tab-button');
             const tabContents = document.querySelectorAll('.tab-content');
-            const eoiForm = document.getElementById('eoiForm');
             
             // Tab switching
             tabButtons.forEach(button => {
@@ -773,6 +738,23 @@
                 });
             });
             
+            // Load trainee application form
+            fetch('trainee-form.html')
+                .then(response => {
+                    if (!response.ok) throw new Error('Form not found');
+                    return response.text();
+                })
+                .then(html => {
+                    const container = document.getElementById('traineeFormContainer');
+                    const fragment  = document.createRange().createContextualFragment(html);
+                    container.innerHTML = '';
+                    container.appendChild(fragment);
+                })
+                .catch(() => {
+                    document.getElementById('traineeFormContainer').innerHTML =
+                        '<p style="color:#666;">Unable to load the application form. Please email <a href="mailto:recruitment@corellian.com.au">recruitment@corellian.com.au</a> to apply.</p>';
+                });
+
             // Load rigger application form
             fetch('rigger-form.html')
                 .then(response => {
@@ -810,40 +792,23 @@
                     `;
                 });
             
-            // Handle EOI form submission
-            if (eoiForm) {
-                eoiForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Validate the form
-                    const name = document.getElementById('eoi-name').value;
-                    const email = document.getElementById('eoi-email').value;
-                    const phone = document.getElementById('eoi-phone').value;
-                    const message = document.getElementById('eoi-message').value;
-                    
-                    if (!name || !email || !phone || !message) {
-                        alert('Please fill in all required fields.');
-                        return;
-                    }
-                    
-                    // Email validation
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(email)) {
-                        alert('Please enter a valid email address.');
-                        return;
-                    }
-                    
-                    // In a real implementation, you would send this data to your server
-                    console.log('Expression of Interest submitted:', { name, email, phone, message });
-                    
-                    // Show success message
-                    alert('Thank you for your expression of interest! We will review your submission and contact you if a suitable position becomes available.');
-                    
-                    // Reset form
-                    eoiForm.reset();
+            // Load EOI form
+            fetch('eoi-form.html')
+                .then(response => {
+                    if (!response.ok) throw new Error('Form not found');
+                    return response.text();
+                })
+                .then(html => {
+                    const container = document.getElementById('eoiFormContainer');
+                    const fragment  = document.createRange().createContextualFragment(html);
+                    container.innerHTML = '';
+                    container.appendChild(fragment);
+                })
+                .catch(() => {
+                    document.getElementById('eoiFormContainer').innerHTML =
+                        '<p style="color:#666;">Unable to load the application form. Please email <a href="mailto:recruitment@corellian.com.au">recruitment@corellian.com.au</a> to apply.</p>';
                 });
-            }
-            
+
             // Scroll to top functionality
             const scrollToTopButton = document.getElementById('scrollToTop');
             

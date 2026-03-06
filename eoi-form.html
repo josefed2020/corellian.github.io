@@ -1,0 +1,562 @@
+<!--
+  eoi-form.html
+  ─────────────────────────────────────────────────────────────────────────────
+  Fetched and injected into employment.html's #eoiFormContainer div.
+  Inherits all base styles from the parent page via CSS variables.
+  Intentionally minimal — the EOI is a short form for general enquiries.
+
+  To update in future:
+    • Edit fields below — no need to touch employment.html.
+    • Replace the two placeholder values in the <script> block.
+  ─────────────────────────────────────────────────────────────────────────────
+-->
+
+<style>
+  /* Scoped to .eoi-wrapper to avoid conflicts with other injected forms */
+
+  .eoi-wrapper { text-align: left; }
+
+  .eoi-wrapper h3 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+  }
+
+  .eoi-intro {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 1.75rem;
+    line-height: 1.6;
+  }
+
+  /* Section card */
+  .eoi-section {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .eoi-section-title {
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.45rem;
+    margin-bottom: 1.1rem;
+  }
+
+  /* Two-column grid */
+  .eoi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.5rem;
+  }
+
+  .eoi-col-2 { grid-column: span 2; }
+
+  @media (max-width: 600px) {
+    .eoi-grid { grid-template-columns: 1fr; }
+    .eoi-col-2 { grid-column: span 1; }
+    .eoi-section { padding: 1.1rem; }
+  }
+
+  /* Field wrapper */
+  .eoi-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .eoi-field label {
+    font-weight: 500;
+    font-size: 0.92rem;
+    color: var(--primary-color);
+    margin-bottom: 0;
+  }
+
+  .eoi-field label .req { color: var(--secondary-color); margin-left: 2px; }
+
+  /* Inherit input styles from parent, remove margin-bottom */
+  .eoi-wrapper .contact-form input[type="text"],
+  .eoi-wrapper .contact-form input[type="email"],
+  .eoi-wrapper .contact-form input[type="tel"],
+  .eoi-wrapper .contact-form textarea {
+    margin-bottom: 0;
+  }
+
+  textarea.eoi-tall { min-height: 140px; resize: vertical; }
+
+  /* Invalid highlights */
+  .eoi-invalid,
+  .eoi-invalid:focus {
+    border-color: var(--secondary-color) !important;
+    background-color: #fff5f5 !important;
+  }
+
+  /* Validation modal */
+  .eoi-valmodal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 600;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .eoi-valmodal-overlay.active { display: flex; }
+
+  .eoi-valmodal-box {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    border-top: 5px solid var(--secondary-color);
+    padding: 2rem;
+    max-width: 420px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .eoi-valmodal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: #fef0f0;
+    border: 3px solid var(--secondary-color);
+    margin: 0 auto 1rem;
+    font-size: 1.4rem;
+    color: var(--secondary-color);
+    font-weight: 700;
+  }
+
+  .eoi-valmodal-box h3 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .eoi-valmodal-box > p {
+    font-size: 0.88rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .eoi-valmodal-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    border: 1px solid #fcc;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .eoi-valmodal-list li {
+    padding: 0.55rem 0.9rem;
+    font-size: 0.88rem;
+    color: #333;
+    border-bottom: 1px solid #fcc;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .eoi-valmodal-list li:last-child { border-bottom: none; }
+
+  .eoi-valmodal-list li::before {
+    content: '!';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .eoi-valmodal-btn {
+    display: block;
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.7rem;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .eoi-valmodal-btn:hover { background-color: #cc0000; }
+
+  /* Thank-you modal */
+  .eoi-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 600;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .eoi-modal-overlay.active { display: flex; }
+
+  .eoi-modal-box {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    border-top: 5px solid var(--secondary-color);
+    padding: 2.5rem 2rem;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+  }
+
+  .eoi-modal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: #eafaf1;
+    border: 3px solid #27ae60;
+    margin: 0 auto 1.25rem;
+    font-size: 1.75rem;
+    color: #27ae60;
+  }
+
+  .eoi-modal-box h3 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+  }
+
+  .eoi-modal-box p {
+    font-size: 0.92rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .eoi-modal-box p:last-of-type { margin-bottom: 1.5rem; }
+
+  .eoi-modal-close {
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.65rem 2rem;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .eoi-modal-close:hover { background-color: #cc0000; }
+
+  /* Submit button */
+  #eoi-submit-btn {
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 0.85rem 2.5rem;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  #eoi-submit-btn:hover    { background-color: #cc0000; }
+  #eoi-submit-btn:disabled { background-color: #bbb; cursor: not-allowed; }
+
+  .eoi-submit-note { font-size: 0.82rem; color: #888; margin-top: 0.75rem; }
+  .eoi-submit-note a { color: var(--secondary-color); }
+
+  /* Error status */
+  #eoi-status {
+    display: none;
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    font-size: 0.93rem;
+    font-weight: 500;
+  }
+
+  #eoi-status.error {
+    display: block;
+    background: #fef0f0;
+    border: 2px solid var(--secondary-color);
+    color: #c0392b;
+  }
+
+  /* Spinner */
+  .eoi-spinner {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: eoi-spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+
+  @keyframes eoi-spin { to { transform: rotate(360deg); } }
+</style>
+
+<!-- reCAPTCHA v3 loader -->
+<script>
+(function() {
+  var SITE_KEY = '6LevpIEsAAAAACfJgzI4bKa7ZKH-caxyKHbVmPD7';
+  var s = document.createElement('script');
+  s.src = 'https://www.google.com/recaptcha/api.js?render=' + SITE_KEY;
+  s.async = true;
+  document.head.appendChild(s);
+})();
+</script>
+
+<div class="eoi-wrapper">
+
+  <form id="eoiForm" class="contact-form" novalidate>
+
+    <!-- Honeypot -->
+    <div style="display:none;" aria-hidden="true">
+      <input type="text" name="website" id="eoi-honeypot" tabindex="-1" autocomplete="off">
+    </div>
+
+    <!-- ── 01 YOUR DETAILS ── -->
+    <div class="eoi-section">
+      <div class="eoi-section-title">01 — Your Details</div>
+      <div class="eoi-grid">
+
+        <div class="eoi-field">
+          <label for="eoi-name">Full Name <span class="req">*</span></label>
+          <input type="text" id="eoi-name" name="name" required placeholder="John Smith">
+        </div>
+
+        <div class="eoi-field">
+          <label for="eoi-email">Email Address <span class="req">*</span></label>
+          <input type="email" id="eoi-email" name="email" required placeholder="john@example.com">
+        </div>
+
+        <div class="eoi-field">
+          <label for="eoi-phone">Phone Number <span class="req">*</span></label>
+          <input type="tel" id="eoi-phone" name="phone" required placeholder="04XX XXX XXX">
+        </div>
+
+        <div class="eoi-field">
+          <label for="eoi-position">Position of Interest</label>
+          <input type="text" id="eoi-position" name="position"
+            placeholder="e.g. General Labourer, Administration, etc.">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 02 ABOUT YOU ── -->
+    <div class="eoi-section">
+      <div class="eoi-section-title">02 — About You</div>
+      <div class="eoi-field">
+        <label for="eoi-message">Tell Us About Yourself and Your Experience <span class="req">*</span></label>
+        <textarea id="eoi-message" name="message" class="eoi-tall" required
+          placeholder="Include relevant skills, experience, and qualifications"></textarea>
+      </div>
+    </div>
+
+    <!-- ── SUBMIT ── -->
+    <div style="text-align:center; margin-top:0.5rem;">
+      <button type="submit" id="eoi-submit-btn">Submit Expression of Interest</button>
+      <p class="eoi-submit-note">
+        Alternatively, email us directly at
+        <a href="mailto:recruitment@corellian.com.au">recruitment@corellian.com.au</a>
+      </p>
+      <div id="eoi-status"></div>
+    </div>
+
+  </form>
+</div><!-- /.eoi-wrapper -->
+
+<!-- Validation modal -->
+<div class="eoi-valmodal-overlay" id="eoi-valModal" role="dialog" aria-modal="true">
+  <div class="eoi-valmodal-box">
+    <div class="eoi-valmodal-icon">!</div>
+    <h3>Please Complete Required Fields</h3>
+    <p>The following fields are missing or incomplete. They have been highlighted on the form.</p>
+    <ul class="eoi-valmodal-list" id="eoi-valModalList"></ul>
+    <button class="eoi-valmodal-btn" id="eoi-valModalClose">Go Back and Fix</button>
+  </div>
+</div>
+
+<!-- Thank-you modal -->
+<div class="eoi-modal-overlay" id="eoi-thankyouModal" role="dialog" aria-modal="true">
+  <div class="eoi-modal-box">
+    <div class="eoi-modal-icon">&#10003;</div>
+    <h3>Expression of Interest Received</h3>
+    <p>Thank you for reaching out to Corellian.</p>
+    <p>We'll review your submission and be in touch if a suitable opportunity arises.</p>
+    <button class="eoi-modal-close" id="eoi-modalClose">Close</button>
+  </div>
+</div>
+
+<script>
+(function () {
+
+  var RECAPTCHA_SITE_KEY = '6LevpIEsAAAAACfJgzI4bKa7ZKH-caxyKHbVmPD7';
+  var APPS_SCRIPT_URL    = 'https://script.google.com/macros/s/AKfycbxuSCyfcuZtOSluNViFGP5_ywCtjy4LI80tdd8PyslavR2zHWRgfyt7JdJL5q8XBf0D/exec';
+
+  /* ── Required field definitions ── */
+  var REQUIRED_FIELDS = [
+    { label: 'Full Name',                 type: 'input', id: 'eoi-name' },
+    { label: 'Email Address',             type: 'input', id: 'eoi-email' },
+    { label: 'Phone Number',              type: 'input', id: 'eoi-phone' },
+    { label: 'About Yourself / Experience', type: 'input', id: 'eoi-message' },
+  ];
+
+  /* ── Clear highlights ── */
+  function clearHighlights() {
+    document.querySelectorAll('.eoi-invalid').forEach(function (el) {
+      el.classList.remove('eoi-invalid');
+    });
+  }
+
+  /* ── Live clear on correction ── */
+  REQUIRED_FIELDS.forEach(function (f) {
+    var el = document.getElementById(f.id);
+    if (el) {
+      el.addEventListener('input',  function () { el.classList.remove('eoi-invalid'); });
+      el.addEventListener('change', function () { el.classList.remove('eoi-invalid'); });
+    }
+  });
+
+  /* ── Validate ── */
+  function validateForm() {
+    clearHighlights();
+    var missing = [];
+
+    REQUIRED_FIELDS.forEach(function (f) {
+      var el = document.getElementById(f.id);
+      var invalid = !el || !el.value.trim() ||
+        (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value));
+      if (invalid) {
+        missing.push(f.label);
+        if (el) el.classList.add('eoi-invalid');
+      }
+    });
+
+    return missing;
+  }
+
+  /* ── Validation modal ── */
+  function closeValModal() {
+    document.getElementById('eoi-valModal').classList.remove('active');
+    var first = document.querySelector('.eoi-invalid');
+    if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  document.getElementById('eoi-valModalClose').addEventListener('click', closeValModal);
+  document.getElementById('eoi-valModal').addEventListener('click', function (e) {
+    if (e.target === this) closeValModal();
+  });
+
+  /* ── Thank-you modal ── */
+  function closeThankYou() {
+    document.getElementById('eoi-thankyouModal').classList.remove('active');
+    var c = document.getElementById('eoiFormContainer');
+    if (c) c.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.getElementById('eoi-modalClose').addEventListener('click', closeThankYou);
+  document.getElementById('eoi-thankyouModal').addEventListener('click', function (e) {
+    if (e.target === this) closeThankYou();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closeValModal(); closeThankYou(); }
+  });
+
+  /* ── Submit ── */
+  document.getElementById('eoiForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form     = e.target;
+    var btn      = document.getElementById('eoi-submit-btn');
+    var statusEl = document.getElementById('eoi-status');
+
+    var missing = validateForm();
+    if (missing.length > 0) {
+      var list = document.getElementById('eoi-valModalList');
+      list.innerHTML = missing.map(function (m) { return '<li>' + m + '</li>'; }).join('');
+      document.getElementById('eoi-valModal').classList.add('active');
+      return;
+    }
+
+    var data = {
+      formType:    'eoi',
+      name:        document.getElementById('eoi-name').value.trim(),
+      email:       document.getElementById('eoi-email').value.trim(),
+      phone:       document.getElementById('eoi-phone').value.trim(),
+      position:    document.getElementById('eoi-position').value.trim() || 'Not specified',
+      message:     document.getElementById('eoi-message').value.trim(),
+      submittedAt: new Date().toLocaleString('en-AU', { timeZone: 'Australia/Sydney' })
+    };
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="eoi-spinner"></span>Submitting\u2026';
+    statusEl.className = '';
+    statusEl.style.display = 'none';
+
+    grecaptcha.ready(function () {
+      grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_eoi' })
+        .then(function (token) {
+
+          data.recaptchaToken = token;
+          data.website        = document.getElementById('eoi-honeypot').value;
+
+          fetch(APPS_SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
+            .then(function (res) { return res.json(); })
+            .then(function (result) {
+              if (result.status === 'success') {
+                document.getElementById('eoi-thankyouModal').classList.add('active');
+                form.reset();
+              } else {
+                throw new Error(result.message || 'Unknown error');
+              }
+            })
+            .catch(function (err) {
+              statusEl.className = 'error';
+              statusEl.textContent = '\u2716 Submission failed. Please try again or email recruitment@corellian.com.au directly.';
+              console.error(err);
+            })
+            .finally(function () {
+              btn.disabled = false;
+              btn.innerHTML = 'Submit Expression of Interest';
+            });
+
+        }); // end grecaptcha.execute.then
+    });     // end grecaptcha.ready
+
+  });  // end addEventListener('submit')
+
+})();
+</script>
