@@ -214,6 +214,7 @@
         .main-navigation {
             display: flex;
             align-items: center;
+            position: relative;
         }
 
         .menu {
@@ -246,7 +247,11 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 0.5rem;
+            padding: 0.75rem;
+            min-width: 44px;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
         }
 
         .menu-toggle .hamburger {
@@ -415,7 +420,7 @@
             background-color: var(--light-bg);
             border-radius: 8px;
             padding: 2rem;
-            text-align: center;
+            text-align: left;
         }
 
         .embedded-form iframe {
@@ -594,28 +599,37 @@
         /* Responsive */
         @media (max-width: 768px) {
             .menu-toggle {
-                display: block;
+                display: flex;
             }
 
             .menu {
                 display: none;
-                flex-direction: column;
                 position: absolute;
                 top: 100%;
-                left: 0;
                 right: 0;
-                background-color: #ffffff;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                min-width: 200px;
+                flex-direction: column;
+                background-color: #fff;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                 padding: 1rem 0;
+                z-index: 100;
             }
 
             .menu.is-active {
                 display: flex;
             }
 
-            .menu li {
+            .menu-item {
                 margin: 0;
-                padding: 0.5rem 1.5rem;
+            }
+
+            .menu-item a {
+                display: block;
+                padding: 0.75rem 1.5rem;
+            }
+
+            .menu-item a:after {
+                display: none;
             }
 
             h1 {
@@ -674,16 +688,9 @@
                 <div id="rigging" class="tab-content">
                     <h2>Rigging Positions</h2>
                     <p>We're looking for experienced riggers to join our team. Our riggers work on complex projects involving heavy equipment relocation, installation, and building services.</p>
-                    
-                    <div class="embedded-form">
-                        <h3>Apply for Rigging Positions</h3>
-                        <p style="color: #666; margin-bottom: 2rem;">Complete the form below to apply for rigging positions.</p>
-                        <!-- Placeholder for Google Form -->
-                        <div style="background-color: #e0e0e0; padding: 3rem; border-radius: 4px; border: 2px dashed #999;">
-                            <p style="color: #666; font-style: italic;">Google Form will be embedded here</p>
-                            <p style="color: #999; font-size: 0.9rem; margin-top: 1rem;">Replace this section with your Google Form embed code:<br>
-                            &lt;iframe src="YOUR_GOOGLE_FORM_URL"&gt;&lt;/iframe&gt;</p>
-                        </div>
+
+                    <div class="embedded-form" id="riggerFormContainer">
+                        <p style="color: #999; font-style: italic;">Loading application form…</p>
                     </div>
                 </div>
 
@@ -747,22 +754,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Elements
-            const menuToggle = document.querySelector('.menu-toggle');
-            const menu = document.querySelector('.menu');
             const tabButtons = document.querySelectorAll('.tab-button');
             const tabContents = document.querySelectorAll('.tab-content');
             const eoiForm = document.getElementById('eoiForm');
-            
-            // Toggle mobile menu
-            if (menuToggle) {
-                menuToggle.addEventListener('click', function() {
-                    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-                    
-                    menuToggle.setAttribute('aria-expanded', !expanded);
-                    menu.classList.toggle('is-active');
-                    menuToggle.classList.toggle('is-active');
-                });
-            }
             
             // Tab switching
             tabButtons.forEach(button => {
@@ -779,6 +773,23 @@
                 });
             });
             
+            // Load rigger application form
+            fetch('rigger-form.html')
+                .then(response => {
+                    if (!response.ok) throw new Error('Form not found');
+                    return response.text();
+                })
+                .then(html => {
+                    const container = document.getElementById('riggerFormContainer');
+                    const fragment  = document.createRange().createContextualFragment(html);
+                    container.innerHTML = '';
+                    container.appendChild(fragment);
+                })
+                .catch(() => {
+                    document.getElementById('riggerFormContainer').innerHTML =
+                        '<p style="color:#666;">Unable to load the application form. Please email <a href="mailto:recruitment@corellian.com.au">recruitment@corellian.com.au</a> to apply.</p>';
+                });
+
             // Load jobs list from external file
             fetch('jobs-list.html')
                 .then(response => {
@@ -853,17 +864,20 @@
         });
     </script>
     <div id="footer-placeholder"></div>
-    ```html
-<script>
+    <script>
     // Load header and footer
     fetch('header.html')
         .then(response => response.text())
-        .then(html => document.getElementById('header-placeholder').innerHTML = html);
-    
+        .then(html => {
+            const placeholder = document.getElementById('header-placeholder');
+            const range = document.createRange();
+            range.selectNodeContents(placeholder);
+            placeholder.appendChild(range.createContextualFragment(html));
+        });
+
     fetch('footer.html')
         .then(response => response.text())
         .then(html => document.getElementById('footer-placeholder').innerHTML = html);
 </script>
-```
 </body>
 </html>

@@ -1,0 +1,1129 @@
+<!--
+  rigger-form.html
+  ─────────────────────────────────────────────────────────────────────────────
+  Fetched and injected into employment.html's #riggerFormContainer div.
+  Inherits all base styles (fonts, colours, .contact-form rules) from the
+  parent page. Only form-specific layout and interactive components are
+  defined here, keeping this file easy to maintain independently.
+
+  To update the form in future:
+    • Edit field labels / options below — no need to touch employment.html.
+    • To add a new section, copy a <div class="rf-section"> block.
+    • To add a new yes/no question, copy a .pill-group + .rf-conditional pair.
+
+  Apps Script URL:
+    Replace APPS_SCRIPT_URL value in the <script> block at the bottom.
+  ─────────────────────────────────────────────────────────────────────────────
+-->
+
+<style>
+  /* ── Form layout — layered on top of employment.html's .contact-form rules ── */
+
+  /* Override .contact-form input margin so grid spacing controls layout */
+  .rf-wrapper .contact-form input[type="text"],
+  .rf-wrapper .contact-form input[type="email"],
+  .rf-wrapper .contact-form input[type="tel"],
+  .rf-wrapper .contact-form input[type="date"],
+  .rf-wrapper .contact-form textarea,
+  .rf-wrapper .contact-form select {
+    margin-bottom: 0;
+  }
+
+  .rf-wrapper { text-align: left; }
+
+  .rf-wrapper h3 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+  }
+
+  .rf-intro {
+    color: #666;
+    margin-bottom: 1.75rem;
+    font-size: 0.95rem;
+  }
+
+  /* Section card */
+  .rf-section {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .rf-section-title {
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.45rem;
+    margin-bottom: 1.1rem;
+  }
+
+  /* Two-column grid */
+  .rf-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.5rem;
+  }
+
+  .rf-col-2 { grid-column: span 2; }
+
+  @media (max-width: 600px) {
+    .rf-grid { grid-template-columns: 1fr; }
+    .rf-col-2 { grid-column: span 1; }
+    .rf-section { padding: 1.1rem; }
+  }
+
+  /* Field wrapper */
+  .rf-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .rf-field label {
+    font-weight: 500;
+    font-size: 0.92rem;
+    color: var(--primary-color);
+    margin-bottom: 0;
+  }
+
+  .rf-field label .req { color: var(--secondary-color); margin-left: 2px; }
+
+  .rf-hint {
+    font-size: 0.8rem;
+    color: #888;
+    line-height: 1.4;
+  }
+
+  /* Pill-style radio / checkbox toggles */
+  .pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.2rem;
+  }
+
+  .pill-group input[type="radio"],
+  .pill-group input[type="checkbox"] { display: none; }
+
+  .pill-group label {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    background: #fff;
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+    margin-bottom: 0;
+  }
+
+  .pill-group label:hover { border-color: var(--secondary-color); }
+
+  .pill-group input[type="radio"]:checked + label,
+  .pill-group input[type="checkbox"]:checked + label {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+  }
+
+  /* Conditional reveal */
+  .rf-conditional {
+    display: none;
+    margin-top: 0.65rem;
+    padding: 0.7rem 1rem;
+    border-left: 3px solid var(--secondary-color);
+    background: var(--light-bg);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .rf-conditional.visible { display: block; }
+
+  /* QLD White Card popup */
+  .rf-popup-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rf-popup-overlay.active { display: flex; }
+
+  .rf-popup-box {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    border-top: 4px solid var(--secondary-color);
+    padding: 1.75rem;
+    max-width: 420px;
+    width: 90%;
+    position: relative;
+  }
+
+  .rf-popup-box h4 {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+  }
+
+  .rf-popup-box p { font-size: 0.92rem; color: #444; line-height: 1.55; margin: 0; }
+
+  .rf-popup-close {
+    position: absolute;
+    top: 0.75rem; right: 0.75rem;
+    background: var(--accent-color);
+    border: none;
+    border-radius: 50%;
+    width: 28px; height: 28px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+    color: var(--primary-color);
+    transition: var(--transition);
+  }
+
+  .rf-popup-close:hover { background: var(--border-color); }
+
+  /* Listbox (visible multi-row select) */
+  .rf-listbox {
+    padding: 0;
+    height: auto;
+    cursor: pointer;
+  }
+
+  .rf-listbox option {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.92rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .rf-listbox option:checked {
+    background-color: var(--secondary-color);
+    color: #fff;
+  }
+
+  /* Two-line textarea */
+  .rf-textarea-short { min-height: 72px; }
+
+  /* Declaration box */
+  .rf-declaration {
+    background: var(--light-bg);
+    border: 2px solid var(--border-color);
+    border-left: 4px solid var(--secondary-color);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Submit button (uses contact-form base, extends here) */
+  #rf-submit-btn {
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 0.85rem 2.5rem;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  #rf-submit-btn:hover { background-color: #cc0000; }
+  #rf-submit-btn:disabled { background-color: #bbb; cursor: not-allowed; }
+
+  .rf-submit-note { font-size: 0.82rem; color: #888; margin-top: 0.75rem; }
+  .rf-submit-note a { color: var(--secondary-color); }
+
+  /* Status messages */
+  #rf-status {
+    display: none;
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    font-size: 0.93rem;
+    font-weight: 500;
+  }
+
+  #rf-status.success {
+    display: block;
+    background: #eafaf1;
+    border: 2px solid #27ae60;
+    color: #1e8449;
+  }
+
+  #rf-status.error {
+    display: block;
+    background: #fef0f0;
+    border: 2px solid var(--secondary-color);
+    color: #c0392b;
+  }
+
+  .rf-spinner {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: rf-spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+
+  /* Thank-you modal */
+  .rf-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 600;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rf-modal-overlay.active { display: flex; }
+
+  .rf-modal-box {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    border-top: 5px solid var(--secondary-color);
+    padding: 2.5rem 2rem;
+    max-width: 440px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+  }
+
+  .rf-modal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #eafaf1;
+    border: 3px solid #27ae60;
+    margin: 0 auto 1.25rem;
+    font-size: 1.75rem;
+    color: #27ae60;
+  }
+
+  .rf-modal-box h3 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+  }
+
+  .rf-modal-box p {
+    font-size: 0.92rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .rf-modal-box p:last-of-type { margin-bottom: 1.5rem; }
+
+  .rf-modal-close {
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.65rem 2rem;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  /* ── Invalid field highlights ── */
+  .rf-invalid,
+  .rf-invalid:focus {
+    border-color: var(--secondary-color) !important;
+    background-color: #fff5f5 !important;
+  }
+
+  .rf-invalid-group .pill-group label {
+    border-color: #f5a5a5;
+    background-color: #fff5f5;
+  }
+
+  .rf-invalid-select {
+    border-color: var(--secondary-color) !important;
+    background-color: #fff5f5 !important;
+  }
+
+  .rf-field-error {
+    font-size: 0.78rem;
+    color: var(--secondary-color);
+    margin-top: 0.2rem;
+    display: none;
+  }
+
+  .rf-field-error.visible { display: block; }
+
+  /* Validation modal */
+  .rf-valmodal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 600;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rf-valmodal-overlay.active { display: flex; }
+
+  .rf-valmodal-box {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    border-top: 5px solid var(--secondary-color);
+    padding: 2rem;
+    max-width: 460px;
+    width: 90%;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .rf-valmodal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #fef0f0;
+    border: 3px solid var(--secondary-color);
+    margin: 0 auto 1rem;
+    font-size: 1.4rem;
+    color: var(--secondary-color);
+    font-weight: 700;
+  }
+
+  .rf-valmodal-box h3 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .rf-valmodal-box > p {
+    font-size: 0.88rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .rf-valmodal-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    border: 1px solid #fcc;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .rf-valmodal-list li {
+    padding: 0.55rem 0.9rem;
+    font-size: 0.88rem;
+    color: #333;
+    border-bottom: 1px solid #fcc;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .rf-valmodal-list li:last-child { border-bottom: none; }
+
+  .rf-valmodal-list li::before {
+    content: '!';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .rf-valmodal-btn {
+    display: block;
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.7rem;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+  }
+
+  .rf-valmodal-btn:hover { background-color: #cc0000; }
+</style>
+
+
+<!-- reCAPTCHA v3 — loaded dynamically; replace site key in the script block below -->
+<script>
+(function() {
+  var SITE_KEY = '6LevpIEsAAAAACfJgzI4bKa7ZKH-caxyKHbVmPD7';
+  var s = document.createElement('script');
+  s.src = 'https://www.google.com/recaptcha/api.js?render=' + SITE_KEY;
+  s.async = true;
+  document.head.appendChild(s);
+})();
+</script>
+
+<div class="rf-wrapper">
+
+  <h3>Apply for Rigging Positions</h3>
+  <p class="rf-intro">
+    Expression of Interest — General Labourer or Rigger.
+    Please complete all required fields marked with <span style="color:var(--secondary-color);">*</span>.
+  </p>
+
+  <form id="riggerForm" class="contact-form" novalidate>
+
+    <!-- Honeypot: hidden from real users; bots typically fill this in.
+         If non-empty, the GS script silently discards the submission. -->
+    <div style="display:none;" aria-hidden="true">
+      <input type="text" name="website" id="rf-honeypot" tabindex="-1" autocomplete="off">
+    </div>
+
+    <!-- ── 01 GENERAL INFORMATION ── -->
+    <div class="rf-section">
+      <div class="rf-section-title">01 — General Information</div>
+      <div class="rf-grid">
+
+        <div class="rf-field">
+          <label for="rf-firstName">First Name <span class="req">*</span></label>
+          <input type="text" id="rf-firstName" name="firstName" required placeholder="John">
+        </div>
+
+        <div class="rf-field">
+          <label for="rf-lastName">Last Name <span class="req">*</span></label>
+          <input type="text" id="rf-lastName" name="lastName" required placeholder="Smith">
+        </div>
+
+        <div class="rf-field">
+          <label for="rf-email">Email Address <span class="req">*</span></label>
+          <input type="email" id="rf-email" name="email" required placeholder="john@example.com">
+        </div>
+
+        <div class="rf-field">
+          <label for="rf-phone">Mobile Phone Number <span class="req">*</span></label>
+          <input type="tel" id="rf-phone" name="phone" required placeholder="04XX XXX XXX">
+        </div>
+
+        <div class="rf-field rf-col-2">
+          <label for="rf-suburb">Residential Address (Suburb) <span class="req">*</span></label>
+          <input type="text" id="rf-suburb" name="suburb" required
+            placeholder="Suburb, State, Postcode — e.g. Blacktown, NSW 2148">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 02 LICENCES & QUALIFICATIONS ── -->
+    <div class="rf-section">
+      <div class="rf-section-title">02 — Licences &amp; Qualifications</div>
+      <div class="rf-grid" style="grid-template-columns: 1fr;">
+
+        <!-- White Card -->
+        <div class="rf-field">
+          <label>Construction Industry Induction (White) Card? <span class="req">*</span></label>
+          <div class="pill-group">
+            <input type="radio" name="whiteCard" id="rf-wc-yes" value="Yes" required>
+            <label for="rf-wc-yes">Yes</label>
+            <input type="radio" name="whiteCard" id="rf-wc-no" value="No">
+            <label for="rf-wc-no">No</label>
+          </div>
+          <div class="rf-conditional" id="rf-whiteCardState">
+            <div class="rf-field">
+              <label for="rf-wcState">Issuing State <span class="req">*</span></label>
+              <select id="rf-wcState" name="whiteCardState">
+                <option value="" disabled selected>Select issuing state…</option>
+                <option value="NSW">NSW</option>
+                <option value="VIC">VIC</option>
+                <option value="QLD">QLD</option>
+                <option value="WA">WA</option>
+                <option value="SA">SA</option>
+                <option value="TAS">TAS</option>
+                <option value="ACT">ACT</option>
+                <option value="NT">NT</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Licences / Tickets -->
+        <div class="rf-field">
+          <label for="rf-licences">Licences / Tickets Held</label>
+          <input type="text" id="rf-licences" name="licences"
+            placeholder="e.g. Dogman, Rigger, EWP, Forklift…">
+          <span class="rf-hint">List all current licences and tickets</span>
+        </div>
+
+        <!-- Trade Qualifications -->
+        <div class="rf-field">
+          <label>Trade Qualifications? <span class="req">*</span></label>
+          <div class="pill-group">
+            <input type="radio" name="tradeQual" id="rf-tq-yes" value="Yes" required>
+            <label for="rf-tq-yes">Yes</label>
+            <input type="radio" name="tradeQual" id="rf-tq-no" value="No">
+            <label for="rf-tq-no">No</label>
+          </div>
+          <div class="rf-conditional" id="rf-tradeQualDetail">
+            <div class="rf-field">
+              <label for="rf-tradeQualDetails">Please specify all trade qualifications</label>
+              <textarea id="rf-tradeQualDetails" name="tradeQualDetails" class="rf-textarea-short"
+                placeholder="e.g. Certificate III in Rigging&#10;Certificate III in Carpentry"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Drivers Licence -->
+        <div class="rf-field">
+          <label>Valid Australian Drivers Licence? <span class="req">*</span></label>
+          <div class="pill-group">
+            <input type="radio" name="driversLicence" id="rf-dl-yes" value="Yes" required>
+            <label for="rf-dl-yes">Yes</label>
+            <input type="radio" name="driversLicence" id="rf-dl-no" value="No">
+            <label for="rf-dl-no">No</label>
+          </div>
+          <div class="rf-conditional" id="rf-licenceType">
+            <div class="rf-field">
+              <label for="rf-licClass">Licence Class</label>
+              <input type="text" id="rf-licClass" name="licenceType"
+                placeholder="e.g. C, MR, HR, HC">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 03 ROLE PREFERENCES ── -->
+    <div class="rf-section">
+      <div class="rf-section-title">03 — Role Preferences</div>
+      <div class="rf-grid">
+
+        <!-- Role listbox -->
+        <div class="rf-field rf-col-2">
+          <label for="rf-role">Role Interested In <span class="req">*</span></label>
+          <span class="rf-hint" style="margin-bottom:0.2rem;">Click to select one option</span>
+          <select id="rf-role" name="role" class="rf-listbox" size="3" required>
+            <option value="General Hand/Labourer">General Hand / Labourer</option>
+            <option value="Mechanical Rigger - Basic Rigging Ticket">Mechanical Rigger — Basic Rigging Ticket</option>
+            <option value="Qualified Mechanical Rigger - Intermediate or Higher">Qualified Mechanical Rigger — Intermediate or Higher</option>
+          </select>
+        </div>
+
+        <!-- Will Accept -->
+        <div class="rf-field">
+          <label>Will Accept <span class="req">*</span></label>
+          <div class="pill-group">
+            <input type="checkbox" name="empType" id="rf-et-casual" value="Casual">
+            <label for="rf-et-casual">Casual</label>
+            <input type="checkbox" name="empType" id="rf-et-fulltime" value="Full-time">
+            <label for="rf-et-fulltime">Full-time</label>
+          </div>
+        </div>
+
+        <!-- Shift Availability -->
+        <div class="rf-field">
+          <label>Shift Availability <span class="req">*</span></label>
+          <div class="pill-group">
+            <input type="checkbox" name="shift" id="rf-sh-day" value="Day">
+            <label for="rf-sh-day">Day</label>
+            <input type="checkbox" name="shift" id="rf-sh-night" value="Night">
+            <label for="rf-sh-night">Night</label>
+            <input type="checkbox" name="shift" id="rf-sh-flex" value="Flexible">
+            <label for="rf-sh-flex">Flexible</label>
+          </div>
+        </div>
+
+        <!-- Start Date -->
+        <div class="rf-field">
+          <label for="rf-startDate">Date Available to Begin Work <span class="req">*</span></label>
+          <input type="date" id="rf-startDate" name="startDate" required>
+        </div>
+
+        <!-- How did you hear -->
+        <div class="rf-field">
+          <label for="rf-hearAboutUs">Where Did You Hear About Us?</label>
+          <select id="rf-hearAboutUs" name="hearAboutUs">
+            <option value="" disabled selected>Select one…</option>
+            <option>Company Website</option>
+            <option>LinkedIn</option>
+            <option>Seek</option>
+            <option>Indeed</option>
+            <option>Word of Mouth / Referral</option>
+            <option>Facebook</option>
+            <option>On a Work Site</option>
+            <option>Trade Contact</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 04 BACKGROUND & HEALTH ── -->
+    <div class="rf-section">
+      <div class="rf-section-title">04 — Background &amp; Health</div>
+      <div class="rf-grid" style="grid-template-columns: 1fr;">
+
+        <!-- Prior conviction -->
+        <div class="rf-field">
+          <label>Have You Ever Been Convicted of a Crime? <span class="req">*</span></label>
+          <div class="pill-group">
+            <input type="radio" name="convicted" id="rf-cv-yes" value="Yes" required>
+            <label for="rf-cv-yes">Yes</label>
+            <input type="radio" name="convicted" id="rf-cv-no" value="No">
+            <label for="rf-cv-no">No</label>
+          </div>
+          <div class="rf-conditional" id="rf-convictedDetail">
+            <div class="rf-field">
+              <label for="rf-convictedDetails">Please Provide Details</label>
+              <textarea id="rf-convictedDetails" name="convictedDetails" class="rf-textarea-short"
+                placeholder="Please provide details of conviction(s)…"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pre-existing condition -->
+        <div class="rf-field">
+          <label>Pre-Existing Condition / Impairment <span class="req">*</span></label>
+          <p style="font-size:0.85rem;color:#666;margin:0.25rem 0 0.5rem;line-height:1.5;">
+            Do you have an existing or pre-existing condition (injury, disease, medical condition,
+            disability or impairment) that would affect your ability to safely perform the duties
+            of this position?
+          </p>
+          <div class="pill-group">
+            <input type="radio" name="preExisting" id="rf-pe-yes" value="Yes" required>
+            <label for="rf-pe-yes">Yes</label>
+            <input type="radio" name="preExisting" id="rf-pe-no" value="No" required>
+            <label for="rf-pe-no">No</label>
+          </div>
+          <div class="rf-conditional" id="rf-preExistingDetail">
+            <div class="rf-field">
+              <label for="rf-preExistingDetails">Please Provide Details</label>
+              <textarea id="rf-preExistingDetails" name="preExistingDetails" class="rf-textarea-short"
+                placeholder="Describe the condition and any relevant impact on your work capacity…"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screening -->
+        <div class="rf-field">
+          <label>Willing to Undergo Pre-Employment Medical Assessment (National Police Check &amp; Drug/Alcohol Screening)? <span class="req">*</span></label>
+          <div class="pill-group">
+            <input type="radio" name="screening" id="rf-sc-yes" value="Yes" required>
+            <label for="rf-sc-yes">Yes</label>
+            <input type="radio" name="screening" id="rf-sc-no" value="No">
+            <label for="rf-sc-no">No</label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 05 RIGHT TO WORK ── -->
+    <div class="rf-section">
+      <div class="rf-section-title">05 — Right to Work</div>
+      <div class="rf-field">
+        <label for="rf-rightToWork">Work Rights Status <span class="req">*</span></label>
+        <span class="rf-hint" style="margin-bottom:0.2rem;">Click to select one option</span>
+        <select id="rf-rightToWork" name="rightToWork" class="rf-listbox" size="6" required>
+          <option value="Australian Citizen / Permanent Resident">Australian Citizen / Australian Permanent Resident</option>
+          <option value="New Zealand Citizen / Permanent Resident">New Zealand Citizen / New Zealand Permanent Resident</option>
+          <option value="Current visa — no working restrictions">Current Visa with No Working Restrictions</option>
+          <option value="Current student visa">Current Student Visa</option>
+          <option value="Current working holiday visa">Current Working Holiday Visa</option>
+          <option value="Requires sponsorship">Requires Sponsorship to Work for a New Employer</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ── 06 DECLARATION ── -->
+    <div class="rf-section">
+      <div class="rf-section-title">06 — Declaration</div>
+      <div class="rf-declaration">
+        I declare that the above information is true and correct. I understand that in the event
+        of my employment by Corellian Pty Ltd, I shall be subject to dismissal if any information
+        that I have given in this application is false or misleading or if I have failed to give
+        any information herein requested, regardless of the time elapsed after discovery.
+      </div>
+      <div class="rf-grid">
+        <div class="rf-field">
+          <label for="rf-declarationName">Full Name <span class="req">*</span></label>
+          <input type="text" id="rf-declarationName" name="declarationName" required
+            placeholder="As per identification">
+        </div>
+        <div class="rf-field">
+          <label for="rf-declarationDate">Date <span class="req">*</span></label>
+          <input type="date" id="rf-declarationDate" name="declarationDate" required>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SUBMIT ── -->
+    <div style="text-align:center; margin-top:0.5rem;">
+      <button type="submit" id="rf-submit-btn">Submit Application</button>
+      <p class="rf-submit-note">
+        Please also email your resume, licences, tickets and qualifications to
+        <a href="mailto:recruitment@corellian.com.au">recruitment@corellian.com.au</a>
+      </p>
+      <div id="rf-status"></div>
+    </div>
+
+  </form>
+</div><!-- /.rf-wrapper -->
+
+
+<!-- Validation error modal -->
+<div class="rf-valmodal-overlay" id="rf-valModal" role="dialog" aria-modal="true" aria-labelledby="rf-valModalTitle">
+  <div class="rf-valmodal-box">
+    <div class="rf-valmodal-icon">!</div>
+    <h3 id="rf-valModalTitle">Please Complete Required Fields</h3>
+    <p>The following fields are missing or incomplete. They have been highlighted on the form.</p>
+    <ul class="rf-valmodal-list" id="rf-valModalList"></ul>
+    <button class="rf-valmodal-btn" id="rf-valModalClose">Go Back and Fix</button>
+  </div>
+</div>
+
+<!-- Thank-you modal -->
+<div class="rf-modal-overlay" id="rf-thankyouModal" role="dialog" aria-modal="true" aria-labelledby="rf-modalTitle">
+  <div class="rf-modal-box">
+    <div class="rf-modal-icon">&#10003;</div>
+    <h3 id="rf-modalTitle">Application Received</h3>
+    <p>Thank you for submitting your application to Corellian.</p>
+    <p>We'll review your details and be in touch if your experience matches our current requirements.</p>
+    <p style="font-size:0.82rem;color:#888;">Please also email your resume, licences, tickets and qualifications to <a href="mailto:recruitment@corellian.com.au" style="color:var(--secondary-color);">recruitment@corellian.com.au</a></p>
+    <button class="rf-modal-close" id="rf-modalClose">Close</button>
+  </div>
+</div>
+
+<!-- QLD White Card Notice -->
+<div class="rf-popup-overlay" id="rf-qldPopup"
+     role="dialog" aria-modal="true" aria-labelledby="rf-qldTitle">
+  <div class="rf-popup-box">
+    <button class="rf-popup-close" id="rf-qldClose" aria-label="Close">&times;</button>
+    <h4 id="rf-qldTitle">&#9888;&nbsp; Note About QLD White Cards</h4>
+    <p>If you do join Corellian, you will need to obtain a new White Card issued in NSW — QLD White Cards are not accepted on our customers' sites.</p>
+  </div>
+</div>
+
+
+<script>
+(function () {
+  /* ── reCAPTCHA v3 site key — replace with your key from console.google.com/recaptcha ── */
+  var RECAPTCHA_SITE_KEY = '6LevpIEsAAAAACfJgzI4bKa7ZKH-caxyKHbVmPD7';
+
+  /* ── Apps Script endpoint — replace with your deployed URL ── */
+  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwWGzEkaEiBlWdEq6kc5P8f9jXX1xB37Wb3wMQR30aYcSfUoH0vHNvBxPg9SM5KNq2N8A/exec';
+
+  /* ── Conditional reveal helper ── */
+  function bindYN(radioName, containerId, triggerValue) {
+    triggerValue = triggerValue || 'Yes';
+    document.querySelectorAll('input[name="' + radioName + '"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        document.getElementById(containerId)
+          .classList.toggle('visible', r.value === triggerValue && r.checked);
+      });
+    });
+  }
+
+  bindYN('whiteCard',      'rf-whiteCardState');
+  bindYN('tradeQual',      'rf-tradeQualDetail');
+  bindYN('convicted',      'rf-convictedDetail');
+  bindYN('preExisting',    'rf-preExistingDetail');
+  bindYN('driversLicence', 'rf-licenceType');
+
+  /* ── QLD White Card state → popup ── */
+  document.getElementById('rf-wcState').addEventListener('change', function () {
+    if (this.value === 'QLD') {
+      document.getElementById('rf-qldPopup').classList.add('active');
+    }
+  });
+
+  function closeQldPopup() {
+    document.getElementById('rf-qldPopup').classList.remove('active');
+  }
+
+  document.getElementById('rf-qldClose').addEventListener('click', closeQldPopup);
+  document.getElementById('rf-qldPopup').addEventListener('click', function (e) {
+    if (e.target === this) closeQldPopup();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeQldPopup();
+  });
+
+  /* ── Thank-you modal close ── */
+  function closeThankYouModal() {
+    document.getElementById('rf-thankyouModal').classList.remove('active');
+    var container = document.getElementById('riggerFormContainer');
+    if (container) container.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.getElementById('rf-modalClose').addEventListener('click', closeThankYouModal);
+  document.getElementById('rf-thankyouModal').addEventListener('click', function (e) {
+    if (e.target === this) closeThankYouModal();
+  });
+
+  /* ── Collect checked checkbox values ── */
+  function getChecked(name) {
+    var vals = Array.from(document.querySelectorAll('input[name="' + name + '"]:checked'))
+      .map(function (cb) { return cb.value; });
+    return vals.length ? vals.join(', ') : 'None selected';
+  }
+
+  /* ── Default today for declaration date ── */
+  document.getElementById('rf-declarationDate').valueAsDate = new Date();
+
+  /* ── Validation modal close ── */
+  function closeValModal() {
+    document.getElementById('rf-valModal').classList.remove('active');
+    // Scroll to the first highlighted field
+    var first = document.querySelector('.rf-invalid, .rf-invalid-group, .rf-invalid-select');
+    if (first) {
+      var target = first.closest('.rf-section') || first;
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  document.getElementById('rf-valModalClose').addEventListener('click', closeValModal);
+  document.getElementById('rf-valModal').addEventListener('click', function (e) {
+    if (e.target === this) closeValModal();
+  });
+
+  /* ── Field definitions for validation ──
+     Each entry: { label, type, id/name, [container] }
+     type: 'input' | 'radio' | 'checkbox' | 'select'
+  ── */
+  var REQUIRED_FIELDS = [
+    { label: 'First Name',                        type: 'input',    id: 'rf-firstName' },
+    { label: 'Last Name',                         type: 'input',    id: 'rf-lastName' },
+    { label: 'Email Address',                     type: 'input',    id: 'rf-email' },
+    { label: 'Mobile Phone Number',               type: 'input',    id: 'rf-phone' },
+    { label: 'Residential Address (Suburb)',      type: 'input',    id: 'rf-suburb' },
+    { label: 'White Card',                        type: 'radio',    name: 'whiteCard',      container: 'rf-whiteCardState' },
+    { label: 'Trade Qualifications',              type: 'radio',    name: 'tradeQual',      container: 'rf-tradeQualDetail' },
+    { label: 'Drivers Licence',                   type: 'radio',    name: 'driversLicence', container: 'rf-licenceType' },
+    { label: 'Role Interested In',                type: 'select',   id: 'rf-role' },
+    { label: 'Will Accept (Casual or Full-time)', type: 'checkbox', name: 'empType' },
+    { label: 'Shift Availability',                type: 'checkbox', name: 'shift' },
+    { label: 'Date Available to Begin Work',      type: 'input',    id: 'rf-startDate' },
+    { label: 'Prior Conviction',                  type: 'radio',    name: 'convicted',      container: 'rf-convictedDetail' },
+    { label: 'Pre-Existing Condition',            type: 'radio',    name: 'preExisting',    container: 'rf-preExistingDetail' },
+    { label: 'Willing to Undergo Screening',      type: 'radio',    name: 'screening' },
+    { label: 'Work Rights Status',                type: 'select',   id: 'rf-rightToWork' },
+    { label: 'Full Name (Declaration)',           type: 'input',    id: 'rf-declarationName' },
+    { label: 'Declaration Date',                  type: 'input',    id: 'rf-declarationDate' },
+  ];
+
+  /* ── Clear all highlights ── */
+  function clearHighlights() {
+    document.querySelectorAll('.rf-invalid').forEach(function (el) { el.classList.remove('rf-invalid'); });
+    document.querySelectorAll('.rf-invalid-group').forEach(function (el) { el.classList.remove('rf-invalid-group'); });
+    document.querySelectorAll('.rf-invalid-select').forEach(function (el) { el.classList.remove('rf-invalid-select'); });
+  }
+
+  /* ── Attach live clear-on-change listeners once ── */
+  REQUIRED_FIELDS.forEach(function (f) {
+    if (f.type === 'input' || f.type === 'select') {
+      var el = document.getElementById(f.id);
+      if (el) el.addEventListener('input', function () { el.classList.remove('rf-invalid', 'rf-invalid-select'); });
+      if (el) el.addEventListener('change', function () { el.classList.remove('rf-invalid', 'rf-invalid-select'); });
+    } else if (f.type === 'radio') {
+      document.querySelectorAll('input[name="' + f.name + '"]').forEach(function (r) {
+        r.addEventListener('change', function () {
+          var pills = r.closest('.rf-field');
+          if (pills) pills.classList.remove('rf-invalid-group');
+        });
+      });
+    } else if (f.type === 'checkbox') {
+      document.querySelectorAll('input[name="' + f.name + '"]').forEach(function (r) {
+        r.addEventListener('change', function () {
+          var pills = r.closest('.rf-field');
+          if (pills) pills.classList.remove('rf-invalid-group');
+        });
+      });
+    }
+  });
+
+  /* ── Main validation function ── */
+  function validateForm() {
+    clearHighlights();
+    var missing = [];
+
+    REQUIRED_FIELDS.forEach(function (f) {
+      var invalid = false;
+
+      if (f.type === 'input') {
+        var el = document.getElementById(f.id);
+        if (!el || !el.value.trim() || (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value))) {
+          invalid = true;
+          if (el) el.classList.add('rf-invalid');
+        }
+      } else if (f.type === 'select') {
+        var el = document.getElementById(f.id);
+        if (!el || !el.value) {
+          invalid = true;
+          if (el) el.classList.add('rf-invalid-select');
+        }
+      } else if (f.type === 'radio') {
+        var checked = document.querySelector('input[name="' + f.name + '"]:checked');
+        if (!checked) {
+          invalid = true;
+          // Highlight the pill-group container
+          var anyRadio = document.querySelector('input[name="' + f.name + '"]');
+          if (anyRadio) {
+            var field = anyRadio.closest('.rf-field');
+            if (field) field.classList.add('rf-invalid-group');
+          }
+        }
+      } else if (f.type === 'checkbox') {
+        var checked = document.querySelector('input[name="' + f.name + '"]:checked');
+        if (!checked) {
+          invalid = true;
+          var anyBox = document.querySelector('input[name="' + f.name + '"]');
+          if (anyBox) {
+            var field = anyBox.closest('.rf-field');
+            if (field) field.classList.add('rf-invalid-group');
+          }
+        }
+      }
+
+      if (invalid) missing.push(f.label);
+    });
+
+    return missing;
+  }
+
+  /* ── Form submit ── */
+  document.getElementById('riggerForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form     = e.target;
+    var btn      = document.getElementById('rf-submit-btn');
+    var statusEl = document.getElementById('rf-status');
+
+    var missing = validateForm();
+    if (missing.length > 0) {
+      // Populate and show validation modal
+      var list = document.getElementById('rf-valModalList');
+      list.innerHTML = missing.map(function (m) { return '<li>' + m + '</li>'; }).join('');
+      document.getElementById('rf-valModal').classList.add('active');
+      return;
+    }
+
+    var data = {
+      firstName:          document.getElementById('rf-firstName').value.trim(),
+      lastName:           document.getElementById('rf-lastName').value.trim(),
+      email:              document.getElementById('rf-email').value.trim(),
+      phone:              document.getElementById('rf-phone').value.trim(),
+      suburb:             document.getElementById('rf-suburb').value.trim(),
+      whiteCard:          (document.querySelector('input[name="whiteCard"]:checked') || {}).value || '',
+      whiteCardState:     document.getElementById('rf-wcState').value || '',
+      licences:           document.getElementById('rf-licences').value.trim() || 'None listed',
+      tradeQual:          (document.querySelector('input[name="tradeQual"]:checked') || {}).value || '',
+      tradeQualDetails:   document.getElementById('rf-tradeQualDetails').value.trim(),
+      driversLicence:     (document.querySelector('input[name="driversLicence"]:checked') || {}).value || '',
+      licenceType:        document.getElementById('rf-licClass').value.trim(),
+      role:               document.getElementById('rf-role').value,
+      empType:            getChecked('empType'),
+      shift:              getChecked('shift'),
+      startDate:          document.getElementById('rf-startDate').value,
+      hearAboutUs:        document.getElementById('rf-hearAboutUs').value,
+      convicted:          (document.querySelector('input[name="convicted"]:checked') || {}).value || '',
+      convictedDetails:   document.getElementById('rf-convictedDetails').value.trim(),
+      preExisting:        (document.querySelector('input[name="preExisting"]:checked') || {}).value || '',
+      preExistingDetails: document.getElementById('rf-preExistingDetails').value.trim(),
+      screening:          (document.querySelector('input[name="screening"]:checked') || {}).value || '',
+      rightToWork:        document.getElementById('rf-rightToWork').value,
+      declarationName:    document.getElementById('rf-declarationName').value.trim(),
+      declarationDate:    document.getElementById('rf-declarationDate').value,
+      submittedAt:        new Date().toLocaleString('en-AU', { timeZone: 'Australia/Sydney' })
+    };
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="rf-spinner"></span>Submitting\u2026';
+    statusEl.className = '';
+    statusEl.style.display = 'none';
+
+    // Get reCAPTCHA v3 token then POST
+    grecaptcha.ready(function () {
+      grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_application' })
+        .then(function (token) {
+
+          data.recaptchaToken = token;
+          data.website        = document.getElementById('rf-honeypot').value; // honeypot
+
+          fetch(APPS_SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
+      .then(function (res) { return res.json(); })
+      .then(function (result) {
+        if (result.status === 'success') {
+          document.getElementById('rf-thankyouModal').classList.add('active');
+          form.reset();
+          document.querySelectorAll('.rf-conditional').forEach(function (el) {
+            el.classList.remove('visible');
+          });
+          document.getElementById('riggerFormContainer') &&
+            document.getElementById('riggerFormContainer').scrollIntoView({ behavior: 'smooth' });
+        } else {
+          throw new Error(result.message || 'Unknown error');
+        }
+      })
+      .catch(function (err) {
+        statusEl.className = 'error';
+        statusEl.textContent = '\u2716 Submission failed. Please try again or email recruitment@corellian.com.au directly.';
+        console.error(err);
+      })
+      .finally(function () {
+        btn.disabled = false;
+        btn.innerHTML = 'Submit Application';
+      });
+
+        }); // end grecaptcha.execute.then
+    });     // end grecaptcha.ready
+
+  });  // end addEventListener('submit')
+
+})();
+</script>
