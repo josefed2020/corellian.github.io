@@ -1169,7 +1169,6 @@
     btn.disabled = true;
     btn.innerHTML = '<span class="tf-spinner"></span>Submitting\u2026';
     statusEl.className = '';
-    statusEl.style.display = 'none';
 
     grecaptcha.ready(function () {
       grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_traineeship' })
