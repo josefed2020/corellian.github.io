@@ -1085,8 +1085,7 @@
     btn.disabled = true;
     btn.innerHTML = '<span class="rf-spinner"></span>Submitting\u2026';
     statusEl.className = '';
-    statusEl.style.display = 'none';
-
+  
     // Get reCAPTCHA v3 token then POST
     grecaptcha.ready(function () {
       grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_application' })
