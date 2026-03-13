@@ -212,6 +212,7 @@
         .main-navigation {
             display: flex;
             align-items: center;
+            position: relative;
         }
 
         .menu {
@@ -261,7 +262,11 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 0.5rem;
+            padding: 0.75rem;
+            min-width: 44px;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
         }
 
         .menu-icon {
@@ -958,8 +963,8 @@
                 display: none;
                 position: absolute;
                 top: 100%;
-                left: 0;
                 right: 0;
+                min-width: 200px;
                 background: white;
                 flex-direction: column;
                 padding: 1rem;
@@ -971,11 +976,20 @@
             }
 
             .menu-item {
-                margin: 0.5rem 0;
+                margin: 0;
+            }
+
+            .menu-item a {
+                display: block;
+                padding: 0.75rem 1.5rem;
+            }
+
+            .menu-item a:after {
+                display: none;
             }
 
             .menu-toggle {
-                display: block;
+                display: flex;
             }
 
             .overview-stats {
@@ -1062,7 +1076,7 @@
                             <div class="stat-label">Years Combined Experience</div>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">200+</span>
+                            <span class="stat-number">2000+</span>
                             <div class="stat-label">Projects Completed</div>
                         </div>
                         <div class="stat-item">
@@ -1129,6 +1143,8 @@
                         <button class="service-tab active" data-service="rigging">Rigging</button>
                         <button class="service-tab" data-service="demolition">Demolition</button>
                         <button class="service-tab" data-service="building">Building Works</button>
+                        <button class="service-tab" data-service="equipment">Equipment Installation</button>
+                        <button class="service-tab" data-service="fabrication">Fabrication</button>
                     </div>
                     
                     <!-- Service Panel Content -->
@@ -1138,13 +1154,14 @@
                             <div class="service-panel-grid">
                                 <div class="service-text">
                                     <h3>Expert Rigging Services</h3>
-                                    <p>Corellian provides comprehensive rigging solutions combining professional expertise in rigging, dogging, craneage and traffic control. We specialize in the safe installation and relocation of heavy machinery and delicate equipment.</p>
+                                    <p>Corellian provides comprehensive rigging solutions combining professional expertise in rigging, dogging, craneage and traffic control. We specialize in the safe installation, removal and relocation of heavy machinery and delicate equipment.</p>
                                     <ul>
-                                        <li>HVAC equipment installation and relocation</li>
-                                        <li>Generators, chillers, boilers, and mechanical plant</li>
+                                        <li>HVAC and electrical equipment installation and relocation</li>
+                                        <li>Generators, chillers, boilers, transformers, tanks, cooling towers, and mechanical plant</li>
                                         <li>Structural steel erection and metalwork</li>
                                         <li>Wind turbine assembly and installation</li>
-                                        <li>Materials handling solutions</li>
+                                        <li>Materials handling and access solutions</li>
+                                        <li>Coordination with cranes, vertical hoisting, scaffolding, traffic control and transport logistics</li>
                                     </ul>
                                     <p>Our experienced team handles everything from delicate switchboards to massive industrial equipment, ensuring safe transport through any space to any location.</p>
                                 </div>
@@ -1159,13 +1176,13 @@
                             <div class="service-panel-grid">
                                 <div class="service-text">
                                     <h3>Comprehensive Demolition</h3>
-                                    <p>Our demolition services cover everything from base-building to detailed services removal. We specialize in the careful demolition and removal of mechanical systems and building components.</p>
+                                    <p>Our demolition services cover everything from base-building to detailed services removal. We specialize in the careful demolition and removal of HVAC system, equipment and building components.</p>
                                     <ul>
-                                        <li>Chiller and boiler removal with gas decontamination</li>
-                                        <li>HVAC systems and ductwork dismantling</li>
-                                        <li>Hydraulic and refrigerant pipework removal</li>
-                                        <li>Concrete plinths and structural elements</li>
-                                        <li>Asbestos decontamination and certification</li>
+                                        <li>Chillers and boilers - cooling and heating systems</li>
+                                        <li>HVAC systems and electrical equipment</li>
+                                        <li>Hydraulic, mechanical, and refrigerant pipework removal</li>
+                                        <li>Concrete plinths and structures</li>
+                                        <li>Structural steel and architectural elements</li>
                                     </ul>
                                     <p>We provide complete penetration services and can demolish masonry, partition walls, suspended ceilings, and all types of building materials with precision and safety.</p>
                                 </div>
@@ -1180,18 +1197,61 @@
                             <div class="service-panel-grid">
                                 <div class="service-text">
                                     <h3>Precision Building Works</h3>
-                                    <p>From complete plant room retrofits to concrete work and temporary structures, our building services cover all architectural trade requirements. We provide both base-building and fit-out solutions.</p>
+                                    <p>From complete plant room retrofits to concrete work and temporary structures, our building services cover all architectural trade requirements. We provide both base-building and fit-out solutions to complement our heavy equipment relocation and installation.</p>
                                     <ul>
-                                        <li>Concrete plinths and structural foundations</li>
-                                        <li>Roof installations and penetrations</li>
+                                        <li>Concrete plinths, inertia bases, and structural elements</li>
+                                        <li>Roof alterations and penetrations</li>
                                         <li>Partition walls and ceiling systems</li>
                                         <li>Metalwork fabrication and installation</li>
-                                        <li>Security systems and access solutions</li>
+                                        <li>Temporary works and access solutions</li>
                                     </ul>
-                                    <p>Our comprehensive approach includes design and construct services, ensuring all architectural obligations are met for HVAC and electrical services contracts.</p>
+                                    <p>Our comprehensive approach includes design and construct services, ensuring all architectural obligations are met for your HVAC and electrical services contracts.</p>
                                 </div>
                                 <div class="service-image">
                                     <img src="./docs/assets/images/services/building-works-overview.jpg" alt="Professional building works">
+                                </div>
+                            </div>
+                        </div>
+                    
+                        
+                        <!-- Equipment Installation Panel - Hidden by default -->
+                        <div class="service-panel" id="equipment-panel">
+                            <div class="service-panel-grid">
+                                <div class="service-text">
+                                    <h3>Equipment Installations</h3>
+                                    <p>Our equipment installation services include all aspects of equipment transport to final location. We can provide the solutions at each stage of your project, with movement of units across various floor conditions and verticality, and through difficult spaces. We can also prepare the final destination for your HVAC and electrical equipment so that when it lands, it's ready to connect.</p>
+                                    <ul>
+                                        <li>Chillers, boilers, pumps, fans, air handling units (AHUs), airconditioning Units (ACUs), switchboards, transformers, generators, motors and compressors</li>
+                                        <li>Fan wall units (FWUs), computer room air conditioning (CRAC) units</li>
+                                        <li>Prefabricated riser modules - survey to get set out, levels, prepare brackets and shaft for installation</li>
+                                        
+                                    </ul>
+                                    
+                                </div>
+                                <div class="service-image">
+                                    <img src="./docs/assets/images/services/globalswitch-during-4.jpg" alt="Reliable equipment movement">
+                                </div>
+                            </div>
+                        </div>
+                    
+
+                        <!-- Fabrication Panel - Hidden by default -->
+                        <div class="service-panel" id="fabrication-panel">
+                            <div class="service-panel-grid">
+                                <div class="service-text">
+                                    <h3>Fabricating and Design</h3>
+                                    <p>Corellian can provide bespoke support systems for your new equipment in both galvanised steel and aluminium with design, drafting and certification. We can also construct a certified custom rigging apparatus to meet the needs of the job safely and efficiently.</p>
+                                    <ul>
+                                        <li>Custom rigging apparatus - E.g.: temporary and permanent monorails</li>
+                                        <li>Structural steel equipment platforms and catwalks</li>
+                                        <li>Equipment plinth and support frames</li>
+                                        <li>Custom stands and hangers</li>
+                                        <li>Fabrication with MIG and TIG welding for carbon steel and aluminium with onsite service available</li>
+                                        
+                                    </ul>
+                                </div>
+                                <div class="service-image">
+                                    <img src="./docs/assets/images/services/3D-platform.jpg" alt="Custom fabrication">
                                 </div>
                             </div>
                         </div>
@@ -1202,7 +1262,7 @@
                         <h3><a href="https://imgur.com/a/rigging-delicate-machinery-OqjlhpG#5t3xLJE" style="color: var(--primary-color); text-decoration: none;">See Us Work</a></h3>
                         <div class="modal-social-links">
                             <a href="https://www.facebook.com/corellianservices/" class="modal-social-link" title="Facebook">FB</a>
-                            <a href="https://imgur.com/a/rigging-delicate-machinery-OqjlhpG#5t3xLJE" class="modal-social-link" title="Project Gallery">IG</a>
+                            
                             <a href="https://www.linkedin.com/company/corellian-pty-ltd/" class="modal-social-link" title="LinkedIn">LI</a>
                         </div>
                     </div>
@@ -1225,13 +1285,13 @@
                         </div>
                         <div class="director-info">
                             <h3 class="director-name">Anthony Micallef</h3>
-                            <div class="director-title">General Manager & Co-Founder</div>
-                            <p class="director-summary">Industry veteran with over 30 years of experience in rigging and construction operations.</p>
+                            <div class="director-title">Managing Director & Co-Founder</div>
+                            <p class="director-summary">Industry veteran with over 30+ years of experience in rigging and construction operations.</p>
                             <button class="expand-btn" onclick="toggleDirectorDetails('anthony')">Learn More</button>
                             <div class="director-details" id="anthony-details">
-                                <p>Anthony co-founded Corellian in 2009 with a vision to revolutionize the rigging industry through comprehensive, whole-package solutions. With over three decades of hands-on experience, he has personally overseen some of Australia's most challenging rigging projects.</p>
-                                <p>His expertise spans across all aspects of heavy lifting, from delicate medical equipment installations to massive industrial machinery relocations. Anthony's commitment to safety and innovation has established Corellian as a trusted name in the industry.</p>
-                                <p>Under his leadership, Corellian has grown from a small specialized team to Australia's premier rigging service provider, maintaining the highest standards of quality and safety across all operations.</p>
+                                <p>Anthony co-founded Corellian in 2009 with a vision to revolutionise the HVAC rigging industry through comprehensive, whole-package rigging solutions. With over three decades of hands-on experience, he has personally overseen some of Australia's most challenging rigging projects.</p>
+                                <p>His expertise spans across all aspects of heavy lifting, from delicate medical equipment installations to massive industrial machinery relocations. Anthony's commitment to safety, integrity, and innovation has established Corellian as a trusted name in the industry.</p>
+                                <p>Under his leadership, Corellian has grown from a small specialized team to Australia's premier equipment rigging service provider, maintaining the highest standards of quality and safety across all operations.</p>
                             </div>
                         </div>
                     </div>
@@ -1243,12 +1303,12 @@
                         <div class="director-info">
                             <h3 class="director-name">Gary Jefferson</h3>
                             <div class="director-title">Operations Director & Co-Founder</div>
-                            <p class="director-summary">Expert in operational excellence and strategic project management with 25+ years experience.</p>
+                            <p class="director-summary">Expert in operational excellence and strategic project management with 30+ years experience.</p>
                             <button class="expand-btn" onclick="toggleDirectorDetails('gary')">Learn More</button>
                             <div class="director-details" id="gary-details">
                                 <p>Gary Jefferson brings a unique combination of technical expertise and strategic thinking to Corellian's operations. As co-founder, he has been instrumental in developing the company's systematic approach to complex rigging challenges.</p>
-                                <p>His background in engineering and project management ensures that every Corellian project is executed with precision, on time, and within budget. Gary's focus on continuous improvement has led to numerous innovations in rigging techniques and safety protocols.</p>
-                                <p>He oversees all major project operations and maintains Corellian's reputation for delivering impossible-seeming projects with reliability and professionalism that clients have come to expect.</p>
+                                <p>His background in rigging operations and construction management ensures that every Corellian project is executed with precision, on time, and within budget. Gary's focus on continuous improvement has led to numerous innovations in rigging techniques, diverse equipment, and safety protocols.</p>
+                                <p>He oversees all major project operations and complex rigging solutions, maintaining Corellian's reputation for delivering impossible-seeming projects with the reliability and professionalism that clients have come to expect.</p>
                             </div>
                         </div>
                     </div>
@@ -1261,8 +1321,53 @@
                     <h2>Our Team</h2>
                     <p>Our skilled professionals bring together decades of specialized experience across multiple trades.</p>
                 </div>
-                
+
                 <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="./docs/assets/images/team/jason-white.jpg" alt="Jason White">
+                        </div>
+                        <div class="member-info">
+                            <h4 class="member-name">Jason White</h4>
+                            <div class="member-position">Safety Manager</div>
+                            <div class="member-experience">25 years in HVAC and workplace safety</div>
+                        </div>
+                    </div>
+                
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="./docs/assets/images/team/cameron.jpg" alt="Cameron">
+                        </div>
+                        <div class="member-info">
+                            <h4 class="member-name">Cameron Hayward</h4>
+                            <div class="member-position">Operations Manager</div>
+                            <div class="member-experience">15 years in crane and rigging projects</div>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="./docs/assets/images/team/raewyn-smith.jpg" alt="Raewyn Smith">
+                        </div>
+                        <div class="member-info">
+                            <h4 class="member-name">Raewyn Smith</h4>
+                            <div class="member-position">Financial Controller</div>
+                            <div class="member-experience">20 years in finance and accounts</div>
+                        </div>
+                    </div>
+         
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="./docs/assets/images/team/glen-rieser.jpg" alt="Glen Rieser">
+                        </div>
+                        <div class="member-info">
+                            <h4 class="member-name">Glen Rieser</h4>
+                            <div class="member-position">Workshop and Logistics Manager</div>
+                            <div class="member-experience">20 years in construction, transport and warehousing</div>
+                        </div>
+                    </div>
+
+                   
                     <div class="team-member">
                         <div class="member-photo">
                             <img src="./docs/assets/images/team/ricky-kelderman.jpg" alt="Ricky Kelderman">
@@ -1276,45 +1381,12 @@
 
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="./docs/assets/images/team/glen-rieser.jpg" alt="Glen Rieser">
+                            <img src="./docs/assets/images/team/glen-preskett.jpg" alt="Glen Preskett">
                         </div>
                         <div class="member-info">
-                            <h4 class="member-name">Glen Rieser</h4>
-                            <div class="member-position">Logistics Lead</div>
-                            <div class="member-experience">20 years in construction, transport and warehousing</div>
-                        </div>
-                    </div>
-
-                    <div class="team-member">
-                        <div class="member-photo">
-                            <img src="./docs/assets/images/team/A-Farrell.jpg" alt="Tony Farrell">
-                        </div>
-                        <div class="member-info">
-                            <h4 class="member-name">Tony Farrell</h4>
-                            <div class="member-position">Preconstruction Manager</div>
-                            <div class="member-experience">18 years in machining and rigging works</div>
-                        </div>
-                    </div>
-
-                    <div class="team-member">
-                        <div class="member-photo">
-                            <img src="./docs/assets/images/team/raika-meyham.jpg" alt="Raika Meyham">
-                        </div>
-                        <div class="member-info">
-                            <h4 class="member-name">Raika Meyham</h4>
-                            <div class="member-position">Project Estimator</div>
-                            <div class="member-experience">15 years in building and construction project estimation</div>
-                        </div>
-                    </div>
-
-                    <div class="team-member">
-                        <div class="member-photo">
-                            <img src="./docs/assets/images/team/jason-white.jpg" alt="Jason White">
-                        </div>
-                        <div class="member-info">
-                            <h4 class="member-name">Jason White</h4>
-                            <div class="member-position">Safety Manager</div>
-                            <div class="member-experience">15 years in workplace safety and compliance</div>
+                            <h4 class="member-name">Glen Preskett</h4>
+                            <div class="member-position">Senior Project Manager</div>
+                            <div class="member-experience">25 years in mechanical project management</div>
                         </div>
                     </div>
 
@@ -1331,48 +1403,26 @@
 
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="./docs/assets/images/team/raewyn-smith.jpg" alt="Raewyn Smith">
+                            <img src="./docs/assets/images/team/raika-meyham.jpg" alt="Raika Meyhami">
                         </div>
                         <div class="member-info">
-                            <h4 class="member-name">Raewyn Smith</h4>
-                            <div class="member-position">Financial Controller</div>
-                            <div class="member-experience">20 years in finance and accounts</div>
+                            <h4 class="member-name">Raika Meyhami</h4>
+                            <div class="member-position">Project Estimator</div>
+                            <div class="member-experience">15 years in building and construction project estimation</div>
                         </div>
                     </div>
 
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="./docs/assets/images/team/glen-preskett.jpg" alt="Glen Preskett">
+                            <img src="./docs/assets/images/team/A-Farrell.jpg" alt="Tony Farrell">
                         </div>
                         <div class="member-info">
-                            <h4 class="member-name">Glen Preskett</h4>
-                            <div class="member-position">Senior Project Manager</div>
-                            <div class="member-experience">20 years in mechanical project management</div>
+                            <h4 class="member-name">Tony Farrell</h4>
+                            <div class="member-position">Preconstruction Manager</div>
+                            <div class="member-experience">18 years in machining and rigging works</div>
                         </div>
                     </div>
-
-                    <div class="team-member">
-                        <div class="member-photo">
-                            <img src="./docs/assets/images/team/Rosa.jpg" alt="Rosabella">
-                        </div>
-                        <div class="member-info">
-                            <h4 class="member-name">Rosabella</h4>
-                            <div class="member-position">Customer Service & Administration</div>
-                            <div class="member-experience">20 years in customer service and administration</div>
-                        </div>
-                    </div>
-
-                    <div class="team-member">
-                        <div class="member-photo">
-                            <img src="./docs/assets/images/team/cameron.jpg" alt="Cameron">
-                        </div>
-                        <div class="member-info">
-                            <h4 class="member-name">Cameron</h4>
-                            <div class="member-position">Operations Manager</div>
-                            <div class="member-experience">15 years in crane and rigging projects</div>
-                        </div>
-                    </div>
-
+                    
                     <div class="team-member">
                         <div class="member-photo">
                             <img src="./docs/assets/images/team/david-kairouz.jpg" alt="David Kairouz">
@@ -1386,14 +1436,37 @@
 
                     <div class="team-member">
                         <div class="member-photo">
+                            <img src="./docs/assets/images/team/Judy.jpg" alt="Judy Sumampong">
+                        </div>
+                        <div class="member-info">
+                            <h4 class="member-name">Judy Sumampong</h4>
+                            <div class="member-position">Project Administrator</div>
+                            <div class="member-experience">10 years in administrative project support</div>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="member-photo">
                             <img src="./docs/assets/images/team/Fatima.jpg" alt="Fatima">
                         </div>
                         <div class="member-info">
-                            <h4 class="member-name">Fatima</h4>
-                            <div class="member-position">Accounts Manager</div>
+                            <h4 class="member-name">Fatima Sajjad</h4>
+                            <div class="member-position">Accounts</div>
                             <div class="member-experience">5 years in accounts management</div>
                         </div>
                     </div>
+
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="./docs/assets/images/team/Rosa.jpg" alt="Rosabella">
+                        </div>
+                        <div class="member-info">
+                            <h4 class="member-name">Rosabella Costa</h4>
+                            <div class="member-position">Customer Service & Administration</div>
+                            <div class="member-experience">20 years in customer service and administration</div>
+                        </div>
+                    </div>
+                                     
                 </div>
             </section>
         </div>
@@ -1432,24 +1505,6 @@
 
         // Wait for the DOM to be fully loaded before running scripts
         document.addEventListener('DOMContentLoaded', function() {
-            
-            // ================================================================
-            // MOBILE MENU TOGGLE
-            // ================================================================
-            // Handles the hamburger menu on mobile devices
-            // ================================================================
-            const menuToggle = document.querySelector('.menu-toggle');
-            const menu = document.querySelector('.menu');
-            
-            if (menuToggle) {
-                menuToggle.addEventListener('click', function() {
-                    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-                    
-                    menuToggle.setAttribute('aria-expanded', !expanded);
-                    menu.classList.toggle('is-active');
-                    menuToggle.classList.toggle('is-active');
-                });
-            }
             
             // ================================================================
             // SCROLL TO TOP BUTTON
@@ -1554,6 +1609,15 @@
              * 3. Remove .active class from all tabs and panels
              * 4. Add .active class to clicked tab and corresponding panel
              */
+            /*
+             * DEEP LINK: Open modal automatically if URL contains #services
+             * e.g. linking from another page: about.html#services
+             */
+            if (window.location.hash === '#services') {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
             serviceTabs.forEach(tab => {
                 tab.addEventListener('click', function() {
                     // Get which service this tab represents (e.g., "rigging", "demolition")
@@ -1619,17 +1683,20 @@
         }
     </script>
     <div id="footer-placeholder"></div>
-```html
 <script>
     // Load header and footer
     fetch('header.html')
         .then(response => response.text())
-        .then(html => document.getElementById('header-placeholder').innerHTML = html);
+        .then(html => {
+            const placeholder = document.getElementById('header-placeholder');
+            const range = document.createRange();
+            range.selectNodeContents(placeholder);
+            placeholder.appendChild(range.createContextualFragment(html));
+        });
     
     fetch('footer.html')
         .then(response => response.text())
         .then(html => document.getElementById('footer-placeholder').innerHTML = html);
 </script>
-```
 </body>
 </html>

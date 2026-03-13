@@ -1,0 +1,1210 @@
+<!--
+  trainee-form.html
+  ─────────────────────────────────────────────────────────────────────────────
+  Fetched and injected into employment.html's #traineeFormContainer div.
+  Inherits all base styles from the parent page via CSS variables.
+  Qualification: Certificate III in Rigging (CPC30720) — NSW traineeship.
+
+  To update in future:
+    • Edit field labels / options below — no need to touch employment.html.
+    • To add a section, copy a <div class="tf-section"> block.
+    • Replace placeholder values in the <script> block before going live.
+  ─────────────────────────────────────────────────────────────────────────────
+-->
+
+<style>
+  /* All rules scoped to .tf-wrapper to avoid conflicts with the parent page
+     or with rigger-form.html if both are loaded in the same session. */
+
+  .tf-wrapper { text-align: left; }
+
+  .tf-wrapper h3 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+  }
+
+  .tf-intro {
+    color: #666;
+    margin-bottom: 1.75rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .tf-intro strong { color: var(--primary-color); }
+
+  /* Section card */
+  .tf-section {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .tf-section-title {
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.45rem;
+    margin-bottom: 1.1rem;
+  }
+
+  /* Two-column grid */
+  .tf-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.5rem;
+  }
+
+  .tf-col-2 { grid-column: span 2; }
+
+  @media (max-width: 600px) {
+    .tf-grid { grid-template-columns: 1fr; }
+    .tf-col-2 { grid-column: span 1; }
+    .tf-section { padding: 1.1rem; }
+  }
+
+  /* Field wrapper */
+  .tf-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .tf-field label {
+    font-weight: 500;
+    font-size: 0.92rem;
+    color: var(--primary-color);
+    margin-bottom: 0;
+  }
+
+  .tf-field label .req { color: var(--secondary-color); margin-left: 2px; }
+
+  .tf-hint {
+    font-size: 0.8rem;
+    color: #888;
+    line-height: 1.5;
+  }
+
+  /* Inputs — inherit from parent .contact-form, zero out margin-bottom */
+  .tf-wrapper .contact-form input[type="text"],
+  .tf-wrapper .contact-form input[type="email"],
+  .tf-wrapper .contact-form input[type="tel"],
+  .tf-wrapper .contact-form input[type="date"],
+  .tf-wrapper .contact-form input[type="number"],
+  .tf-wrapper .contact-form textarea,
+  .tf-wrapper .contact-form select {
+    margin-bottom: 0;
+  }
+
+  textarea.tf-short  { min-height: 72px;  resize: vertical; }
+  textarea.tf-medium { min-height: 110px; resize: vertical; }
+
+  /* Pill toggles */
+  .tf-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 0.2rem;
+  }
+
+  .tf-pills input[type="radio"],
+  .tf-pills input[type="checkbox"] { display: none; }
+
+  .tf-pills label {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    background: #fff;
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+    margin-bottom: 0;
+  }
+
+  .tf-pills label:hover { border-color: var(--secondary-color); }
+
+  .tf-pills input[type="radio"]:checked  + label,
+  .tf-pills input[type="checkbox"]:checked + label {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+  }
+
+  /* Conditional reveal */
+  .tf-conditional {
+    display: none;
+    margin-top: 0.65rem;
+    padding: 0.7rem 1rem;
+    border-left: 3px solid var(--secondary-color);
+    background: var(--light-bg);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .tf-conditional.visible { display: block; }
+
+  /* Listbox */
+  select.tf-listbox {
+    padding: 0;
+    height: auto;
+    cursor: pointer;
+  }
+
+  select.tf-listbox option {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.92rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  select.tf-listbox option:checked {
+    background-color: var(--secondary-color);
+    color: #fff;
+  }
+
+  /* Info callout — used for traineeship commitment notice */
+  .tf-callout {
+    background: #f0f6ff;
+    border: 1px solid #b3d1f5;
+    border-left: 4px solid #2980b9;
+    border-radius: 4px;
+    padding: 0.85rem 1.1rem;
+    font-size: 0.87rem;
+    color: #1a3a5c;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  /* Declaration box */
+  .tf-declaration {
+    background: var(--light-bg);
+    border: 2px solid var(--border-color);
+    border-left: 4px solid var(--secondary-color);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Submit */
+  #tf-submit-btn {
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 0.85rem 2.5rem;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  #tf-submit-btn:hover    { background-color: #cc0000; }
+  #tf-submit-btn:disabled { background-color: #bbb; cursor: not-allowed; }
+
+  .tf-submit-note { font-size: 0.82rem; color: #888; margin-top: 0.75rem; }
+  .tf-submit-note a { color: var(--secondary-color); }
+
+  /* Status */
+  #tf-status {
+    display: none;
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    font-size: 0.93rem;
+    font-weight: 500;
+  }
+
+  #tf-status.error {
+    display: block;
+    background: #fef0f0;
+    border: 2px solid var(--secondary-color);
+    color: #c0392b;
+  }
+
+  /* Spinner */
+  .tf-spinner {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: tf-spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+
+  @keyframes tf-spin { to { transform: rotate(360deg); } }
+
+  /* ── Invalid highlights ── */
+  .tf-invalid,
+  .tf-invalid:focus {
+    border-color: var(--secondary-color) !important;
+    background-color: #fff5f5 !important;
+  }
+
+  .tf-invalid-group .tf-pills label {
+    border-color: #f5a5a5;
+    background-color: #fff5f5;
+  }
+
+  .tf-invalid-select {
+    border-color: var(--secondary-color) !important;
+    background-color: #fff5f5 !important;
+  }
+
+  /* ── Validation modal ── */
+  .tf-valmodal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 600;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tf-valmodal-overlay.active { display: flex; }
+
+  .tf-valmodal-box {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    border-top: 5px solid var(--secondary-color);
+    padding: 2rem;
+    max-width: 460px;
+    width: 90%;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .tf-valmodal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: #fef0f0;
+    border: 3px solid var(--secondary-color);
+    margin: 0 auto 1rem;
+    font-size: 1.4rem;
+    color: var(--secondary-color);
+    font-weight: 700;
+  }
+
+  .tf-valmodal-box h3 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .tf-valmodal-box > p {
+    font-size: 0.88rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .tf-valmodal-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    border: 1px solid #fcc;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .tf-valmodal-list li {
+    padding: 0.55rem 0.9rem;
+    font-size: 0.88rem;
+    color: #333;
+    border-bottom: 1px solid #fcc;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .tf-valmodal-list li:last-child { border-bottom: none; }
+
+  .tf-valmodal-list li::before {
+    content: '!';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .tf-valmodal-btn {
+    display: block;
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.7rem;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+  }
+
+  .tf-valmodal-btn:hover { background-color: #cc0000; }
+
+  /* ── Thank-you modal ── */
+  .tf-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 600;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tf-modal-overlay.active { display: flex; }
+
+  .tf-modal-box {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    border-top: 5px solid var(--secondary-color);
+    padding: 2.5rem 2rem;
+    max-width: 440px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+  }
+
+  .tf-modal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: #eafaf1;
+    border: 3px solid #27ae60;
+    margin: 0 auto 1.25rem;
+    font-size: 1.75rem;
+    color: #27ae60;
+  }
+
+  .tf-modal-box h3 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+  }
+
+  .tf-modal-box p {
+    font-size: 0.92rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .tf-modal-box p:last-of-type { margin-bottom: 1.5rem; }
+
+  .tf-modal-close {
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.65rem 2rem;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .tf-modal-close:hover { background-color: #cc0000; }
+</style>
+
+<!-- reCAPTCHA v3 loader -->
+<script>
+(function() {
+  var SITE_KEY = '6LevpIEsAAAAACfJgzI4bKa7ZKH-caxyKHbVmPD7';
+  var s = document.createElement('script');
+  s.src = 'https://www.google.com/recaptcha/api.js?render=' + SITE_KEY;
+  s.async = true;
+  document.head.appendChild(s);
+})();
+</script>
+
+<div class="tf-wrapper">
+
+  <h3>Apply for a Rigging Traineeship</h3>
+  <p class="tf-intro">
+    Expression of Interest — <strong>Certificate III in Rigging (CPC30720)</strong>.<br>
+    This is a paid traineeship: you work full-time with Corellian while completing formal training
+    through a registered training organisation (RTO) under a NSW training contract — typically 24 months.<br><br>
+    Please complete all required fields marked with <span style="color:var(--secondary-color);">*</span>.
+  </p>
+
+  <form id="traineeForm" class="contact-form" novalidate>
+
+    <!-- Honeypot -->
+    <div style="display:none;" aria-hidden="true">
+      <input type="text" name="website" id="tf-honeypot" tabindex="-1" autocomplete="off">
+    </div>
+
+    <!-- ── 01 PERSONAL INFORMATION ── -->
+    <div class="tf-section">
+      <div class="tf-section-title">01 — Personal Information</div>
+      <div class="tf-grid">
+
+        <div class="tf-field">
+          <label for="tf-firstName">First Name <span class="req">*</span></label>
+          <input type="text" id="tf-firstName" name="firstName" required placeholder="John">
+        </div>
+
+        <div class="tf-field">
+          <label for="tf-lastName">Last Name <span class="req">*</span></label>
+          <input type="text" id="tf-lastName" name="lastName" required placeholder="Smith">
+        </div>
+
+        <div class="tf-field">
+          <label for="tf-email">Email Address <span class="req">*</span></label>
+          <input type="email" id="tf-email" name="email" required placeholder="john@example.com">
+        </div>
+
+        <div class="tf-field">
+          <label for="tf-phone">Mobile Phone Number <span class="req">*</span></label>
+          <input type="tel" id="tf-phone" name="phone" required placeholder="04XX XXX XXX">
+        </div>
+
+        <div class="tf-field tf-col-2">
+          <label for="tf-suburb">Residential Address (Suburb) <span class="req">*</span></label>
+          <input type="text" id="tf-suburb" name="suburb" required
+            placeholder="Suburb, State, Postcode — e.g. Blacktown, NSW 2148">
+        </div>
+
+        <div class="tf-field">
+          <label for="tf-dob">Date of Birth <span class="req">*</span></label>
+          <input type="date" id="tf-dob" name="dob" required>
+          <span class="tf-hint">You must be 18 or older to hold a High Risk Work Licence</span>
+        </div>
+
+        <div class="tf-field">
+          <label>Valid Australian Drivers Licence? <span class="req">*</span></label>
+          <div class="tf-pills">
+            <input type="radio" name="driversLicence" id="tf-dl-yes" value="Yes" required>
+            <label for="tf-dl-yes">Yes</label>
+            <input type="radio" name="driversLicence" id="tf-dl-no" value="No">
+            <label for="tf-dl-no">No</label>
+          </div>
+          <div class="tf-conditional" id="tf-licenceType">
+            <div class="tf-field">
+              <label for="tf-licClass">Licence Class</label>
+              <input type="text" id="tf-licClass" name="licenceType" placeholder="e.g. C, MR, HR">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 02 EDUCATION & LITERACY ── -->
+    <div class="tf-section">
+      <div class="tf-section-title">02 — Education &amp; Literacy</div>
+      <div class="tf-grid" style="grid-template-columns:1fr;">
+
+        <div class="tf-field">
+          <label for="tf-education">Highest Level of Education Completed <span class="req">*</span></label>
+          <span class="tf-hint" style="margin-bottom:0.2rem;">Click to select one option</span>
+          <select id="tf-education" name="education" class="tf-listbox" size="6" required>
+            <option value="Year 10 or below">Year 10 or below</option>
+            <option value="Year 11">Year 11</option>
+            <option value="Year 12 / HSC">Year 12 / HSC</option>
+          </select>
+        </div>
+
+        <div class="tf-field">
+          <label for="tf-experience">Workforce Experience After Graduation<span class="req">*</span></label>
+          <span class="tf-hint" style="margin-bottom:0.2rem;">Click to select one option</span>
+          <select id="tf-experience" name="experience" class="tf-listbox" size="6" required>
+            <option value="Plus 1 Year out of School">Plus 1 Year out of School</option>
+            <option value="Plus 2 Years out of School">Plus 2 Years out of School</option>
+            <option value="Plus 3 Years out of School">Plus 3 Years out of School</option>
+            <option value="Plus 4 Years out of School">Plus 4 Years out of School</option>
+            <option value="Plus 5 Years out of School">Plus 5 Years out of School</option>
+          </select>
+        </div>
+
+        <div class="tf-field">
+          <label>Are you comfortable with basic maths such as calculating weights and load limits? <span class="req">*</span></label>
+          <span class="tf-hint">This is a practical requirement of the CPC30720 qualification</span>
+          <div class="tf-pills">
+            <input type="radio" name="mathsComfort" id="tf-maths-yes" value="Yes" required>
+            <label for="tf-maths-yes">Yes</label>
+            <input type="radio" name="mathsComfort" id="tf-maths-no" value="No">
+            <label for="tf-maths-no">No</label>
+            <input type="radio" name="mathsComfort" id="tf-maths-some" value="Somewhat">
+            <label for="tf-maths-some">Somewhat</label>
+          </div>
+        </div>
+
+        <div class="tf-field">
+          <label>Do you have any literacy or language difficulties that may affect your ability to complete written training assessments? <span class="req">*</span></label>
+          <div class="tf-pills">
+            <input type="radio" name="literacyDifficulty" id="tf-lit-yes" value="Yes" required>
+            <label for="tf-lit-yes">Yes</label>
+            <input type="radio" name="literacyDifficulty" id="tf-lit-no" value="No">
+            <label for="tf-lit-no">No</label>
+          </div>
+          <div class="tf-conditional" id="tf-literacyDetail">
+            <div class="tf-field">
+              <label for="tf-literacyDetails">Please provide details</label>
+              <textarea id="tf-literacyDetails" name="literacyDetails" class="tf-short"
+                placeholder="e.g. English as a second language, dyslexia — support options may be available"></textarea>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 03 CONSTRUCTION EXPERIENCE & LICENCES ── -->
+    <div class="tf-section">
+      <div class="tf-section-title">03 — Construction Experience &amp; Licences</div>
+      <div class="tf-grid" style="grid-template-columns:1fr;">
+
+        <!-- White Card -->
+        <div class="tf-field">
+          <label>Do you hold a Construction Industry Induction (White) Card? <span class="req">*</span></label>
+          <span class="tf-hint">Required before entering any Corellian construction site</span>
+          <div class="tf-pills">
+            <input type="radio" name="whiteCard" id="tf-wc-yes" value="Yes" required>
+            <label for="tf-wc-yes">Yes</label>
+            <input type="radio" name="whiteCard" id="tf-wc-no" value="No — but willing to obtain">
+            <label for="tf-wc-no">No — but willing to obtain</label>
+            <input type="radio" name="whiteCard" id="tf-wc-working" value="In progress">
+            <label for="tf-wc-working">In progress</label>
+          </div>
+          <div class="tf-conditional" id="tf-whiteCardState">
+            <div class="tf-field">
+              <label for="tf-wcState">Issuing State</label>
+              <select id="tf-wcState" name="whiteCardState">
+                <option value="" disabled selected>Select issuing state…</option>
+                <option value="NSW">NSW</option>
+                <option value="VIC">VIC</option>
+                <option value="QLD">QLD</option>
+                <option value="WA">WA</option>
+                <option value="SA">SA</option>
+                <option value="TAS">TAS</option>
+                <option value="ACT">ACT</option>
+                <option value="NT">NT</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dogging licence — key prerequisite for Basic Rigging HRW -->
+        <div class="tf-field">
+          <label>Do you hold a Dogging (DG) High Risk Work Licence? <span class="req">*</span></label>
+          <span class="tf-hint">A DG licence is a prerequisite for the Basic Rigging (RB) HRW Licence under SafeWork NSW</span>
+          <div class="tf-pills">
+            <input type="radio" name="doggingLicence" id="tf-dg-yes" value="Yes" required>
+            <label for="tf-dg-yes">Yes</label>
+            <input type="radio" name="doggingLicence" id="tf-dg-no" value="No">
+            <label for="tf-dg-no">No</label>
+            <input type="radio" name="doggingLicence" id="tf-dg-progress" value="In progress">
+            <label for="tf-dg-progress">In progress</label>
+          </div>
+        </div>
+
+        <!-- Other licences -->
+        <div class="tf-field">
+          <label for="tf-licences">Other Licences / Tickets / Certificates Held</label>
+          <input type="text" id="tf-licences" name="licences"
+            placeholder="e.g. EWP, Forklift, Working at Heights, First Aid…">
+          <span class="tf-hint">List all — leave blank if none</span>
+        </div>
+
+        <!-- Prior construction experience -->
+        <div class="tf-field">
+          <label>Do you have any prior experience working in construction, a trade, or a related industry? <span class="req">*</span></label>
+          <div class="tf-pills">
+            <input type="radio" name="priorExperience" id="tf-exp-yes" value="Yes" required>
+            <label for="tf-exp-yes">Yes</label>
+            <input type="radio" name="priorExperience" id="tf-exp-no" value="No">
+            <label for="tf-exp-no">No</label>
+          </div>
+          <div class="tf-conditional" id="tf-priorExpDetail">
+            <div class="tf-field">
+              <label for="tf-priorExpDetails">Please describe your experience</label>
+              <textarea id="tf-priorExpDetails" name="priorExpDetails" class="tf-medium"
+                placeholder="e.g. 2 years labouring on residential construction sites, forklift operator in a warehouse…"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trade qualifications -->
+        <div class="tf-field">
+          <label>Do you hold any trade qualifications? <span class="req">*</span></label>
+          <div class="tf-pills">
+            <input type="radio" name="tradeQual" id="tf-tq-yes" value="Yes" required>
+            <label for="tf-tq-yes">Yes</label>
+            <input type="radio" name="tradeQual" id="tf-tq-no" value="No">
+            <label for="tf-tq-no">No</label>
+          </div>
+          <div class="tf-conditional" id="tf-tradeQualDetail">
+            <div class="tf-field">
+              <label for="tf-tradeQualDetails">Please specify all trade qualifications</label>
+              <textarea id="tf-tradeQualDetails" name="tradeQualDetails" class="tf-short"
+                placeholder="e.g. Certificate III in Rigging&#10;Certificate III in Carpentry"></textarea>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 04 PHYSICAL REQUIREMENTS ── -->
+    <div class="tf-section">
+      <div class="tf-section-title">04 — Physical Requirements</div>
+      <div class="tf-grid" style="grid-template-columns:1fr;">
+
+        <div class="tf-field">
+          <label>Are you comfortable working at heights? <span class="req">*</span></label>
+          <span class="tf-hint">Rigging work regularly involves elevated work platforms, scaffolding, and structures</span>
+          <div class="tf-pills">
+            <input type="radio" name="workAtHeights" id="tf-wah-yes" value="Yes" required>
+            <label for="tf-wah-yes">Yes</label>
+            <input type="radio" name="workAtHeights" id="tf-wah-no" value="No">
+            <label for="tf-wah-no">No</label>
+            <input type="radio" name="workAtHeights" id="tf-wah-some" value="Some experience">
+            <label for="tf-wah-some">Some experience</label>
+          </div>
+        </div>
+
+        <div class="tf-field">
+          <label>Are you comfortable with physically demanding outdoor work including manual handling of heavy equipment? <span class="req">*</span></label>
+          <div class="tf-pills">
+            <input type="radio" name="physicalDemands" id="tf-phys-yes" value="Yes" required>
+            <label for="tf-phys-yes">Yes</label>
+            <input type="radio" name="physicalDemands" id="tf-phys-no" value="No">
+            <label for="tf-phys-no">No</label>
+          </div>
+        </div>
+
+        <div class="tf-field">
+          <label>Pre-Existing Condition / Impairment <span class="req">*</span></label>
+          <p style="font-size:0.85rem;color:#666;margin:0.25rem 0 0.5rem;line-height:1.5;">
+            Do you have an existing or pre-existing condition (injury, disease, medical condition,
+            disability or impairment) that would affect your ability to safely perform the physical
+            demands of this role?
+          </p>
+          <div class="tf-pills">
+            <input type="radio" name="preExisting" id="tf-pe-yes" value="Yes" required>
+            <label for="tf-pe-yes">Yes</label>
+            <input type="radio" name="preExisting" id="tf-pe-no" value="No" required>
+            <label for="tf-pe-no">No</label>
+          </div>
+          <div class="tf-conditional" id="tf-preExistingDetail">
+            <div class="tf-field">
+              <label for="tf-preExistingDetails">Please provide details</label>
+              <textarea id="tf-preExistingDetails" name="preExistingDetails" class="tf-short"
+                placeholder="Describe the condition and any relevant impact on your work capacity…"></textarea>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 05 TRAINEESHIP COMMITMENT ── -->
+    <div class="tf-section">
+      <div class="tf-section-title">05 — Traineeship Commitment</div>
+      <div class="tf-grid" style="grid-template-columns:1fr;">
+
+        <div class="tf-callout">
+          A Certificate III in Rigging traineeship under NSW Smart and Skilled requires full-time
+          employment with Corellian under a formal training contract, combined with structured off-site
+          training through a registered RTO. The typical duration is <strong>12–24 months</strong>.
+          Trainees are paid employees throughout.
+        </div>
+
+        <div class="tf-field">
+          <label>Are you able to commit to a full-time traineeship of up to 24 months? <span class="req">*</span></label>
+          <div class="tf-pills">
+            <input type="radio" name="commitTraineeship" id="tf-commit-yes" value="Yes" required>
+            <label for="tf-commit-yes">Yes</label>
+            <input type="radio" name="commitTraineeship" id="tf-commit-no" value="No">
+            <label for="tf-commit-no">No</label>
+            <input type="radio" name="commitTraineeship" id="tf-commit-discuss" value="Would like to discuss">
+            <label for="tf-commit-discuss">Would like to discuss</label>
+          </div>
+        </div>
+
+        <div class="tf-field">
+          <label for="tf-startDate">Date Available to Begin <span class="req">*</span></label>
+          <input type="date" id="tf-startDate" name="startDate" required>
+        </div>
+
+        <div class="tf-field">
+          <label>Shift Availability <span class="req">*</span></label>
+          <div class="tf-pills">
+            <input type="checkbox" name="shift" id="tf-sh-day" value="Day">
+            <label for="tf-sh-day">Day</label>
+            <input type="checkbox" name="shift" id="tf-sh-night" value="Night">
+            <label for="tf-sh-night">Night</label>
+            <input type="checkbox" name="shift" id="tf-sh-flex" value="Flexible">
+            <label for="tf-sh-flex">Flexible</label>
+          </div>
+        </div>
+
+        <div class="tf-field">
+          <label for="tf-hearAboutUs">Where Did You Hear About Us?</label>
+          <select id="tf-hearAboutUs" name="hearAboutUs">
+            <option value="" disabled selected>Select one…</option>
+            <option>Company Website</option>
+            <option>LinkedIn</option>
+            <option>Seek</option>
+            <option>Indeed</option>
+            <option>Word of Mouth / Referral</option>
+            <option>Facebook</option>
+            <option>On a Work Site</option>
+            <option>Trade Contact</option>
+            <option>School or TAFE</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 06 MOTIVATION ── -->
+    <div class="tf-section">
+      <div class="tf-section-title">06 — Motivation</div>
+      <div class="tf-grid" style="grid-template-columns:1fr;">
+
+        <div class="tf-field">
+          <label for="tf-whyRigging">Why do you want to become a rigger? <span class="req">*</span></label>
+          <textarea id="tf-whyRigging" name="whyRigging" class="tf-medium" required
+            placeholder="Tell us what appeals to you about a career in rigging…"></textarea>
+        </div>
+
+        <div class="tf-field">
+          <label for="tf-whatKnow">What do you already know about rigging work? <span class="req">*</span></label>
+          <textarea id="tf-whatKnow" name="whatKnow" class="tf-medium" required
+            placeholder="Describe any knowledge you have of rigging, lifting, dogwork, or related site operations…"></textarea>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 07 BACKGROUND ── -->
+    <div class="tf-section">
+      <div class="tf-section-title">07 — Background</div>
+      <div class="tf-grid" style="grid-template-columns:1fr;">
+
+        <div class="tf-field">
+          <label>Have You Ever Been Convicted of a Crime? <span class="req">*</span></label>
+          <div class="tf-pills">
+            <input type="radio" name="convicted" id="tf-cv-yes" value="Yes" required>
+            <label for="tf-cv-yes">Yes</label>
+            <input type="radio" name="convicted" id="tf-cv-no" value="No">
+            <label for="tf-cv-no">No</label>
+          </div>
+          <div class="tf-conditional" id="tf-convictedDetail">
+            <div class="tf-field">
+              <label for="tf-convictedDetails">Please Provide Details</label>
+              <textarea id="tf-convictedDetails" name="convictedDetails" class="tf-short"
+                placeholder="Please provide details of conviction(s)…"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="tf-field">
+          <label>Willing to Undergo Pre-Employment Medical Assessment (National Police Check &amp; Drug/Alcohol Screening)? <span class="req">*</span></label>
+          <div class="tf-pills">
+            <input type="radio" name="screening" id="tf-sc-yes" value="Yes" required>
+            <label for="tf-sc-yes">Yes</label>
+            <input type="radio" name="screening" id="tf-sc-no" value="No">
+            <label for="tf-sc-no">No</label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 08 RIGHT TO WORK ── -->
+    <div class="tf-section">
+      <div class="tf-section-title">08 — Right to Work</div>
+      <div class="tf-field">
+        <label for="tf-rightToWork">Work Rights Status <span class="req">*</span></label>
+        <span class="tf-hint" style="margin-bottom:0.2rem;">Click to select one option</span>
+        <select id="tf-rightToWork" name="rightToWork" class="tf-listbox" size="6" required>
+          <option value="Australian Citizen / Permanent Resident">Australian Citizen / Australian Permanent Resident</option>
+          <option value="New Zealand Citizen / Permanent Resident">New Zealand Citizen / New Zealand Permanent Resident</option>
+          <option value="Current visa — no working restrictions">Current Visa with No Working Restrictions</option>
+          <option value="Current student visa">Current Student Visa</option>
+          <option value="Current working holiday visa">Current Working Holiday Visa</option>
+          <option value="Requires sponsorship">Requires Sponsorship to Work for a New Employer</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ── 09 DECLARATION ── -->
+    <div class="tf-section">
+      <div class="tf-section-title">09 — Declaration</div>
+      <div class="tf-declaration">
+        I declare that the above information is true and correct. I understand that in the event of
+        my employment by Corellian Pty Ltd, I shall be subject to dismissal if any information that
+        I have given in this application is false or misleading or if I have failed to give any
+        information herein requested, regardless of the time elapsed after discovery.
+      </div>
+      <div class="tf-grid">
+        <div class="tf-field">
+          <label for="tf-declarationName">Full Name <span class="req">*</span></label>
+          <input type="text" id="tf-declarationName" name="declarationName" required
+            placeholder="As per identification">
+        </div>
+        <div class="tf-field">
+          <label for="tf-declarationDate">Date <span class="req">*</span></label>
+          <input type="date" id="tf-declarationDate" name="declarationDate" required>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SUBMIT ── -->
+    <div style="text-align:center; margin-top:0.5rem;">
+      <button type="submit" id="tf-submit-btn">Submit Application</button>
+      <p class="tf-submit-note">
+        Please also email your resume, licences, and any relevant certificates to
+        <a href="mailto:recruitment@corellian.com.au">recruitment@corellian.com.au</a>
+      </p>
+      <div id="tf-status"></div>
+    </div>
+
+  </form>
+</div><!-- /.tf-wrapper -->
+
+<!-- Validation error modal -->
+<div class="tf-valmodal-overlay" id="tf-valModal" role="dialog" aria-modal="true" aria-labelledby="tf-valModalTitle">
+  <div class="tf-valmodal-box">
+    <div class="tf-valmodal-icon">!</div>
+    <h3 id="tf-valModalTitle">Please Complete Required Fields</h3>
+    <p>The following fields are missing or incomplete. They have been highlighted on the form.</p>
+    <ul class="tf-valmodal-list" id="tf-valModalList"></ul>
+    <button class="tf-valmodal-btn" id="tf-valModalClose">Go Back and Fix</button>
+  </div>
+</div>
+
+<!-- Thank-you modal -->
+<div class="tf-modal-overlay" id="tf-thankyouModal" role="dialog" aria-modal="true" aria-labelledby="tf-modalTitle">
+  <div class="tf-modal-box">
+    <div class="tf-modal-icon">&#10003;</div>
+    <h3 id="tf-modalTitle">Application Received</h3>
+    <p>Thank you for your interest in a Corellian rigging traineeship.</p>
+    <p>We'll review your application and be in touch if your profile is a good match for our current traineeship intake.</p>
+    <p style="font-size:0.82rem;color:#888;">Please also email your resume and any relevant certificates to <a href="mailto:recruitment@corellian.com.au" style="color:var(--secondary-color);">recruitment@corellian.com.au</a></p>
+    <button class="tf-modal-close" id="tf-modalClose">Close</button>
+  </div>
+</div>
+
+<script>
+(function () {
+
+  var RECAPTCHA_SITE_KEY = '6LevpIEsAAAAACfJgzI4bKa7ZKH-caxyKHbVmPD7';
+  var APPS_SCRIPT_URL    = 'https://script.google.com/macros/s/AKfycbysDuV0SLBOSpe2RRYmzQJWu4AkYg8X5nW2i5rx34X3IGE4vMle79bcrShU5jCGoNmQ/exec';
+
+  /* ── Conditional reveal helper ── */
+  function bindYN(radioName, containerId, triggerValue) {
+    triggerValue = triggerValue || 'Yes';
+    document.querySelectorAll('input[name="' + radioName + '"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        document.getElementById(containerId)
+          .classList.toggle('visible', r.value === triggerValue && r.checked);
+      });
+    });
+  }
+
+  bindYN('driversLicence',   'tf-licenceType');
+  bindYN('literacyDifficulty', 'tf-literacyDetail');
+  bindYN('whiteCard',        'tf-whiteCardState');
+  bindYN('priorExperience',  'tf-priorExpDetail');
+  bindYN('tradeQual',        'tf-tradeQualDetail');
+  bindYN('preExisting',      'tf-preExistingDetail');
+  bindYN('convicted',        'tf-convictedDetail');
+
+  /* ── QLD White Card popup ── */
+  document.getElementById('tf-wcState').addEventListener('change', function () {
+    if (this.value === 'QLD') {
+      // Reuse the same popup structure from parent — create inline if not present
+      alert('Note: If you join Corellian you will need a new White Card issued in NSW — QLD White Cards are not accepted on our customers\u2019 sites.');
+    }
+  });
+
+  /* ── Thank-you modal close ── */
+  function closeThankYou() {
+    document.getElementById('tf-thankyouModal').classList.remove('active');
+    var c = document.getElementById('traineeFormContainer');
+    if (c) c.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.getElementById('tf-modalClose').addEventListener('click', closeThankYou);
+  document.getElementById('tf-thankyouModal').addEventListener('click', function (e) {
+    if (e.target === this) closeThankYou();
+  });
+
+  /* ── Validation modal close ── */
+  function closeValModal() {
+    document.getElementById('tf-valModal').classList.remove('active');
+    var first = document.querySelector('.tf-invalid, .tf-invalid-group, .tf-invalid-select');
+    if (first) {
+      var target = first.closest('.tf-section') || first;
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  document.getElementById('tf-valModalClose').addEventListener('click', closeValModal);
+  document.getElementById('tf-valModal').addEventListener('click', function (e) {
+    if (e.target === this) closeValModal();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      closeValModal();
+      closeThankYou();
+    }
+  });
+
+  /* ── Required field definitions ── */
+  var REQUIRED_FIELDS = [
+    { label: 'First Name',                              type: 'input',    id: 'tf-firstName' },
+    { label: 'Last Name',                               type: 'input',    id: 'tf-lastName' },
+    { label: 'Email Address',                           type: 'input',    id: 'tf-email' },
+    { label: 'Mobile Phone Number',                     type: 'input',    id: 'tf-phone' },
+    { label: 'Residential Address (Suburb)',            type: 'input',    id: 'tf-suburb' },
+    { label: 'Date of Birth',                           type: 'input',    id: 'tf-dob' },
+    { label: 'Drivers Licence',                         type: 'radio',    name: 'driversLicence' },
+    { label: 'Highest Level of Education',              type: 'select',   id: 'tf-education' },
+    { label: 'Comfortable with Basic Maths',            type: 'radio',    name: 'mathsComfort' },
+    { label: 'Literacy / Language Difficulties',        type: 'radio',    name: 'literacyDifficulty' },
+    { label: 'White Card',                              type: 'radio',    name: 'whiteCard' },
+    { label: 'Dogging (DG) Licence',                   type: 'radio',    name: 'doggingLicence' },
+    { label: 'Prior Construction Experience',           type: 'radio',    name: 'priorExperience' },
+    { label: 'Trade Qualifications',                    type: 'radio',    name: 'tradeQual' },
+    { label: 'Comfortable Working at Heights',          type: 'radio',    name: 'workAtHeights' },
+    { label: 'Comfortable with Physical Demands',       type: 'radio',    name: 'physicalDemands' },
+    { label: 'Pre-Existing Condition',                  type: 'radio',    name: 'preExisting' },
+    { label: 'Able to Commit to Traineeship',           type: 'radio',    name: 'commitTraineeship' },
+    { label: 'Date Available to Begin',                 type: 'input',    id: 'tf-startDate' },
+    { label: 'Shift Availability',                      type: 'checkbox', name: 'shift' },
+    { label: 'Why Do You Want to Become a Rigger',      type: 'input',    id: 'tf-whyRigging' },
+    { label: 'What Do You Know About Rigging Work',     type: 'input',    id: 'tf-whatKnow' },
+    { label: 'Prior Conviction',                        type: 'radio',    name: 'convicted' },
+    { label: 'Willing to Undergo Screening',            type: 'radio',    name: 'screening' },
+    { label: 'Work Rights Status',                      type: 'select',   id: 'tf-rightToWork' },
+    { label: 'Full Name (Declaration)',                 type: 'input',    id: 'tf-declarationName' },
+    { label: 'Declaration Date',                        type: 'input',    id: 'tf-declarationDate' },
+  ];
+
+  /* ── Clear highlights ── */
+  function clearHighlights() {
+    document.querySelectorAll('.tf-invalid').forEach(function (el) { el.classList.remove('tf-invalid'); });
+    document.querySelectorAll('.tf-invalid-group').forEach(function (el) { el.classList.remove('tf-invalid-group'); });
+    document.querySelectorAll('.tf-invalid-select').forEach(function (el) { el.classList.remove('tf-invalid-select'); });
+  }
+
+  /* ── Live clear on correction ── */
+  REQUIRED_FIELDS.forEach(function (f) {
+    if (f.type === 'input' || f.type === 'select') {
+      var el = document.getElementById(f.id);
+      if (el) {
+        el.addEventListener('input',  function () { el.classList.remove('tf-invalid', 'tf-invalid-select'); });
+        el.addEventListener('change', function () { el.classList.remove('tf-invalid', 'tf-invalid-select'); });
+      }
+    } else if (f.type === 'radio' || f.type === 'checkbox') {
+      document.querySelectorAll('input[name="' + f.name + '"]').forEach(function (r) {
+        r.addEventListener('change', function () {
+          var field = r.closest('.tf-field');
+          if (field) field.classList.remove('tf-invalid-group');
+        });
+      });
+    }
+  });
+
+  /* ── Validate ── */
+  function validateForm() {
+    clearHighlights();
+    var missing = [];
+
+    REQUIRED_FIELDS.forEach(function (f) {
+      var invalid = false;
+
+      if (f.type === 'input') {
+        var el = document.getElementById(f.id);
+        if (!el || !el.value.trim() ||
+            (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value))) {
+          invalid = true;
+          if (el) el.classList.add('tf-invalid');
+        }
+      } else if (f.type === 'select') {
+        var el = document.getElementById(f.id);
+        if (!el || !el.value) {
+          invalid = true;
+          if (el) el.classList.add('tf-invalid-select');
+        }
+      } else if (f.type === 'radio') {
+        var checked = document.querySelector('input[name="' + f.name + '"]:checked');
+        if (!checked) {
+          invalid = true;
+          var any = document.querySelector('input[name="' + f.name + '"]');
+          if (any) {
+            var field = any.closest('.tf-field');
+            if (field) field.classList.add('tf-invalid-group');
+          }
+        }
+      } else if (f.type === 'checkbox') {
+        var checked = document.querySelector('input[name="' + f.name + '"]:checked');
+        if (!checked) {
+          invalid = true;
+          var any = document.querySelector('input[name="' + f.name + '"]');
+          if (any) {
+            var field = any.closest('.tf-field');
+            if (field) field.classList.add('tf-invalid-group');
+          }
+        }
+      }
+
+      if (invalid) missing.push(f.label);
+    });
+
+    return missing;
+  }
+
+  /* ── Collect checked checkboxes ── */
+  function getChecked(name) {
+    var vals = Array.from(document.querySelectorAll('input[name="' + name + '"]:checked'))
+      .map(function (cb) { return cb.value; });
+    return vals.length ? vals.join(', ') : 'None selected';
+  }
+
+  /* ── Default today for declaration date ── */
+  document.getElementById('tf-declarationDate').valueAsDate = new Date();
+
+  /* ── Submit ── */
+  document.getElementById('traineeForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form     = e.target;
+    var btn      = document.getElementById('tf-submit-btn');
+    var statusEl = document.getElementById('tf-status');
+
+    var missing = validateForm();
+    if (missing.length > 0) {
+      var list = document.getElementById('tf-valModalList');
+      list.innerHTML = missing.map(function (m) { return '<li>' + m + '</li>'; }).join('');
+      document.getElementById('tf-valModal').classList.add('active');
+      return;
+    }
+
+    var data = {
+      formType:           'traineeship',
+      firstName:          document.getElementById('tf-firstName').value.trim(),
+      lastName:           document.getElementById('tf-lastName').value.trim(),
+      email:              document.getElementById('tf-email').value.trim(),
+      phone:              document.getElementById('tf-phone').value.trim(),
+      suburb:             document.getElementById('tf-suburb').value.trim(),
+      dob:                document.getElementById('tf-dob').value,
+      driversLicence:     (document.querySelector('input[name="driversLicence"]:checked') || {}).value || '',
+      licenceType:        document.getElementById('tf-licClass').value.trim(),
+      education:          document.getElementById('tf-education').value,
+      mathsComfort:       (document.querySelector('input[name="mathsComfort"]:checked') || {}).value || '',
+      literacyDifficulty: (document.querySelector('input[name="literacyDifficulty"]:checked') || {}).value || '',
+      literacyDetails:    document.getElementById('tf-literacyDetails').value.trim(),
+      whiteCard:          (document.querySelector('input[name="whiteCard"]:checked') || {}).value || '',
+      whiteCardState:     document.getElementById('tf-wcState').value || '',
+      doggingLicence:     (document.querySelector('input[name="doggingLicence"]:checked') || {}).value || '',
+      licences:           document.getElementById('tf-licences').value.trim() || 'None listed',
+      priorExperience:    (document.querySelector('input[name="priorExperience"]:checked') || {}).value || '',
+      priorExpDetails:    document.getElementById('tf-priorExpDetails').value.trim(),
+      tradeQual:          (document.querySelector('input[name="tradeQual"]:checked') || {}).value || '',
+      tradeQualDetails:   document.getElementById('tf-tradeQualDetails').value.trim(),
+      workAtHeights:      (document.querySelector('input[name="workAtHeights"]:checked') || {}).value || '',
+      physicalDemands:    (document.querySelector('input[name="physicalDemands"]:checked') || {}).value || '',
+      preExisting:        (document.querySelector('input[name="preExisting"]:checked') || {}).value || '',
+      preExistingDetails: document.getElementById('tf-preExistingDetails').value.trim(),
+      commitTraineeship:  (document.querySelector('input[name="commitTraineeship"]:checked') || {}).value || '',
+      startDate:          document.getElementById('tf-startDate').value,
+      shift:              getChecked('shift'),
+      hearAboutUs:        document.getElementById('tf-hearAboutUs').value,
+      whyRigging:         document.getElementById('tf-whyRigging').value.trim(),
+      whatKnow:           document.getElementById('tf-whatKnow').value.trim(),
+      convicted:          (document.querySelector('input[name="convicted"]:checked') || {}).value || '',
+      convictedDetails:   document.getElementById('tf-convictedDetails').value.trim(),
+      screening:          (document.querySelector('input[name="screening"]:checked') || {}).value || '',
+      rightToWork:        document.getElementById('tf-rightToWork').value,
+      declarationName:    document.getElementById('tf-declarationName').value.trim(),
+      declarationDate:    document.getElementById('tf-declarationDate').value,
+      submittedAt:        new Date().toLocaleString('en-AU', { timeZone: 'Australia/Sydney' })
+    };
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="tf-spinner"></span>Submitting\u2026';
+    statusEl.className = '';
+    statusEl.style.display = 'none';
+
+    grecaptcha.ready(function () {
+      grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_traineeship' })
+        .then(function (token) {
+
+          data.recaptchaToken = token;
+          data.website        = document.getElementById('tf-honeypot').value;
+
+          fetch(APPS_SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
+            .then(function (res) { return res.json(); })
+            .then(function (result) {
+              if (result.status === 'success') {
+                document.getElementById('tf-thankyouModal').classList.add('active');
+                form.reset();
+                document.querySelectorAll('.tf-conditional').forEach(function (el) {
+                  el.classList.remove('visible');
+                });
+              } else {
+                throw new Error(result.message || 'Unknown error');
+              }
+            })
+            .catch(function (err) {
+              statusEl.className = 'error';
+              statusEl.textContent = '\u2716 Submission failed. Please try again or email recruitment@corellian.com.au directly.';
+              console.error(err);
+            })
+            .finally(function () {
+              btn.disabled = false;
+              btn.innerHTML = 'Submit Application';
+            });
+
+        }); // end grecaptcha.execute.then
+    });     // end grecaptcha.ready
+
+  });  // end addEventListener('submit')
+
+})();
+</script>
