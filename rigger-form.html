@@ -495,13 +495,128 @@
   }
 
   .rf-valmodal-btn:hover { background-color: #cc0000; }
+
+  /* ── File upload zone ── */
+  .rf-upload-zone {
+    border: 2px dashed var(--border-color);
+    border-radius: 6px;
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    background: #fafafa;
+    margin-top: 0.75rem;
+  }
+
+  .rf-upload-zone:hover,
+  .rf-upload-zone.dragover {
+    border-color: var(--secondary-color);
+    background: #fff8f8;
+  }
+
+  .rf-upload-icon { font-size: 2rem; color: #ccc; margin-bottom: 0.35rem; line-height: 1; }
+  .rf-upload-title { font-weight: 600; font-size: 0.95rem; color: var(--primary-color); margin: 0 0 0.25rem; }
+  .rf-upload-hint  { font-size: 0.85rem; color: #888; margin: 0 0 0.45rem; }
+  .rf-upload-types { font-size: 0.77rem; color: #aaa; margin: 0 0 0.9rem; }
+
+  .rf-upload-browse {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.45rem 1.25rem;
+    font-family: var(--font-heading);
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .rf-upload-browse:hover { background: #cc0000; }
+
+  .rf-file-list { margin-top: 0.6rem; display: flex; flex-direction: column; gap: 0.35rem; }
+
+  .rf-file-item {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.45rem 0.75rem;
+    background: #f7f7f7;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.84rem;
+  }
+
+  .rf-file-icon   { font-size: 1.1rem; flex-shrink: 0; }
+  .rf-file-name   { flex: 1; color: var(--primary-color); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rf-file-size   { color: #aaa; font-size: 0.78rem; flex-shrink: 0; }
+  .rf-file-remove { background: none; border: none; color: #bbb; cursor: pointer; font-size: 1.1rem; line-height: 1; padding: 0 2px; flex-shrink: 0; }
+  .rf-file-remove:hover { color: var(--secondary-color); }
+
+  .rf-upload-note {
+    background: #fffbef;
+    border: 1px solid #e8d080;
+    border-left: 4px solid #c89600;
+    border-radius: 4px;
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.55;
+    margin-bottom: 0.75rem;
+  }
+
+  .rf-upload-note strong { color: var(--primary-color); }
+  .rf-upload-note a { color: var(--secondary-color); }
+  .rf-upload-error { color: var(--secondary-color); font-size: 0.82rem; margin-top: 0.35rem; }
+
+  /* Attachment-status card pills */
+  .rf-att-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.3rem;
+  }
+
+  .rf-att-pills input[type="radio"] { display: none; }
+
+  .rf-att-pills label {
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    background: #fff;
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+    margin-bottom: 0;
+    line-height: 1.4;
+  }
+
+  .rf-att-pills label:hover { border-color: var(--secondary-color); }
+
+  .rf-att-pills input[type="radio"]:checked + label {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+  }
+
+  .rf-att-invalid .rf-att-pills label {
+    border-color: #f5a5a5;
+    background-color: #fff5f5;
+  }
+
 </style>
 
 
 <!-- reCAPTCHA v3 — loaded dynamically; replace site key in the script block below -->
 <script>
 (function() {
-  var SITE_KEY = '6LevpIEsAAAAACfJgzI4bKa7ZKH-caxyKHbVmPD7';
+  var SITE_KEY = '6LcV6IosAAAAAJTlJ1i9wpaizpD2vQWl0f_8HB7q';
   var s = document.createElement('script');
   s.src = 'https://www.google.com/recaptcha/api.js?render=' + SITE_KEY;
   s.async = true;
@@ -647,7 +762,8 @@
         <div class="rf-field rf-col-2">
           <label for="rf-role">Role Interested In <span class="req">*</span></label>
           <span class="rf-hint" style="margin-bottom:0.2rem;">Click to select one option</span>
-          <select id="rf-role" name="role" class="rf-listbox" size="3" required>
+          <select id="rf-role" name="role" class="rf-listbox" size="4" required>
+            <option value="Labourer or Driver - Non-Rigging Position">Labourer or Driver - Non-Rigging Position</option>
             <option value="Qualified Rigger - No Mechanical Experience">Qualified Rigger - No Mechanical Rigging Experience</option>
             <option value="Mechanical Rigger - Basic Rigging Ticket">Mechanical Rigger — Basic Rigging Ticket</option>
             <option value="Mechanical Rigger - Intermediate or Higher">Mechanical Rigger — Intermediate or Higher</option>
@@ -781,9 +897,49 @@
       </div>
     </div>
 
-    <!-- ── 06 DECLARATION ── -->
+
+    <!-- ── 06 DOCUMENTS & CONFIRMATION ── -->
     <div class="rf-section">
-      <div class="rf-section-title">06 — Declaration</div>
+      <div class="rf-section-title">06 &mdash; Documents &amp; Confirmation</div>
+
+      <div class="rf-upload-note">
+        <strong>Please attach your resume and your High Risk Work Licence image (if you hold one).</strong><br>
+        Do <em>not</em> attach other certificates, tickets, or licences here &mdash; please list these in your
+        resume instead. If you have trouble uploading, email your documents to
+        <a href="mailto:recruitment@corellian.com.au">recruitment@corellian.com.au</a>.
+      </div>
+
+      <div class="rf-upload-zone" id="rf-uploadZone">
+        <div class="rf-upload-icon">&#128206;</div>
+        <p class="rf-upload-title">Attach Resume &amp; High Risk Work Licence</p>
+        <p class="rf-upload-hint">Drag &amp; drop files here, or click to browse</p>
+        <p class="rf-upload-types">PDF, Word (.doc / .docx) or image (JPG, PNG) &middot; Max 5 MB per file</p>
+        <input type="file" id="rf-fileInput" multiple
+          accept="image/*,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          style="display:none;" tabindex="-1">
+        <button type="button" class="rf-upload-browse" id="rf-uploadBrowse">Browse Files</button>
+      </div>
+      <div id="rf-fileList" class="rf-file-list"></div>
+      <div id="rf-uploadError" class="rf-upload-error" style="display:none;"></div>
+
+      <!-- Confirmation question -->
+      <div class="rf-field" style="margin-top: 1.1rem;" id="rf-attachmentField">
+        <label>Document Attachment Status <span class="req">*</span></label>
+        <div class="rf-att-pills" id="rf-attachmentPills">
+          <input type="radio" name="attachmentStatus" id="rf-att-attached" value="Attached — resume and/or licence included">
+          <label for="rf-att-attached">I have attached my best available resume and (if applicable) High Risk Work Licence</label>
+          <input type="radio" name="attachmentStatus" id="rf-att-none" value="No documents available">
+          <label for="rf-att-none">I do not have a resume and/or licence image to provide</label>
+          <input type="radio" name="attachmentStatus" id="rf-att-email" value="Will email documents">
+          <label for="rf-att-email">I will send my resume and licence by email to recruitment@corellian.com.au</label>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── 07 DECLARATION ── -->
+    <div class="rf-section">
+      <div class="rf-section-title">07 — Declaration</div>
       <div class="rf-declaration">
         I declare that the above information is true and correct. I understand that in the event
         of my employment by Corellian Pty Ltd, I shall be subject to dismissal if any information
@@ -807,7 +963,7 @@
     <div style="text-align:center; margin-top:0.5rem;">
       <button type="submit" id="rf-submit-btn">Submit Application</button>
       <p class="rf-submit-note">
-        Please also email your resume, licences, tickets and qualifications to
+        If you selected “I will send by email” above, please send your documents to
         <a href="mailto:recruitment@corellian.com.au">recruitment@corellian.com.au</a>
       </p>
       <div id="rf-status"></div>
@@ -835,7 +991,7 @@
     <h3 id="rf-modalTitle">Application Received</h3>
     <p>Thank you for submitting your application to Corellian.</p>
     <p>We'll review your details and be in touch if your experience matches our current requirements.</p>
-    <p style="font-size:0.82rem;color:#888;">Please also email your resume, licences, tickets and qualifications to <a href="mailto:recruitment@corellian.com.au" style="color:var(--secondary-color);">recruitment@corellian.com.au</a></p>
+    <p style="font-size:0.82rem;color:#888;" id="rf-modalEmailReminder">If you selected “I will send by email”, please remember to send your resume and licence to <a href="mailto:recruitment@corellian.com.au" style="color:var(--secondary-color);">recruitment@corellian.com.au</a></p>
     <button class="rf-modal-close" id="rf-modalClose">Close</button>
   </div>
 </div>
@@ -854,10 +1010,10 @@
 <script>
 (function () {
   /* ── reCAPTCHA v3 site key — replace with your key from console.google.com/recaptcha ── */
-  var RECAPTCHA_SITE_KEY = '6LevpIEsAAAAACfJgzI4bKa7ZKH-caxyKHbVmPD7';
+  var RECAPTCHA_SITE_KEY = '6LcV6IosAAAAAJTlJ1i9wpaizpD2vQWl0f_8HB7q';
 
   /* ── Apps Script endpoint — replace with your deployed URL ── */
-  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwWGzEkaEiBlWdEq6kc5P8f9jXX1xB37Wb3wMQR30aYcSfUoH0vHNvBxPg9SM5KNq2N8A/exec';
+  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby05S9RbmxnqKOZwfX8wLOW-sWYSaiPS1VKfOfJxPNzW3L-k1mmIF1K-kfpIqsgweca/exec';
 
   /* ── Conditional reveal helper ── */
   function bindYN(radioName, containerId, triggerValue) {
@@ -914,6 +1070,84 @@
     return vals.length ? vals.join(', ') : 'None selected';
   }
 
+
+  /* ── File attachment handling ── */
+  var rfAttachedFiles = [];
+  var RF_MAX_FILE = 5 * 1024 * 1024;
+
+  (function() {
+    var zone     = document.getElementById('rf-uploadZone');
+    var input    = document.getElementById('rf-fileInput');
+    var listEl   = document.getElementById('rf-fileList');
+    var errEl    = document.getElementById('rf-uploadError');
+    var browseBtn = document.getElementById('rf-uploadBrowse');
+
+    function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function fmtSize(b) { return b > 1048576 ? (b/1048576).toFixed(1)+' MB' : Math.round(b/1024)+' KB'; }
+    function fileIcon(n) {
+      var ext = n.split('.').pop().toLowerCase();
+      return ext === 'pdf' ? '\uD83D\uDCC4' : (ext === 'doc' || ext === 'docx') ? '\uD83D\uDCDD' : '\uD83D\uDDBC\uFE0F';
+    }
+
+    function render() {
+      listEl.innerHTML = '';
+      rfAttachedFiles.forEach(function(file, idx) {
+        var item = document.createElement('div');
+        item.className = 'rf-file-item';
+        item.innerHTML =
+          '<span class="rf-file-icon">' + fileIcon(file.name) + '</span>' +
+          '<span class="rf-file-name" title="' + esc(file.name) + '">' + esc(file.name) + '</span>' +
+          '<span class="rf-file-size">' + fmtSize(file.size) + '</span>' +
+          '<button type="button" class="rf-file-remove" title="Remove" data-idx="' + idx + '">&times;</button>';
+        listEl.appendChild(item);
+      });
+      listEl.querySelectorAll('.rf-file-remove').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          rfAttachedFiles.splice(parseInt(this.dataset.idx), 1); render();
+        });
+      });
+    }
+
+    function addFiles(fl) {
+      var errors = [];
+      Array.from(fl).forEach(function(file) {
+        if (file.size > RF_MAX_FILE) { errors.push('\u201c' + file.name + '\u201d exceeds 5 MB.'); return; }
+        if (rfAttachedFiles.some(function(f) { return f.name === file.name && f.size === file.size; })) return;
+        rfAttachedFiles.push(file);
+      });
+      errEl.textContent = errors.join(' ');
+      errEl.style.display = errors.length ? 'block' : 'none';
+      render();
+    }
+
+    browseBtn.addEventListener('click', function(e) { e.stopPropagation(); input.click(); });
+    zone.addEventListener('click', function() { input.click(); });
+    zone.addEventListener('dragover', function(e) { e.preventDefault(); zone.classList.add('dragover'); });
+    zone.addEventListener('dragleave', function() { zone.classList.remove('dragover'); });
+    zone.addEventListener('drop', function(e) { e.preventDefault(); zone.classList.remove('dragover'); addFiles(e.dataTransfer.files); });
+    input.addEventListener('change', function() { addFiles(this.files); this.value = ''; });
+
+    /* Live clear on attachment status selection */
+    document.querySelectorAll('input[name="attachmentStatus"]').forEach(function(r) {
+      r.addEventListener('change', function() {
+        var field = document.getElementById('rf-attachmentField');
+        if (field) field.classList.remove('rf-att-invalid');
+      });
+    });
+  })();
+
+  function rfReadFilesAsB64() {
+    if (rfAttachedFiles.length === 0) return Promise.resolve([]);
+    return Promise.all(rfAttachedFiles.map(function(file) {
+      return new Promise(function(resolve) {
+        var reader = new FileReader();
+        reader.onload  = function(e) { resolve({ name: file.name, type: file.type, size: file.size, dataB64: e.target.result.split(',')[1] }); };
+        reader.onerror = function()  { resolve({ name: file.name, type: file.type, size: file.size, error: 'read failed' }); };
+        reader.readAsDataURL(file);
+      });
+    }));
+  }
+
   /* ── Default today for declaration date ── */
   document.getElementById('rf-declarationDate').valueAsDate = new Date();
 
@@ -956,6 +1190,7 @@
     { label: 'Work Rights Status',                type: 'select',   id: 'rf-rightToWork' },
     { label: 'Full Name (Declaration)',           type: 'input',    id: 'rf-declarationName' },
     { label: 'Declaration Date',                  type: 'input',    id: 'rf-declarationDate' },
+    { label: 'Document Attachment Status',          type: 'radio',    name: 'attachmentStatus',   container: 'rf-attachmentField' },
   ];
 
   /* ── Clear all highlights ── */
@@ -963,6 +1198,7 @@
     document.querySelectorAll('.rf-invalid').forEach(function (el) { el.classList.remove('rf-invalid'); });
     document.querySelectorAll('.rf-invalid-group').forEach(function (el) { el.classList.remove('rf-invalid-group'); });
     document.querySelectorAll('.rf-invalid-select').forEach(function (el) { el.classList.remove('rf-invalid-select'); });
+    document.querySelectorAll('.rf-att-invalid').forEach(function (el) { el.classList.remove('rf-att-invalid'); });
   }
 
   /* ── Attach live clear-on-change listeners once ── */
@@ -1012,11 +1248,15 @@
         var checked = document.querySelector('input[name="' + f.name + '"]:checked');
         if (!checked) {
           invalid = true;
-          // Highlight the pill-group container
-          var anyRadio = document.querySelector('input[name="' + f.name + '"]');
-          if (anyRadio) {
-            var field = anyRadio.closest('.rf-field');
-            if (field) field.classList.add('rf-invalid-group');
+          if (f.name === 'attachmentStatus') {
+            var attField = document.getElementById('rf-attachmentField');
+            if (attField) attField.classList.add('rf-att-invalid');
+          } else {
+            var anyRadio = document.querySelector('input[name="' + f.name + '"]');
+            if (anyRadio) {
+              var field = anyRadio.closest('.rf-field');
+              if (field) field.classList.add('rf-invalid-group');
+            }
           }
         }
       } else if (f.type === 'checkbox') {
@@ -1079,15 +1319,25 @@
       rightToWork:        document.getElementById('rf-rightToWork').value,
       declarationName:    document.getElementById('rf-declarationName').value.trim(),
       declarationDate:    document.getElementById('rf-declarationDate').value,
+      attachmentStatus:   (document.querySelector('input[name="attachmentStatus"]:checked') || {}).value || '',
       submittedAt:        new Date().toLocaleString('en-AU', { timeZone: 'Australia/Sydney' })
     };
 
     btn.disabled = true;
     btn.innerHTML = '<span class="rf-spinner"></span>Submitting\u2026';
     statusEl.className = '';
-  
-    // Get reCAPTCHA v3 token then POST
-    grecaptcha.ready(function () {
+
+
+    // Read files then get reCAPTCHA v3 token and POST
+    rfReadFilesAsB64().then(function(fileData) {
+      data.attachedFiles = fileData;
+
+      // Show/hide email reminder in modal based on selection
+      var attVal = (document.querySelector('input[name="attachmentStatus"]:checked') || {}).value || '';
+      var modalReminder = document.getElementById('rf-modalEmailReminder');
+      if (modalReminder) modalReminder.style.display = attVal.indexOf('email') !== -1 ? '' : 'none';
+
+      grecaptcha.ready(function () {
       grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_application' })
         .then(function (token) {
 
@@ -1095,32 +1345,34 @@
           data.website        = document.getElementById('rf-honeypot').value; // honeypot
 
           fetch(APPS_SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
-      .then(function (res) { return res.json(); })
-      .then(function (result) {
-        if (result.status === 'success') {
-          document.getElementById('rf-thankyouModal').classList.add('active');
-          form.reset();
-          document.querySelectorAll('.rf-conditional').forEach(function (el) {
-            el.classList.remove('visible');
-          });
-          document.getElementById('riggerFormContainer') &&
-            document.getElementById('riggerFormContainer').scrollIntoView({ behavior: 'smooth' });
-        } else {
-          throw new Error(result.message || 'Unknown error');
-        }
-      })
-      .catch(function (err) {
-        statusEl.className = 'error';
-        statusEl.textContent = '\u2716 Submission failed. Please try again or email recruitment@corellian.com.au directly.';
-        console.error(err);
-      })
-      .finally(function () {
-        btn.disabled = false;
-        btn.innerHTML = 'Submit Application';
-      });
+            .then(function (res) { return res.json(); })
+            .then(function (result) {
+              if (result.status === 'success') {
+                document.getElementById('rf-thankyouModal').classList.add('active');
+                form.reset();
+                rfAttachedFiles = [];
+                document.getElementById('rf-fileList').innerHTML = '';
+                document.querySelectorAll('.rf-conditional').forEach(function (el) { el.classList.remove('visible'); });
+                document.getElementById('riggerFormContainer') &&
+                  document.getElementById('riggerFormContainer').scrollIntoView({ behavior: 'smooth' });
+              } else {
+                throw new Error(result.message || 'Unknown error');
+              }
+            })
+            .catch(function (err) {
+              statusEl.className = 'error';
+              statusEl.textContent = '\u2716 Submission failed. Please try again or email recruitment@corellian.com.au directly.';
+              console.error(err);
+            })
+            .finally(function () {
+              btn.disabled = false;
+              btn.innerHTML = 'Submit Application';
+            });
 
-        }); // end grecaptcha.execute.then
-    });     // end grecaptcha.ready
+          }); // end grecaptcha.execute.then
+      });     // end grecaptcha.ready
+
+    }); // end rfReadFilesAsB64
 
   });  // end addEventListener('submit')
 
