@@ -458,7 +458,7 @@
     btn.disabled = true;
     btn.innerHTML = '<span class="cf-spinner"></span>Sending\u2026';
     statusEl.className = '';
-
+    statusEl.style.display = 'none';
 
     grecaptcha.ready(function () {
       grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_contact' })
