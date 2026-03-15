@@ -375,6 +375,121 @@
 
   .tf-valmodal-btn:hover { background-color: #cc0000; }
 
+  /* ── File upload zone ── */
+  .tf-upload-zone {
+    border: 2px dashed var(--border-color);
+    border-radius: 6px;
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    background: #fafafa;
+    margin-top: 0.75rem;
+  }
+
+  .tf-upload-zone:hover,
+  .tf-upload-zone.dragover {
+    border-color: var(--secondary-color);
+    background: #fff8f8;
+  }
+
+  .tf-upload-icon { font-size: 2rem; color: #ccc; margin-bottom: 0.35rem; line-height: 1; }
+  .tf-upload-title { font-weight: 600; font-size: 0.95rem; color: var(--primary-color); margin: 0 0 0.25rem; }
+  .tf-upload-hint  { font-size: 0.85rem; color: #888; margin: 0 0 0.45rem; }
+  .tf-upload-types { font-size: 0.77rem; color: #aaa; margin: 0 0 0.9rem; }
+
+  .tf-upload-browse {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.45rem 1.25rem;
+    font-family: var(--font-heading);
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .tf-upload-browse:hover { background: #cc0000; }
+
+  .tf-file-list { margin-top: 0.6rem; display: flex; flex-direction: column; gap: 0.35rem; }
+
+  .tf-file-item {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.45rem 0.75rem;
+    background: #f7f7f7;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.84rem;
+  }
+
+  .tf-file-icon   { font-size: 1.1rem; flex-shrink: 0; }
+  .tf-file-name   { flex: 1; color: var(--primary-color); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tf-file-size   { color: #aaa; font-size: 0.78rem; flex-shrink: 0; }
+  .tf-file-remove { background: none; border: none; color: #bbb; cursor: pointer; font-size: 1.1rem; line-height: 1; padding: 0 2px; flex-shrink: 0; }
+  .tf-file-remove:hover { color: var(--secondary-color); }
+
+  .tf-upload-note {
+    background: #fffbef;
+    border: 1px solid #e8d080;
+    border-left: 4px solid #c89600;
+    border-radius: 4px;
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.55;
+    margin-bottom: 0.75rem;
+  }
+
+  .tf-upload-note strong { color: var(--primary-color); }
+  .tf-upload-note a { color: var(--secondary-color); }
+  .tf-upload-error { color: var(--secondary-color); font-size: 0.82rem; margin-top: 0.35rem; }
+
+  /* Attachment-status card pills */
+  .tf-att-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.3rem;
+  }
+
+  .tf-att-pills input[type="radio"] { display: none; }
+
+  .tf-att-pills label {
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    background: #fff;
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+    margin-bottom: 0;
+    line-height: 1.4;
+  }
+
+  .tf-att-pills label:hover { border-color: var(--secondary-color); }
+
+  .tf-att-pills input[type="radio"]:checked + label {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+  }
+
+  .tf-att-invalid .tf-att-pills label {
+    border-color: #f5a5a5;
+    background-color: #fff5f5;
+  }
+
+
   /* ── Thank-you modal ── */
   .tf-modal-overlay {
     display: none;
@@ -448,7 +563,7 @@
 <!-- reCAPTCHA v3 loader -->
 <script>
 (function() {
-  var SITE_KEY = '6LevpIEsAAAAACfJgzI4bKa7ZKH-caxyKHbVmPD7';
+  var SITE_KEY = '6LcV6IosAAAAAJTlJ1i9wpaizpD2vQWl0f_8HB7q';
   var s = document.createElement('script');
   s.src = 'https://www.google.com/recaptcha/api.js?render=' + SITE_KEY;
   s.async = true;
@@ -548,6 +663,7 @@
           <label for="tf-experience">Workforce Experience After Graduation<span class="req">*</span></label>
           <span class="tf-hint" style="margin-bottom:0.2rem;">Click to select one option</span>
           <select id="tf-experience" name="experience" class="tf-listbox" size="6" required>
+            <option value="School Leaver/Recently Graduated">School Leaver/Recently Graduated</option>
             <option value="Plus 1 Year out of School">Plus 1 Year out of School</option>
             <option value="Plus 2 Years out of School">Plus 2 Years out of School</option>
             <option value="Plus 3 Years out of School">Plus 3 Years out of School</option>
@@ -871,9 +987,49 @@
       </div>
     </div>
 
-    <!-- ── 09 DECLARATION ── -->
+
+    <!-- ── 09 DOCUMENTS & CONFIRMATION ── -->
     <div class="tf-section">
-      <div class="tf-section-title">09 — Declaration</div>
+      <div class="tf-section-title">09 &mdash; Documents &amp; Confirmation</div>
+
+      <div class="tf-upload-note">
+        <strong>Please attach your resume and your High Risk Work Licence image (if you hold one).</strong><br>
+        Do <em>not</em> attach other certificates, tickets, or licences here &mdash; please mention these in
+        your resume instead. If you have trouble uploading, email your documents to
+        <a href="mailto:recruitment@corellian.com.au">recruitment@corellian.com.au</a>.
+      </div>
+
+      <div class="tf-upload-zone" id="tf-uploadZone">
+        <div class="tf-upload-icon">&#128206;</div>
+        <p class="tf-upload-title">Attach Resume &amp; High Risk Work Licence</p>
+        <p class="tf-upload-hint">Drag &amp; drop files here, or click to browse</p>
+        <p class="tf-upload-types">PDF, Word (.doc / .docx) or image (JPG, PNG) &middot; Max 5 MB per file</p>
+        <input type="file" id="tf-fileInput" multiple
+          accept="image/*,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          style="display:none;" tabindex="-1">
+        <button type="button" class="tf-upload-browse" id="tf-uploadBrowse">Browse Files</button>
+      </div>
+      <div id="tf-fileList" class="tf-file-list"></div>
+      <div id="tf-uploadError" class="tf-upload-error" style="display:none;"></div>
+
+      <!-- Confirmation question -->
+      <div class="tf-field" style="margin-top: 1.1rem;" id="tf-attachmentField">
+        <label>Document Attachment Status <span class="req">*</span></label>
+        <div class="tf-att-pills" id="tf-attachmentPills">
+          <input type="radio" name="attachmentStatus" id="tf-att-attached" value="Attached — resume and/or licence included">
+          <label for="tf-att-attached">I have attached my best available resume and (if applicable) High Risk Work Licence</label>
+          <input type="radio" name="attachmentStatus" id="tf-att-none" value="No documents available">
+          <label for="tf-att-none">I do not have a resume and/or licence image to provide</label>
+          <input type="radio" name="attachmentStatus" id="tf-att-email" value="Will email documents">
+          <label for="tf-att-email">I will send my resume and licence by email to recruitment@corellian.com.au</label>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── 10 DECLARATION ── -->
+    <div class="tf-section">
+      <div class="tf-section-title">10 — Declaration</div>
       <div class="tf-declaration">
         I declare that the above information is true and correct. I understand that in the event of
         my employment by Corellian Pty Ltd, I shall be subject to dismissal if any information that
@@ -897,7 +1053,7 @@
     <div style="text-align:center; margin-top:0.5rem;">
       <button type="submit" id="tf-submit-btn">Submit Application</button>
       <p class="tf-submit-note">
-        Please also email your resume, licences, and any relevant certificates to
+        If you selected “I will send by email” above, please send your documents to
         <a href="mailto:recruitment@corellian.com.au">recruitment@corellian.com.au</a>
       </p>
       <div id="tf-status"></div>
@@ -924,7 +1080,7 @@
     <h3 id="tf-modalTitle">Application Received</h3>
     <p>Thank you for your interest in a Corellian rigging traineeship.</p>
     <p>We'll review your application and be in touch if your profile is a good match for our current traineeship intake.</p>
-    <p style="font-size:0.82rem;color:#888;">Please also email your resume and any relevant certificates to <a href="mailto:recruitment@corellian.com.au" style="color:var(--secondary-color);">recruitment@corellian.com.au</a></p>
+    <p style="font-size:0.82rem;color:#888;" id="tf-modalEmailReminder">If you selected “I will send by email”, please remember to send your resume and licence to <a href="mailto:recruitment@corellian.com.au" style="color:var(--secondary-color);">recruitment@corellian.com.au</a></p>
     <button class="tf-modal-close" id="tf-modalClose">Close</button>
   </div>
 </div>
@@ -932,7 +1088,7 @@
 <script>
 (function () {
 
-  var RECAPTCHA_SITE_KEY = '6LevpIEsAAAAACfJgzI4bKa7ZKH-caxyKHbVmPD7';
+  var RECAPTCHA_SITE_KEY = '6LcV6IosAAAAAJTlJ1i9wpaizpD2vQWl0f_8HB7q';
   var APPS_SCRIPT_URL    = 'https://script.google.com/macros/s/AKfycbysDuV0SLBOSpe2RRYmzQJWu4AkYg8X5nW2i5rx34X3IGE4vMle79bcrShU5jCGoNmQ/exec';
 
   /* ── Conditional reveal helper ── */
@@ -1005,6 +1161,7 @@
     { label: 'Date of Birth',                           type: 'input',    id: 'tf-dob' },
     { label: 'Drivers Licence',                         type: 'radio',    name: 'driversLicence' },
     { label: 'Highest Level of Education',              type: 'select',   id: 'tf-education' },
+    { label: 'Work Experience',                         type: 'select',   id: 'tf-experience' },
     { label: 'Comfortable with Basic Maths',            type: 'radio',    name: 'mathsComfort' },
     { label: 'Literacy / Language Difficulties',        type: 'radio',    name: 'literacyDifficulty' },
     { label: 'White Card',                              type: 'radio',    name: 'whiteCard' },
@@ -1024,6 +1181,7 @@
     { label: 'Work Rights Status',                      type: 'select',   id: 'tf-rightToWork' },
     { label: 'Full Name (Declaration)',                 type: 'input',    id: 'tf-declarationName' },
     { label: 'Declaration Date',                        type: 'input',    id: 'tf-declarationDate' },
+    { label: 'Document Attachment Status',                 type: 'radio',    name: 'attachmentStatus' },
   ];
 
   /* ── Clear highlights ── */
@@ -1031,6 +1189,7 @@
     document.querySelectorAll('.tf-invalid').forEach(function (el) { el.classList.remove('tf-invalid'); });
     document.querySelectorAll('.tf-invalid-group').forEach(function (el) { el.classList.remove('tf-invalid-group'); });
     document.querySelectorAll('.tf-invalid-select').forEach(function (el) { el.classList.remove('tf-invalid-select'); });
+    document.querySelectorAll('.tf-att-invalid').forEach(function (el) { el.classList.remove('tf-att-invalid'); });
   }
 
   /* ── Live clear on correction ── */
@@ -1076,10 +1235,15 @@
         var checked = document.querySelector('input[name="' + f.name + '"]:checked');
         if (!checked) {
           invalid = true;
-          var any = document.querySelector('input[name="' + f.name + '"]');
-          if (any) {
-            var field = any.closest('.tf-field');
-            if (field) field.classList.add('tf-invalid-group');
+          if (f.name === 'attachmentStatus') {
+            var attField = document.getElementById('tf-attachmentField');
+            if (attField) attField.classList.add('tf-att-invalid');
+          } else {
+            var any = document.querySelector('input[name="' + f.name + '"]');
+            if (any) {
+              var field = any.closest('.tf-field');
+              if (field) field.classList.add('tf-invalid-group');
+            }
           }
         }
       } else if (f.type === 'checkbox') {
@@ -1105,6 +1269,83 @@
     var vals = Array.from(document.querySelectorAll('input[name="' + name + '"]:checked'))
       .map(function (cb) { return cb.value; });
     return vals.length ? vals.join(', ') : 'None selected';
+  }
+
+
+  /* ── File attachment handling ── */
+  var tfAttachedFiles = [];
+  var TF_MAX_FILE = 5 * 1024 * 1024;
+
+  (function() {
+    var zone      = document.getElementById('tf-uploadZone');
+    var input     = document.getElementById('tf-fileInput');
+    var listEl    = document.getElementById('tf-fileList');
+    var errEl     = document.getElementById('tf-uploadError');
+    var browseBtn = document.getElementById('tf-uploadBrowse');
+
+    function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function fmtSize(b) { return b > 1048576 ? (b/1048576).toFixed(1)+' MB' : Math.round(b/1024)+' KB'; }
+    function fileIcon(n) {
+      var ext = n.split('.').pop().toLowerCase();
+      return ext === 'pdf' ? '\uD83D\uDCC4' : (ext === 'doc' || ext === 'docx') ? '\uD83D\uDCDD' : '\uD83D\uDDBC\uFE0F';
+    }
+
+    function render() {
+      listEl.innerHTML = '';
+      tfAttachedFiles.forEach(function(file, idx) {
+        var item = document.createElement('div');
+        item.className = 'tf-file-item';
+        item.innerHTML =
+          '<span class="tf-file-icon">' + fileIcon(file.name) + '</span>' +
+          '<span class="tf-file-name" title="' + esc(file.name) + '">' + esc(file.name) + '</span>' +
+          '<span class="tf-file-size">' + fmtSize(file.size) + '</span>' +
+          '<button type="button" class="tf-file-remove" title="Remove" data-idx="' + idx + '">&times;</button>';
+        listEl.appendChild(item);
+      });
+      listEl.querySelectorAll('.tf-file-remove').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          tfAttachedFiles.splice(parseInt(this.dataset.idx), 1); render();
+        });
+      });
+    }
+
+    function addFiles(fl) {
+      var errors = [];
+      Array.from(fl).forEach(function(file) {
+        if (file.size > TF_MAX_FILE) { errors.push('\u201c' + file.name + '\u201d exceeds 5 MB.'); return; }
+        if (tfAttachedFiles.some(function(f) { return f.name === file.name && f.size === file.size; })) return;
+        tfAttachedFiles.push(file);
+      });
+      errEl.textContent = errors.join(' ');
+      errEl.style.display = errors.length ? 'block' : 'none';
+      render();
+    }
+
+    browseBtn.addEventListener('click', function(e) { e.stopPropagation(); input.click(); });
+    zone.addEventListener('click', function() { input.click(); });
+    zone.addEventListener('dragover', function(e) { e.preventDefault(); zone.classList.add('dragover'); });
+    zone.addEventListener('dragleave', function() { zone.classList.remove('dragover'); });
+    zone.addEventListener('drop', function(e) { e.preventDefault(); zone.classList.remove('dragover'); addFiles(e.dataTransfer.files); });
+    input.addEventListener('change', function() { addFiles(this.files); this.value = ''; });
+
+    document.querySelectorAll('input[name="attachmentStatus"]').forEach(function(r) {
+      r.addEventListener('change', function() {
+        var field = document.getElementById('tf-attachmentField');
+        if (field) field.classList.remove('tf-att-invalid');
+      });
+    });
+  })();
+
+  function tfReadFilesAsB64() {
+    if (tfAttachedFiles.length === 0) return Promise.resolve([]);
+    return Promise.all(tfAttachedFiles.map(function(file) {
+      return new Promise(function(resolve) {
+        var reader = new FileReader();
+        reader.onload  = function(e) { resolve({ name: file.name, type: file.type, size: file.size, dataB64: e.target.result.split(',')[1] }); };
+        reader.onerror = function()  { resolve({ name: file.name, type: file.type, size: file.size, error: 'read failed' }); };
+        reader.readAsDataURL(file);
+      });
+    }));
   }
 
   /* ── Default today for declaration date ── */
@@ -1136,6 +1377,7 @@
       driversLicence:     (document.querySelector('input[name="driversLicence"]:checked') || {}).value || '',
       licenceType:        document.getElementById('tf-licClass').value.trim(),
       education:          document.getElementById('tf-education').value,
+      experience:         document.getElementById('tf-experience').value,
       mathsComfort:       (document.querySelector('input[name="mathsComfort"]:checked') || {}).value || '',
       literacyDifficulty: (document.querySelector('input[name="literacyDifficulty"]:checked') || {}).value || '',
       literacyDetails:    document.getElementById('tf-literacyDetails').value.trim(),
@@ -1163,45 +1405,56 @@
       rightToWork:        document.getElementById('tf-rightToWork').value,
       declarationName:    document.getElementById('tf-declarationName').value.trim(),
       declarationDate:    document.getElementById('tf-declarationDate').value,
+      attachmentStatus:   (document.querySelector('input[name="attachmentStatus"]:checked') || {}).value || '',
       submittedAt:        new Date().toLocaleString('en-AU', { timeZone: 'Australia/Sydney' })
     };
 
     btn.disabled = true;
     btn.innerHTML = '<span class="tf-spinner"></span>Submitting\u2026';
     statusEl.className = '';
+    statusEl.style.display = 'none';
 
-    grecaptcha.ready(function () {
-      grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_traineeship' })
+    tfReadFilesAsB64().then(function(fileData) {
+      data.attachedFiles = fileData;
+
+      var attVal = (document.querySelector('input[name="attachmentStatus"]:checked') || {}).value || '';
+      var modalReminder = document.getElementById('tf-modalEmailReminder');
+      if (modalReminder) modalReminder.style.display = attVal.indexOf('email') !== -1 ? '' : 'none';
+
+      grecaptcha.ready(function () {
+        grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit_traineeship' })
         .then(function (token) {
 
           data.recaptchaToken = token;
           data.website        = document.getElementById('tf-honeypot').value;
 
           fetch(APPS_SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
-            .then(function (res) { return res.json(); })
-            .then(function (result) {
-              if (result.status === 'success') {
-                document.getElementById('tf-thankyouModal').classList.add('active');
-                form.reset();
-                document.querySelectorAll('.tf-conditional').forEach(function (el) {
-                  el.classList.remove('visible');
-                });
-              } else {
-                throw new Error(result.message || 'Unknown error');
-              }
-            })
-            .catch(function (err) {
-              statusEl.className = 'error';
-              statusEl.textContent = '\u2716 Submission failed. Please try again or email recruitment@corellian.com.au directly.';
-              console.error(err);
-            })
-            .finally(function () {
-              btn.disabled = false;
-              btn.innerHTML = 'Submit Application';
-            });
+              .then(function (res) { return res.json(); })
+              .then(function (result) {
+                if (result.status === 'success') {
+                  document.getElementById('tf-thankyouModal').classList.add('active');
+                  form.reset();
+                  tfAttachedFiles = [];
+                  document.getElementById('tf-fileList').innerHTML = '';
+                  document.querySelectorAll('.tf-conditional').forEach(function (el) { el.classList.remove('visible'); });
+                } else {
+                  throw new Error(result.message || 'Unknown error');
+                }
+              })
+              .catch(function (err) {
+                statusEl.className = 'error';
+                statusEl.textContent = '\u2716 Submission failed. Please try again or email recruitment@corellian.com.au directly.';
+                console.error(err);
+              })
+              .finally(function () {
+                btn.disabled = false;
+                btn.innerHTML = 'Submit Application';
+              });
 
-        }); // end grecaptcha.execute.then
-    });     // end grecaptcha.ready
+          }); // end grecaptcha.execute.then
+      });     // end grecaptcha.ready
+
+    }); // end tfReadFilesAsB64
 
   });  // end addEventListener('submit')
 
