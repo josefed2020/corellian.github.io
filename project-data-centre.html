@@ -462,6 +462,115 @@
             color: var(--text-color);
         }
 
+        /* Portrait/vertical video container (e.g. DigiCo During Construction) */
+        .video-container--portrait {
+            position: relative;
+            max-width: 360px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 0;
+            height: auto;
+            aspect-ratio: 9 / 16;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 1rem;
+            background: #000;
+        }
+
+        .video-container--portrait iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Vertical video grid - tiles portrait videos side by side on wider screens */
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 0 0 3rem;
+        }
+
+        .video-grid__item {
+            width: 100%;
+            max-width: 360px;
+            margin: 0 auto;
+        }
+
+        .video-grid__item .video-container--portrait {
+            max-width: none;
+            margin-bottom: 0.75rem;
+        }
+
+        .video-grid__item .video-title {
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        @media (min-width: 900px) {
+            .video-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 2.5rem 3rem;
+                justify-items: center;
+            }
+
+            .video-grid__item {
+                max-width: 380px;
+            }
+
+            /* Centre a lone video left over on the final row */
+            .video-grid__item:last-child:nth-child(odd) {
+                grid-column: 1 / -1;
+            }
+        }
+
+        /* Scroll reveal - only applied when JavaScript is available */
+        .js-reveal .gallery-item,
+        .js-reveal .project-featured-image,
+        .js-reveal .video-container,
+        .js-reveal .video-container--portrait {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out, box-shadow 0.3s ease;
+            will-change: opacity, transform;
+        }
+
+        .js-reveal .gallery-item.animate,
+        .js-reveal .project-featured-image.animate,
+        .js-reveal .video-container.animate,
+        .js-reveal .video-container--portrait.animate {
+            opacity: 1;
+            transform: none;
+            will-change: auto;
+        }
+
+        /* Keep the hover lift working - it would otherwise be overridden by the reveal rule above */
+        .js-reveal .gallery-item.animate:hover {
+            transform: translateY(-5px);
+            transition-delay: 0s;
+        }
+
+        .js-reveal .gallery-item:nth-child(2) { transition-delay: 0.03s; }
+        .js-reveal .gallery-item:nth-child(3) { transition-delay: 0.06s; }
+        .js-reveal .gallery-item:nth-child(4) { transition-delay: 0.09s; }
+        .js-reveal .gallery-item:nth-child(n+5) { transition-delay: 0.12s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .js-reveal .gallery-item,
+            .js-reveal .project-featured-image,
+            .js-reveal .video-container,
+            .js-reveal .video-container--portrait {
+                opacity: 1;
+                transform: none;
+                transition: none;
+                transition-delay: 0s;
+            }
+        }
+
         /* Lightbox */
         .lightbox-modal {
             display: none;
@@ -676,6 +785,9 @@
             margin: 4rem 0;
         }
     </style>
+
+    <!-- Flags that JS is available so reveal styles apply without a flash of unstyled content -->
+    <script>document.documentElement.classList.add('js-reveal');</script>
 </head>
 <body>
     <!-- Header -->
@@ -733,32 +845,38 @@
                                     <div class="gallery-item" data-caption="NextDC data centre infrastructure installation">
                                         <img src="./docs/assets/images/projects/nextdc-during-1.jpg" alt="NextDC Project">
                                         <div class="gallery-caption">
-                                            <h4>NextDC Installation</h4>
-                                            <p>Critical infrastructure installation and rigging works</p>
+                                            <h4>NextDC critical infrastructure installation and rigging works</h4>
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- NextDC Videos -->
-                            <h3>NextDC Project Videos</h3>
-                            
-                            <p> See our Installation work at NextDC up close <a href="https://youtu.be/_-GRfahYU44">here!</a></p>
-                            <!-- <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/_-GRfahYU44?si=DrYWNbOwDwMFQr23" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                            <p class="video-title">NextDC Installation Works</p>-->
-
-                            <div class="video-container">
-                                <iframe src="https://player.vimeo.com/video/1164281643?h=HASH&title=1&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <p class="video-title">Heavy skating at NextDC</p>
-
+                           
                             
                             <div class="video-container">
-                                <iframe src="https://player.vimeo.com/video/1164288013?h=HASH&title=1&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                <iframe src="https://player.vimeo.com/video/1225533382?h=HASH&title=1&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                             </div>
-                            <p class="video-title">Crane Lift</p>
+                            
+                            
+                            <div class="section-divider"></div>
+
+                            <div class="video-grid">
+                                <div class="video-grid__item">
+                                    <div class="video-container--portrait">
+                                        <iframe src="https://player.vimeo.com/video/1164281643?h=HASH&title=1&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="video-grid__item">
+                                    <div class="video-container--portrait">
+                                        <iframe src="https://player.vimeo.com/video/1164288013?h=HASH&title=1&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    
+                                </div>
+                            </div>
 
                             <!-- AIRTRUNK SECTION -->
                             <div class="section-divider"></div>
@@ -772,31 +890,38 @@
                                     <div class="gallery-item" data-caption="AirTrunk data centre rigging and installation">
                                         <img src="./docs/assets/images/projects/airtrunk-during-1.jpg" alt="AirTrunk Project">
                                         <div class="gallery-caption">
-                                            <h4>AirTrunk Installation</h4>
-                                            <p>Hyperscale data centre equipment rigging and installation</p>
+                                            
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- AirTrunk Video -->
-                            <h3>AirTrunk Project Video</h3>
+                            
 
-                            <div class="video-container">
-                                <iframe src="https://player.vimeo.com/video/1164286468?h=HASH&title=1&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <p class="video-title">Directing the swing lift</p>
+                            <div class="video-grid">
+                                <div class="video-grid__item">
+                                    <div class="video-container--portrait">
+                                        <iframe src="https://player.vimeo.com/video/1164286468?h=HASH&title=1&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    
+                                </div>
 
-                            <div class="video-container">
-                                <iframe src="https://player.vimeo.com/video/1160473138?h=HASH&title=1&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <p class="video-title">Swing lifting up close</p>
+                                <div class="video-grid__item">
+                                    <div class="video-container--portrait">
+                                        <iframe src="https://player.vimeo.com/video/1160473138?h=HASH&title=1&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    
+                                </div>
 
-                           
-                            <div class="video-container">
-                                <iframe src="https://player.vimeo.com/video/1164268489?h=HASH&title=1&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                <div class="video-grid__item">
+                                    <div class="video-container--portrait">
+                                        <iframe src="https://player.vimeo.com/video/1164268489?h=HASH&title=1&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    
+                                </div>
                             </div>
-                            <p class="video-title">Stacking FWUs</p>
                             
                           
                             <!-- DigiCo SECTION -->
@@ -811,79 +936,76 @@
 
                             <div class="gallery-section">
                                 <div class="gallery-grid">
-                                    <div class="gallery-item" data-caption="DigiCo installation works in progress">
+                                    <div class="gallery-item" data-caption="">
                                         <img src="./docs/assets/images/projects/globalswitch-during-1.jpg" alt="DigiCo During Phase 1">
                                         <div class="gallery-caption">
-                                            <h4>DigiCo - During 1</h4>
-                                            <p>Installation works in progress at data centre facility</p>
+                                            
+                                            
                                         </div>
                                     </div>
 
-                                    <div class="gallery-item" data-caption="DigiCo installation works in progress">
+                                    <div class="gallery-item" data-caption="">
                                         <img src="./docs/assets/images/projects/globalswitch-during-2.jpg" alt="DigiCo During Phase 2">
                                         <div class="gallery-caption">
-                                            <h4>DigiCo - During 2</h4>
-                                            <p>Installation works in progress at data centre facility</p>
+                                            
                                         </div>
                                     </div>
 
-                                    <div class="gallery-item" data-caption="DigiCo installation works in progress">
+                                    <div class="gallery-item" data-caption="">
                                         <img src="./docs/assets/images/projects/globalswitch-during-3.jpg" alt="DigiCo During Phase 3">
                                         <div class="gallery-caption">
-                                            <h4>DigiCo - During 3</h4>
-                                            <p>Installation works in progress at data centre facility</p>
+                                            
                                         </div>
                                     </div>
 
-                                    <div class="gallery-item" data-caption="DigiCo installation works in progress">
+                                    <div class="gallery-item" data-caption="">
                                         <img src="./docs/assets/images/projects/globalswitch-during-4.jpg" alt="DigiCo During Phase 4">
                                         <div class="gallery-caption">
-                                            <h4>DigiCo - During 4</h4>
-                                            <p>Installation works in progress at data centre facility</p>
+                                            
                                         </div>
                                     </div>
 
-                                    <div class="gallery-item" data-caption="DigiCo installation works in progress">
+                                    <div class="gallery-item" data-caption="">
                                         <img src="./docs/assets/images/projects/globalswitch-during-5.jpg" alt="DigiCo During Phase 5">
                                         <div class="gallery-caption">
-                                            <h4>DigiCo - During 5</h4>
-                                            <p>Installation works in progress at data centre facility</p>
+                                            
                                         </div>
                                     </div>
 
-                                    <div class="gallery-item" data-caption="DigiCo installation works in progress">
+                                    <div class="gallery-item" data-caption="">
                                         <img src="./docs/assets/images/projects/globalswitch-during-6.jpg" alt="DigiCo During Phase 6">
                                         <div class="gallery-caption">
-                                            <h4>DigiCo - During 6</h4>
-                                            <p>Installation works in progress at data centre facility</p>
+                                            
                                         </div>
                                     </div>
 
-                                    <div class="gallery-item" data-caption="DigiCo installation works in progress">
+                                    <div class="gallery-item" data-caption="">
                                         <img src="./docs/assets/images/projects/globalswitch-during-7.jpg" alt="DigiCo During Phase 7">
                                         <div class="gallery-caption">
-                                            <h4>DigiCo - During 7</h4>
-                                            <p>Installation works in progress at data centre facility</p>
+                                            
                                         </div>
                                     </div>
 
-                                    <div class="gallery-item" data-caption="DigiCo installation works in progress">
+                                    <div class="gallery-item" data-caption="">
                                         <img src="./docs/assets/images/projects/globalswitch-during-8.jpg" alt="DigiCo During Phase 8">
                                         <div class="gallery-caption">
-                                            <h4>DigiCo - During 8</h4>
-                                            <p>Installation works in progress at data centre facility</p>
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- DigiCo - During Video -->
-                            <h4>Construction Phase Documentation</h4>
                             
-                            <div class="video-container">
-                                <iframe src="https://player.vimeo.com/video/1164313827?h=HASH&title=1&byline=0&portrait=0" allow="fullscreen" allowfullscreen=""></iframe>
+                            
+                            <div class="video-grid">
+                                <div class="video-grid__item">
+                                    <div class="video-container--portrait">
+                                        <iframe src="https://player.vimeo.com/video/1164313827?h=HASH&title=1&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                                    </div>
+                                    
+                                </div>
                             </div>
-                            <p class="video-title">DigiCo During Construction</p>
 
                             <!-- DigiCo - Completed Stage -->
                             <h3>Completed Installation</h3>
@@ -891,51 +1013,45 @@
 
                             <div class="gallery-section">
                                 <div class="gallery-grid">
-                                    <div class="gallery-item" data-caption="DigiCo completed installation">
+                                    <div class="gallery-item" data-caption="">
                                         <img src="./docs/assets/images/projects/globalswitch-completed-1.jpg" alt="DigiCo Completed 1">
                                         <div class="gallery-caption">
-                                            <h4>DigiCo - Completed 1</h4>
-                                            <p>Completed installation at data centre facility</p>
+                                            
                                         </div>
                                     </div>
 
-                                    <div class="gallery-item" data-caption="DigiCo completed installation">
+                                    <div class="gallery-item" data-caption="">
                                         <img src="./docs/assets/images/projects/globalswitch-completed-2.jpg" alt="DigiCo Completed 2">
                                         <div class="gallery-caption">
-                                            <h4>DigiCo - Completed 2</h4>
-                                            <p>Completed installation at data centre facility</p>
+                                            
                                         </div>
                                     </div>
 
-                                    <div class="gallery-item" data-caption="DigiCo completed installation">
+                                    <div class="gallery-item" data-caption="">
                                         <img src="./docs/assets/images/projects/globalswitch-completed-3.jpg" alt="DigiCo Completed 3">
                                         <div class="gallery-caption">
-                                            <h4>DigiCo - Completed 3</h4>
-                                            <p>Completed installation at data centre facility</p>
+                                            
                                         </div>
                                     </div>
 
-                                    <div class="gallery-item" data-caption="DigiCo completed installation">
+                                    <div class="gallery-item" data-caption="">
                                         <img src="./docs/assets/images/projects/globalswitch-completed-4.jpg" alt="DigiCo Completed 4">
                                         <div class="gallery-caption">
-                                            <h4>DigiCo - Completed 4</h4>
-                                            <p>Completed installation at data centre facility</p>
+                                            
                                         </div>
                                     </div>
 
-                                    <div class="gallery-item" data-caption="DigiCo completed installation">
+                                    <div class="gallery-item" data-caption="">
                                         <img src="./docs/assets/images/projects/globalswitch-completed-5.jpg" alt="DigiCo Completed 5">
                                         <div class="gallery-caption">
-                                            <h4>DigiCo - Completed 5</h4>
-                                            <p>Completed installation at data centre facility</p>
+                                            
                                         </div>
                                     </div>
 
-                                    <div class="gallery-item" data-caption="DigiCo completed installation">
+                                    <div class="gallery-item" data-caption="">
                                         <img src="./docs/assets/images/projects/globalswitch-completed-6.jpg" alt="DigiCo Completed 6">
                                         <div class="gallery-caption">
-                                            <h4>DigiCo - Completed 6</h4>
-                                            <p>Completed installation at data centre facility</p>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -1055,62 +1171,41 @@
                 });
             });
 
-            // Add animation on scroll for gallery and content elements
-            const animatedElements = document.querySelectorAll('.gallery-item, .project-featured-image, .video-container');
-            
-            function checkIfInView() {
-                animatedElements.forEach(element => {
-                    const elementPosition = element.getBoundingClientRect();
-                    const windowHeight = window.innerHeight;
-                    
-                    if (elementPosition.top < windowHeight * 0.8) {
-                        element.classList.add('animate');
-                    }
-                });
+        });
+    </script>
+
+    <!-- Scroll reveal (kept in its own script so an error elsewhere can never leave content hidden) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Reveal gallery and media elements as they approach the viewport.
+            // Styling lives in the main stylesheet under .js-reveal so there is no flash on load.
+            const animatedElements = document.querySelectorAll('.gallery-item, .project-featured-image, .video-container, .video-container--portrait');
+
+            function revealAll() {
+                animatedElements.forEach(element => element.classList.add('animate'));
             }
-            
-            // Add animation class in CSS
-            const style = document.createElement('style');
-            style.textContent = `
-                .gallery-item, .project-featured-image, .video-container {
-                    opacity: 0;
-                    transform: translateY(30px);
-                    transition: opacity 0.5s ease, transform 0.5s ease;
-                }
-                
-                .gallery-item.animate, .project-featured-image.animate, .video-container.animate {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-                
-                .gallery-item:nth-child(2) {
-                    transition-delay: 0.2s;
-                }
-                
-                .gallery-item:nth-child(3) {
-                    transition-delay: 0.4s;
-                }
-                
-                .gallery-item:nth-child(4) {
-                    transition-delay: 0.6s;
-                }
-                
-                .gallery-item:nth-child(5) {
-                    transition-delay: 0.8s;
-                }
-                
-                .gallery-item:nth-child(6) {
-                    transition-delay: 1.0s;
-                }
-                
-                .video-container {
-                    transition-delay: 0.3s;
-                }
-            `;
-            document.head.appendChild(style);
-            
-            window.addEventListener('scroll', checkIfInView);
-            checkIfInView();
+
+            const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (reduceMotion || !('IntersectionObserver' in window)) {
+                revealAll();
+            } else {
+                const observer = new IntersectionObserver(function(entries, obs) {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate');
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    // Start the transition well before the element scrolls into view
+                    root: null,
+                    rootMargin: '200px 0px 300px 0px',
+                    threshold: 0
+                });
+
+                animatedElements.forEach(element => observer.observe(element));
+            }
         });
     </script>
 
