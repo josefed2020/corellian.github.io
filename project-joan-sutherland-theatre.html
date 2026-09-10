@@ -169,6 +169,7 @@
         .main-navigation {
             display: flex;
             align-items: center;
+            position: relative;
         }
 
         .menu {
@@ -218,7 +219,11 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 0.5rem;
+            padding: 0.75rem;
+            min-width: 44px;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
         }
 
         .menu-icon {
@@ -594,15 +599,15 @@
             }
 
             .menu-toggle {
-                display: block;
+                display: flex;
             }
 
             .menu {
                 display: none;
                 position: absolute;
                 top: 100%;
-                left: 0;
                 right: 0;
+                min-width: 200px;
                 flex-direction: column;
                 background-color: #fff;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -678,7 +683,7 @@
                             
                             <p><strong>Deconstructing the Existing Theatre Space</strong></p>
                             
-                            <p>The initial phase involved the complete deconstruction and removal of extensive theatre machinery by Corellian's skilled team. They carefully dismantled the theatre's intricate stage lifts, equalizer platforms, hoists, winches, portal bridge, and counterweight system. Corellian's crew systematically removed every associated cable, rope line, fly batten, and curtain.</p>
+                            <p>The initial phase involved the complete deconstruction and removal of extensive theatre machinery by Corellian's skilled team. They carefully dismantled the theatre's intricate stage lifts, equalizer platforms, hoists, winches, portal bridge, orchestra pit, and counterweight system. Corellian's crew systematically removed every associated cable, rope line, fly batten, and curtain.</p>
                             
                             <p><strong>Preserving Heritage Theatre Elements</strong></p>
                             
@@ -686,7 +691,7 @@
                             
                             <p><strong>Rigging and Positioning New Theatre Machinery</strong></p>
                             
-                            <p>Once the existing machinery was deconstructed, Corellian commenced their vital role of rigging the newly supplied theatre equipment into position. This included the complex lifting, positioning and installation of the new rear stage elevator, windlass, and cable reelers that will enable the theatre's productions going forward.</p>
+                            <p>Once the existing machinery was deconstructed, Corellian commenced their vital role of rigging the newly supplied theatre equipment into position by collaborating with stakeholders. This included the complex lifting, positioning and installation of the new rear stage elevator, windlass, and cable reelers that will enable the theatre's productions going forward.</p>
                             
                             <p>Corellian's exceptional skills for large-scale theatre deconstruction and new equipment rigging were on full display during this project. Their successful execution showcased their unmatched capabilities for managing comprehensive theatre renovations while upholding heritage preservation standards.</p>
                             
@@ -752,21 +757,6 @@
     <!-- Custom JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Elements
-            const menuToggle = document.querySelector('.menu-toggle');
-            const menu = document.querySelector('.menu');
-            
-            // Toggle mobile menu
-            if (menuToggle) {
-                menuToggle.addEventListener('click', function() {
-                    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-                    
-                    menuToggle.setAttribute('aria-expanded', !expanded);
-                    menu.classList.toggle('is-active');
-                    menuToggle.classList.toggle('is-active');
-                });
-            }
-            
             // Gallery image lightbox (simple implementation)
             const galleryItems = document.querySelectorAll('.gallery-item img');
             
@@ -859,17 +849,20 @@
         });
     </script>
     <div id="footer-placeholder"></div>
-    ```html
-<script>
+    <script>
     // Load header and footer
     fetch('header.html')
         .then(response => response.text())
-        .then(html => document.getElementById('header-placeholder').innerHTML = html);
-    
+        .then(html => {
+            const placeholder = document.getElementById('header-placeholder');
+            const range = document.createRange();
+            range.selectNodeContents(placeholder);
+            placeholder.appendChild(range.createContextualFragment(html));
+        });
+
     fetch('footer.html')
         .then(response => response.text())
         .then(html => document.getElementById('footer-placeholder').innerHTML = html);
 </script>
-```
 </body>
 </html>

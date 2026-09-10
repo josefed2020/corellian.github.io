@@ -169,6 +169,7 @@
         .main-navigation {
             display: flex;
             align-items: center;
+            position: relative;
         }
 
         .menu {
@@ -218,7 +219,11 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 0.5rem;
+            padding: 0.75rem;
+            min-width: 44px;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
         }
 
         .menu-icon {
@@ -701,15 +706,15 @@
             }
 
             .menu-toggle {
-                display: block;
+                display: flex;
             }
 
             .menu {
                 display: none;
                 position: absolute;
                 top: 100%;
-                left: 0;
                 right: 0;
+                min-width: 200px;
                 flex-direction: column;
                 background-color: #fff;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -956,7 +961,7 @@
                                         <div class="gallery-caption">The chiller is slowly moved from the mezzanine to the B4 floor</div>
                                     </div>
                                     <div class="gallery-item" data-caption="Seawater pumps are rigged for precise movement">
-                                        <img src="docs/assets/images/projects/star-casino-24.jpg" alt="Seawater pumps are rigged for precise movement">
+                                        <img src="docs/assets/images/projects/star-casino-24.jpg" alt="Seawater GRP header sections are rigged into final position">
                                         <div class="gallery-caption">Seawater pumps are rigged for precise movement</div>
                                     </div>
                                 </div>
@@ -1044,13 +1049,13 @@
                                         <img src="docs/assets/images/projects/star-casino-32.jpg" alt="Catwalks and access, doors and finishes installed">
                                         <div class="gallery-caption">Catwalks and access, doors and finishes installed throughout the project</div>
                                     </div>
-                                    <div class="gallery-item" data-caption="Catwalks and access, doors and finishes installed throughout the project">
-                                        <img src="docs/assets/images/projects/star-casino-33.jpg" alt="Catwalks and access, doors and finishes installed">
-                                        <div class="gallery-caption">Catwalks and access, doors and finishes installed throughout the project</div>
+                                    <div class="gallery-item" data-caption="Plant room finishes and space complete & ready for future expansion">
+                                        <img src="docs/assets/images/projects/star-casino-33.jpg" alt="Plant room finishes and space ready for expansion">
+                                        <div class="gallery-caption">Plant room finishes and space complete & ready for future expansion</div>
                                     </div>
-                                    <div class="gallery-item" data-caption="Catwalks and access, doors and finishes installed throughout the project">
-                                        <img src="docs/assets/images/projects/star-casino-34.jpg" alt="Catwalks and access, doors and finishes installed">
-                                        <div class="gallery-caption">Catwalks and access, doors and finishes installed throughout the project</div>
+                                    <div class="gallery-item" data-caption="New service access platform to new seawater valves and filters">
+                                        <img src="docs/assets/images/projects/star-casino-34.jpg" alt="New service access platform">
+                                        <div class="gallery-caption">New service access platform to new seawater valves and filters</div>
                                     </div>
                                 </div>
                             </div>
@@ -1133,21 +1138,6 @@
     <!-- Custom JavaScript -->
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Elements
-            const menuToggle = document.querySelector('.menu-toggle');
-            const menu = document.querySelector('.menu');
-            
-            // Toggle mobile menu
-            if (menuToggle) {
-                menuToggle.addEventListener('click', function() {
-                    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-                    
-                    menuToggle.setAttribute('aria-expanded', !expanded);
-                    menu.classList.toggle('is-active');
-                    menuToggle.classList.toggle('is-active');
-                });
-            }
-            
             // Gallery image lightbox
             const galleryItems = document.querySelectorAll('.gallery-item img');
             const lightboxModal = document.getElementById('lightboxModal');
@@ -1273,17 +1263,20 @@
         });
     </script>
     <div id="footer-placeholder"></div>
-    ```html
-<script>
+    <script>
     // Load header and footer
     fetch('header.html')
         .then(response => response.text())
-        .then(html => document.getElementById('header-placeholder').innerHTML = html);
-    
+        .then(html => {
+            const placeholder = document.getElementById('header-placeholder');
+            const range = document.createRange();
+            range.selectNodeContents(placeholder);
+            placeholder.appendChild(range.createContextualFragment(html));
+        });
+
     fetch('footer.html')
         .then(response => response.text())
         .then(html => document.getElementById('footer-placeholder').innerHTML = html);
 </script>
-```
 </body>
 </html>
